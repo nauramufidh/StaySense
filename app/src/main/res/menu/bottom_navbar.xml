@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/baseline_home_filled_24"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/navigation_predict"
+        android:icon="@drawable/baseline_document_scanner_24"
+        android:title="@string/predict" />
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_chatbot"-->
+<!--        android:icon="@drawable/ic_chatbot"-->
+<!--        android:title="@string/chatbot" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_profile"-->
+<!--        android:icon="@drawable/baseline_person_24"-->
+<!--        android:title="@string/title_profile" />-->
+
+</menu>

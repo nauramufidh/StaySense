@@ -7,5 +7,8 @@
     <color name="dark_cyan">#4F959D</color>
     <color name="lime_green">#98D2C0</color>
     <color name="grayish_lime">#9BC8A6</color>
-    <color name="ligth_grayish_lime">#A9DBB5</color>
+    <color name="light_grayish_lime">#A9DBB5</color>
+    <color name="light_grayish_yellow">#F6F8D5</color>
+    <color name="light_grayish_green">#EEFBDD</color>
+
 </resources>

@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.staysense.R
 import com.example.staysense.databinding.ActivityWelcomeScreenBinding
+import com.example.staysense.ui.authentication.LoginActivity
+import com.example.staysense.ui.authentication.SignupActivity
 
 class WelcomeScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeScreenBinding
@@ -23,15 +25,23 @@ class WelcomeScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupaction()
+        playAnimation()
 
     }
 
     private fun setupaction() {
         binding.btnSignup.setOnClickListener {
-//            val intentToLogin = Intent(this, LoginActivity::class.java)
-//            intentToLogin.putExtra("fromRegister", true)
-//            startActivity(intentToLogin)
-//            finish()
+            val intentToSignup = Intent(this, SignupActivity::class.java)
+//            intentToSignup.putExtra("fromWelcome", true)
+            startActivity(intentToSignup)
+            finish()
+        }
+
+        binding.btnSignup.setOnClickListener {
+            val intentToLogin = Intent(this, LoginActivity::class.java)
+//            intentToLogin.putExtra("fromWelcome", true)
+            startActivity(intentToLogin)
+            finish()
         }
     }
 
@@ -41,6 +51,17 @@ class WelcomeScreenActivity : AppCompatActivity() {
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
         }.start()
+
+        val getstarted = ObjectAnimator.ofFloat(binding.tvGetStarted, View.ALPHA, 1f).setDuration(300)
+        val welcometxt = ObjectAnimator.ofFloat(binding.tvWelcomeText, View.ALPHA, 1f).setDuration(300)
+        val btnsignup = ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 1f).setDuration(300)
+        val haveacc = ObjectAnimator.ofFloat(binding.llHaveAcc, View.ALPHA, 1f).setDuration(300)
+
+
+        AnimatorSet().apply {
+            playSequentially(getstarted, welcometxt, btnsignup, haveacc)
+            start()
+        }
 
     }
 }

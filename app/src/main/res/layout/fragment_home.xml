@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_blobs"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:contentDescription="TODO"
+            android:scaleType="fitXY"
+            android:src="@drawable/zblobs"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/iv_blobs"
+            app:layout_constraintBottom_toBottomOf="@id/iv_blobs"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="@string/welcome_user"/>
+
+        <TextView
+            android:id="@+id/tv_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/iv_blobs"
+            android:textSize="18sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="@string/dashboard"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_dashboard">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_totalCust"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_dashboard"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="8dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_totalImpression"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_dashboard"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_margin="8dp" />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

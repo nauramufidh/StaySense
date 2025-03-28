@@ -2,6 +2,7 @@ package com.example.staysense.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,18 +25,26 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        if (intent.getBooleanExtra("fromRegister", false)) {
+            showLoading(false)
+        } else {
+            checkLogin()
+        }
+    }
+
+    private fun setupLogin(){
         binding.btnLogin2.setOnClickListener {
             val email = binding.etEmailLogin.text.toString()
             val password = binding.etPasswordLogin.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()){
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                   if (it.isSuccessful){
-                       val intent = Intent(this, MainActivity::class.java)
-                       startActivity(intent)
-                   } else {
-                       Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                   }
+                    if (it.isSuccessful){
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else{
                 Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
@@ -46,4 +55,22 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    fun checkLogin() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        else {
+            setupLogin()
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+
 }
