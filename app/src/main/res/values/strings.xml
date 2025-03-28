@@ -3,4 +3,9 @@
 
     <!--Splash Screen-->
     <string name="app_logo">Logo</string>
+    <string name="get_started">Get Started</string>
+    <string name="welcome_text">Optimize customer retention with accurate and fast AI-based churn prediction!</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
 </resources>

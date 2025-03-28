@@ -2,21 +2,84 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/welcome_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.welcomescreen.WelcomeScreenActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/welcome_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/welcome_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <ImageButton
+    <TextView
+        android:id="@+id/tv_get_started"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/welcome_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/get_started"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_welcome_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_get_started"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/welcome_text"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_welcome_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/dark_cyan"
+        android:text="@string/sign_up"/>
+
+    <LinearLayout
+        android:id="@+id/ll_have_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_signup">
+
+        <TextView
+            android:id="@+id/tv_have_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:text="@string/already_have_an_account" />
+
+        <TextView
+            android:id="@+id/tv_login_to_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/login"
+            android:textColor="@color/dark_cyan"/>
+
+
+    </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
