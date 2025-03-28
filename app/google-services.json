@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1097102275809",
+    "project_id": "staysense-624b4",
+    "storage_bucket": "staysense-624b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097102275809:android:56f3b991a4e566ef8fb3a0",
+        "android_client_info": {
+          "package_name": "com.example.staysense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAmKEIBIzvRqMWohyG4b8xlZWqLIeytH0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
