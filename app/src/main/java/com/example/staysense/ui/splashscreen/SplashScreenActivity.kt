@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.staysense.MainActivity
+import com.example.staysense.ui.main.MainActivity
 import com.example.staysense.R
 
 class SplashScreenActivity : AppCompatActivity() {
