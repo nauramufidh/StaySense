@@ -8,17 +8,17 @@
 
     <item
         android:id="@+id/navigation_predict"
-        android:icon="@drawable/baseline_document_scanner_24"
+        android:icon="@drawable/trending_down_"
         android:title="@string/predict" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_chatbot"-->
-<!--        android:icon="@drawable/ic_chatbot"-->
-<!--        android:title="@string/chatbot" />-->
+    <item
+        android:id="@+id/navigation_wordcloud"
+        android:icon="@drawable/desktop_cloud"
+        android:title="@string/word_cloud" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_profile"-->
-<!--        android:icon="@drawable/baseline_person_24"-->
-<!--        android:title="@string/title_profile" />-->
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/account_circle"
+        android:title="@string/account" />
 
 </menu>

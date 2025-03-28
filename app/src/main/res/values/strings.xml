@@ -20,5 +20,7 @@
     <string name="welcome_user">Welcome, user</string>
     <string name="dashboard">Dashboard</string>
     <string name="hello_predict_fragment">predict fragment</string>
-    <string name="predict">predict</string>
+    <string name="predict">Predict</string>
+    <string name="account">account</string>
+    <string name="word_cloud">Word Cloud</string>
 </resources>

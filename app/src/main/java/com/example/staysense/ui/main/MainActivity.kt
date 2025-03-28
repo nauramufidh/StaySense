@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -40,6 +39,12 @@ class MainActivity : AppCompatActivity() {
                     navView.visibility = View.VISIBLE
                 }
                 R.id.navigation_predict-> {
+                    navView.visibility = View.VISIBLE
+                }
+                R.id.navigation_profile-> {
+                    navView.visibility = View.VISIBLE
+                }
+                R.id.navigation_wordcloud-> {
                     navView.visibility = View.VISIBLE
                 }
                 else -> {
