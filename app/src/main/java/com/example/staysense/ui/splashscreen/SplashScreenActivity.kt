@@ -1,4 +1,4 @@
-package com.example.staysense.ui
+package com.example.staysense.ui.splashscreen
 
 import android.content.Intent
 import android.os.Bundle
