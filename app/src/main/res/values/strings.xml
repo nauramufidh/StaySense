@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">StaySense</string>
 
-    <!--Splash Screen-->
-    <string name="app_logo">Logo</string>
+    <string name="login_msg">Welcome to StaySense!</string>
+    <string name="login_desc">Please enter your address below to start using StaySense.</string>
+    <string name="email">Enter your email</string>
+    <string name="password">Enter your password</string>
+    <string name="confirm_password">Confirm your password</string>
+    <string name="create_acc">Create an account?</string>
+    <string name="signup_desc">Please put your information below to create an account.</string>
+
     <string name="get_started">Get Started</string>
     <string name="welcome_text">Optimize customer retention with accurate and fast AI-based churn prediction!</string>
     <string name="sign_up">Sign Up</string>

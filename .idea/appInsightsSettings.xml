@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.staysense" />
+                  <option name="mobileSdkAppId" value="1:1097102275809:android:56f3b991a4e566ef8fb3a0" />
+                  <option name="projectId" value="staysense-624b4" />
+                  <option name="projectNumber" value="1097102275809" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
