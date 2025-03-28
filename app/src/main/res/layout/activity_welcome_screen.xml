@@ -8,11 +8,11 @@
     tools:context=".ui.welcomescreen.WelcomeScreenActivity">
 
     <ImageView
-        android:id="@+id/welcome_icon"
+        android:id="@+id/iv_welcome_icon"
         android:layout_width="wrap_content"
         android:layout_height="450dp"
         android:contentDescription="TODO"
-        android:src="@drawable/welcome_icon"
+        android:src="@drawable/zwelcome_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -21,7 +21,7 @@
         android:id="@+id/tv_get_started"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/welcome_icon"
+        app:layout_constraintTop_toBottomOf="@id/iv_welcome_icon"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
         android:layout_marginStart="20dp"
