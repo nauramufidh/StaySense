@@ -25,11 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        if (intent.getBooleanExtra("fromRegister", false)) {
-            showLoading(false)
-        } else {
-            checkLogin()
-        }
+        setupLogin()
     }
 
     private fun setupLogin(){
@@ -56,21 +52,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun checkLogin() {
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        else {
-            setupLogin()
-        }
-    }
+//    private fun checkLogin() {
+//        val currentUser = firebaseAuth.currentUser
+//        if (currentUser != null) {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//        else {
+//            setupLogin()
+//        }
+//    }
 
-    private fun showLoading(isLoading: Boolean){
-        binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
+
 
 
 }

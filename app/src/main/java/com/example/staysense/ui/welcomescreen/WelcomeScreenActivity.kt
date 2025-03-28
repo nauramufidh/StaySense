@@ -37,7 +37,7 @@ class WelcomeScreenActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnSignup.setOnClickListener {
+        binding.tvLoginToLogin.setOnClickListener {
             val intentToLogin = Intent(this, LoginActivity::class.java)
 //            intentToLogin.putExtra("fromWelcome", true)
             startActivity(intentToLogin)
