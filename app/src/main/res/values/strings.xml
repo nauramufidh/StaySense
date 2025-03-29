@@ -23,4 +23,8 @@
     <string name="predict">Predict</string>
     <string name="account">account</string>
     <string name="word_cloud">Word Cloud</string>
+    <string name="total_customers_title">Total Customers</string>
+    <string name="total_cust">1908</string>
+    <string name="total_impression_title">Total Impressions</string>
+    <string name="total_impression">2009</string>
 </resources>
