@@ -23,7 +23,7 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/wordCloudFragment"
+        android:id="@+id/navigation_wordcloud"
         android:name="com.example.staysense.ui.wordcloud.WordCloudFragment"
         android:label="fragment_word_cloud"
         tools:layout="@layout/fragment_word_cloud" />
