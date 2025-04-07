@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.staysense"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -56,4 +56,12 @@ dependencies {
 
     implementation (libs.anychart.android)
     implementation (libs.multidex)
+
+    implementation("com.github.jolenechong:androidWordCloud:1.0.0") {
+        // exclude due to duplicate classes with the
+        // edu.stanford.nlp:stanford-corenlp dependency for data processing
+        exclude(group="com.sun.xml.bind", module="jaxb-core")
+        exclude(group="com.sun.xml.bind", module="jaxb-impl")
+    }
+
 }
