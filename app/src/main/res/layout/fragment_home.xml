@@ -16,7 +16,7 @@
             android:id="@+id/progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="1dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,6 @@
 
                     </LinearLayout>
 
-
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -172,7 +171,7 @@
                         android:id="@+id/churn_piechart"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:layout_marginTop="4dp"/>
+                        android:layout_gravity="center" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -193,19 +192,15 @@
                     android:padding="8dp">
 
                     <TextView
-                        android:id="@+id/tv_churmrate"
+                        android:id="@+id/tv_churnrate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/churn_chart"
+                        android:text="@string/churn_rate"
                         android:textSize="14sp"
                         android:alpha="0.6"
                         android:textStyle="bold" />
 
-                    <com.anychart.AnyChartView
-                        android:id="@+id/chart_churnrate"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="4dp"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

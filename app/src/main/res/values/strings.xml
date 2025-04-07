@@ -31,4 +31,5 @@
     <string name="blobs">blobs</string>
     <string name="churn_history">Churn History</string>
     <string name="churn_rate">Churn Rate</string>
+    <string name="langsung_masuk">Langsung masuk</string>
 </resources>

@@ -14,6 +14,7 @@ import com.example.staysense.R
 import com.example.staysense.databinding.ActivityWelcomeScreenBinding
 import com.example.staysense.ui.authentication.LoginActivity
 import com.example.staysense.ui.authentication.SignupActivity
+import com.example.staysense.ui.main.MainActivity
 
 class WelcomeScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeScreenBinding
@@ -41,6 +42,12 @@ class WelcomeScreenActivity : AppCompatActivity() {
             val intentToLogin = Intent(this, LoginActivity::class.java)
 //            intentToLogin.putExtra("fromWelcome", true)
             startActivity(intentToLogin)
+            finish()
+        }
+
+        binding.btnLgsgmasuk.setOnClickListener {
+            val intentMasuk = Intent(this, MainActivity::class.java)
+            startActivity(intentMasuk)
             finish()
         }
     }
