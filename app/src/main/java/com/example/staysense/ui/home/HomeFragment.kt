@@ -13,9 +13,7 @@ import com.anychart.chart.common.listener.Event
 import com.anychart.chart.common.listener.ListenersInterface
 import com.anychart.enums.Align
 import com.anychart.enums.LegendLayout
-import com.example.staysense.R
 import com.example.staysense.databinding.FragmentHomeBinding
-
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null

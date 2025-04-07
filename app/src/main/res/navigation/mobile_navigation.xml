@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.staysense.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.example.staysense.ui.home.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_predict"
@@ -22,9 +22,22 @@
         android:name="com.example.staysense.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/navigation_wordcloud"
         android:name="com.example.staysense.ui.wordcloud.WordCloudFragment"
         android:label="fragment_word_cloud"
         tools:layout="@layout/fragment_word_cloud" />
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.staysense.ui.home.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard"/>
+
+    <fragment
+        android:id="@+id/rateFragment"
+        android:name="com.example.staysense.ui.home.RateFragment"
+        android:label="fragment_rate"
+        tools:layout="@layout/fragment_rate" />
 </navigation>

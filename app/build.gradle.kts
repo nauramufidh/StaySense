@@ -64,4 +64,6 @@ dependencies {
         exclude(group="com.sun.xml.bind", module="jaxb-impl")
     }
 
+    implementation(libs.androidx.viewpager2)
+
 }
