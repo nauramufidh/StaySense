@@ -11,8 +11,12 @@ import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.chart.common.listener.Event
 import com.anychart.chart.common.listener.ListenersInterface
+import com.anychart.charts.Cartesian
 import com.anychart.enums.Align
+import com.anychart.enums.Anchor
 import com.anychart.enums.LegendLayout
+import com.anychart.enums.Position
+import com.anychart.enums.TooltipPositionMode
 import com.example.staysense.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -32,7 +36,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupPieChart()
-//        setupChurnRate()
+
     }
 
 
@@ -59,8 +63,8 @@ class HomeFragment : Fragment() {
         )
 
         pie.data(data)
-        pie.title("Churn Pie Chart")
-        pie.labels().position("outside")
+//        pie.title("Churn Pie Chart")
+//        pie.labels().position("outside")
 
 //        pie.legend().title().enabled(true)
 //        pie.legend().title().text("Churn").padding(0.0, 0.0, 10.0, 0.0)
@@ -75,7 +79,6 @@ class HomeFragment : Fragment() {
         Log.d("PieChart", "setupPieChart finished")
     }
 
-    
 
 
     override fun onDestroyView() {

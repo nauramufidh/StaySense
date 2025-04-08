@@ -33,6 +33,7 @@
     <string name="churn_rate">Churn Rate</string>
     <string name="langsung_masuk">Langsung masuk</string>
 
-    <string name="tab_text_1">Churn Cart</string>
+    <string name="tab_text_1">Churn Chart</string>
     <string name="tab_text_2">Churn Rate</string>
+    <string name="total_churn">Total Churn</string>
 </resources>

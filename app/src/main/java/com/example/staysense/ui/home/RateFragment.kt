@@ -5,56 +5,65 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.anychart.AnyChart
+import com.anychart.chart.common.dataentry.ValueDataEntry
+import com.anychart.charts.Cartesian
+import com.anychart.enums.Anchor
+import com.anychart.enums.Position
+import com.anychart.enums.TooltipPositionMode
 import com.example.staysense.R
+import com.example.staysense.databinding.FragmentHomeBinding
+import com.example.staysense.databinding.FragmentRateBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RateFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentRateBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rate, container, false)
+        _binding = FragmentRateBinding.inflate(inflater, container, false)
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RateFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RateFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupChurnRate()
+    }
+
+    private fun setupChurnRate() {
+        val column: Cartesian = AnyChart.column()
+        val data = listOf(
+            ValueDataEntry("Jan", 5),
+            ValueDataEntry("Feb", 8),
+            ValueDataEntry("Mar", 4),
+            ValueDataEntry("Apr", 6),
+            ValueDataEntry("May", 7)
+        )
+        val series = column.column(data)
+
+        series.tooltip()
+            .titleFormat("{%X}")
+            .position(Position.CENTER_BOTTOM)
+            .anchor(Anchor.CENTER_BOTTOM)
+            .offsetX(0.0)
+            .offsetY(5.0)
+            .format("{%Value}%")
+
+        column.animation(true)
+        column.title("Monthly Churn Rate (%)")
+
+        column.yScale().minimum(0.0)
+
+        column.tooltip().positionMode(TooltipPositionMode.POINT)
+        column.interactivity().hoverMode("by-x")
+        column.xAxis(0).title("Month")
+        column.yAxis(0).title("Churn Rate")
+
+        binding.churnPiechart.setChart(column)
     }
 }
