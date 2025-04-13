@@ -25,8 +25,8 @@ class SignupActivity : AppCompatActivity() {
 
         binding.btnSignup.setOnClickListener {
             val email = binding.etEmailSignup.text.toString()
-            val password = binding.etEmailSignup.text.toString()
-            val confirmPassword = binding.etEmailSignup.text.toString()
+            val password = binding.etPasswordSignup.text.toString()
+            val confirmPassword = binding.etConfirmPasswordSignup.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()){
                 if (password == confirmPassword){
