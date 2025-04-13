@@ -12,6 +12,8 @@ import com.example.staysense.R
 import com.example.staysense.databinding.ActivityLoginBinding
 import com.example.staysense.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
 
 class LoginActivity : AppCompatActivity() {
 
@@ -34,12 +36,17 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.etPasswordLogin.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()){
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                    if (it.isSuccessful){
+                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful){
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                        val errorMessage = when (val exception = task.exception){
+                            is FirebaseAuthInvalidUserException -> "Email not registered."
+                            is FirebaseAuthInvalidCredentialsException -> "Incorrect Password or Email."
+                            else -> "Login Failed: ${exception?.localizedMessage}"
+                        }
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }
             } else{
@@ -51,20 +58,4 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-//    private fun checkLogin() {
-//        val currentUser = firebaseAuth.currentUser
-//        if (currentUser != null) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//        else {
-//            setupLogin()
-//        }
-//    }
-
-
-
-
 }
