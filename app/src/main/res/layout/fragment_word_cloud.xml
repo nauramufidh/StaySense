@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.wordcloud.WordCloudFragment"
+    android:orientation="vertical"
     android:paddingBottom="64dp">
 
-    <FrameLayout
-        android:id="@+id/wordCloudView"
+    <com.anychart.AnyChartView
+        android:id="@+id/ac_word_cloud_view"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="470dp"
         android:background="@drawable/rounded_background"
         android:layout_margin="15dp"/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/et_word_input"
+        android:layout_width="385dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:hint="silakan curhat"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btn_submit_word"
+        android:layout_width="385dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="submit"/>
+
+</LinearLayout>

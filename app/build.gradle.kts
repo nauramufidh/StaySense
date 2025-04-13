@@ -58,12 +58,6 @@ dependencies {
     implementation (libs.anychart.android)
     implementation (libs.multidex)
 
-    implementation("com.github.jolenechong:androidWordCloud:1.0.0") {
-        // exclude due to duplicate classes with the
-        // edu.stanford.nlp:stanford-corenlp dependency for data processing
-        exclude(group="com.sun.xml.bind", module="jaxb-core")
-        exclude(group="com.sun.xml.bind", module="jaxb-impl")
-    }
 
     implementation(libs.androidx.viewpager2)
 
