@@ -37,4 +37,12 @@
     <string name="tab_text_2">Churn Rate</string>
     <string name="total_churn">Total Churn</string>
     <string name="logout">Logout</string>
+    <string name="predict_churn">Predict Churn</string>
+    <string name="input_data_costumer">Input Data Costumer</string>
+    <string name="csv_file">csv file</string>
+    <string name="upload_file">Upload File</string>
+    <string name="supported_files">Supported files are .csv, .xls, .xlxs</string>
+    <string name="send">Send</string>
+    <string name="or">OR</string>
+    <string name="profile">Profile</string>
 </resources>
