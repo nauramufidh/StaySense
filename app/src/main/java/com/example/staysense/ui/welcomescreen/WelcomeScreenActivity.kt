@@ -36,9 +36,9 @@ class WelcomeScreenActivity : AppCompatActivity() {
         setupaction()
         playAnimation()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            checkLogin()
-        }, 200)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            checkLogin()
+//        }, 200)
 
     }
 
@@ -64,14 +64,14 @@ class WelcomeScreenActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkLogin(){
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null){
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-
-    }
+//    private fun checkLogin(){
+//        val currentUser = firebaseAuth.currentUser
+//        if (currentUser != null){
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
+//        }
+//
+//    }
 
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.ivWelcomeIcon, View.TRANSLATION_X, -30f, 30f).apply {

@@ -45,4 +45,6 @@
     <string name="send">Send</string>
     <string name="or">OR</string>
     <string name="profile">Profile</string>
+    <string name="username">$username</string>
+    <string name="account_settings">Account Settings</string>
 </resources>

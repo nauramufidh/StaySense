@@ -1,5 +1,6 @@
 package com.example.staysense.ui.splashscreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +11,7 @@ import com.example.staysense.ui.main.MainActivity
 import com.example.staysense.ui.welcomescreen.WelcomeScreenActivity
 import com.google.firebase.auth.FirebaseAuth
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -17,11 +19,25 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            startActivity(Intent(this, WelcomeScreenActivity::class.java))
+//        }, 3000)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, WelcomeScreenActivity::class.java))
-        }, 3000)
+            checkLogin()
+        }, 2000)
     }
 
+    private fun checkLogin() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+        } else {
+            startActivity(Intent(this, WelcomeScreenActivity::class.java))
+        }
+        finish()
+    }
 
 }
