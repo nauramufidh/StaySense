@@ -82,7 +82,6 @@ class WordCloudFragment : Fragment() {
         anyChartView.setChart(tagCloud)
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
