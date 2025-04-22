@@ -47,4 +47,6 @@
     <string name="profile">Profile</string>
     <string name="username">$username</string>
     <string name="account_settings">Account Settings</string>
+    <string name="enter_word">Enter word</string>
+
 </resources>

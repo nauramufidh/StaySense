@@ -1,32 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.wordcloud.WordCloudFragment"
     android:orientation="vertical"
     android:paddingBottom="64dp">
 
-    <com.anychart.AnyChartView
-        android:id="@+id/ac_word_cloud_view"
+    <LinearLayout
+        android:id="@+id/ll_any"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
-        android:background="@drawable/rounded_background"
-        android:layout_margin="15dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/et_word_input"
-        android:layout_width="385dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:hint="silakan curhat"
-        android:inputType="text" />
+        <com.anychart.AnyChartView
+            android:id="@+id/acWordCloudView"
+            android:layout_width="match_parent"
+            android:layout_height="338dp"
+            android:layout_margin="16dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_wordcloud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etWordInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="7dp"
+                android:hint="@string/enter_word"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btn_submit_word"
-        android:layout_width="385dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:text="submit"/>
+        android:id="@+id/submitButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_any" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="8dp"
+        android:alpha="0.65"
+        app:layout_constraintTop_toBottomOf="@id/submitButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_upload_file2"
+        android:layout_width="355dp"
+        android:layout_height="141dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_dashed_border"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_line">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/iv_csv2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/csv_file"
+                android:src="@drawable/zcsv_file" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:text="@string/upload_file" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_supported_files2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:alpha="0.65"
+            android:text="@string/supported_files"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
