@@ -1,10 +1,12 @@
 package com.example.staysense.ui.profile
 
 import android.content.Intent
+import android.os.Build.VERSION_CODES.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.staysense.databinding.FragmentProfileBinding
@@ -27,12 +29,20 @@ class ProfileFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnLogout.setOnClickListener{setupLogout()}
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let {
+            val email = it.email
+            binding.tvEmail.text = email
+        }
+
+        binding.llLogout.setOnClickListener{setupLogout()}
+
     }
 
     private fun setupLogout() {

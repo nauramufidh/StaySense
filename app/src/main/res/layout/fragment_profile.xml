@@ -53,8 +53,8 @@
                 android:id="@+id/tv_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kasamira Anindita"
-                android:textSize="18sp"
+                android:text="@string/username"
+                android:textSize="20sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:letterSpacing="0.05"/>
@@ -64,16 +64,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="kasanindit@gmail.com"
+                android:text="@string/user_email"
                 android:textColor="@color/white"
                 android:alpha="0.8"
                 android:letterSpacing="0.05"/>
 
-
         </LinearLayout>
 
     </LinearLayout>
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -99,7 +97,7 @@
                 android:text="@string/account_settings"
                 android:alpha="0.65"
                 android:layout_margin="8dp"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:id="@+id/ll_personal_information"
@@ -107,32 +105,125 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/iv_key_personalinfo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/zpersonal"/>
 
+                <TextView
+                    android:id="@+id/tv_personalinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:text="@string/personal_information" />
 
+                <ImageView
+                    android:id="@+id/iv_arrow_personalinfo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="90dp"
+                    android:src="@drawable/zarrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_password_security"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_key_passecure"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/zkey"/>
+
+                <TextView
+                    android:id="@+id/tv_passecure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:text="@string/password_and_security"/>
+
+                <ImageView
+                    android:id="@+id/iv_arrow_passecure"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="75dp"
+                    android:src="@drawable/zarrow" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:alpha="0.65"
+                android:text="@string/history"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_history"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/zhistory"/>
+
+                <TextView
+                    android:id="@+id/tv_history2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:text="@string/predict_history"/>
+
+                <ImageView
+                    android:id="@+id/iv_arrow_history"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="140dp"
+                    android:src="@drawable/zarrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_logout"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/zlogout"/>
+
+                <TextView
+                    android:id="@+id/tv_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/red"
+                    android:text="@string/logout"/>
             </LinearLayout>
 
 
         </LinearLayout>
 
 
-
-
-
-
-
     </androidx.cardview.widget.CardView>
-
-
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/logout"
-        android:backgroundTint="@color/red"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

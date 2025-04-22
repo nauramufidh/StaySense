@@ -54,6 +54,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.firebase.auth.ktx)
+//    implementation (libs.firebase.firestore)
+
 
     implementation (libs.anychart.android)
     implementation (libs.multidex)

@@ -5,6 +5,7 @@
     <string name="login_desc">Please enter your address below to start using StaySense.</string>
     <string name="email">Enter your email</string>
     <string name="password">Enter your password</string>
+    <string name="username_signup">Enter Username</string>
     <string name="confirm_password">Confirm your password</string>
     <string name="create_acc">Create an account?</string>
     <string name="signup_desc">Please put your information below to create an account.</string>
@@ -46,10 +47,17 @@
     <string name="or">OR</string>
     <string name="profile">Profile</string>
     <string name="username">$username</string>
+    <string name="user_email">User Email</string>
     <string name="account_settings">Account Settings</string>
     <string name="enter_word">Enter word</string>
     <string name="input_data_manual">Input Data Manual</string>
     <string name="input_manual_instruction">ⓘ Fill out the following form to predict whether a customer will churn or not. Please complete all fields with the appropriate data. The data you enter will help the system to analyze accurately.</string>
     <string name="input_churn_reason">Input Churn Reason</string>
     <string name="submit">Submit</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="password_and_security">Password and Security</string>
+    <string name="history">History</string>
+    <string name="predict_history">Predict History</string>
+
+
 </resources>

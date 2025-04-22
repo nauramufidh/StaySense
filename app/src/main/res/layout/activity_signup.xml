@@ -23,7 +23,7 @@
             android:layout_width="152dp"
             android:layout_height="135dp"
             android:layout_gravity="center"
-            android:layout_marginTop="95dp"
+            android:layout_marginTop="9dp"
             android:src="@drawable/zstaysense" />
 
         <TextView
@@ -41,6 +41,24 @@
             android:textSize="18sp"
             android:text="@string/signup_desc"
             android:maxLines="2"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_username_signup"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/et_username_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username_signup"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:drawableStart="@drawable/account_circle"
+                android:drawablePadding="4dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_email_signup"
