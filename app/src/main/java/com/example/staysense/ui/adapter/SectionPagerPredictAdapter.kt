@@ -3,15 +3,15 @@ package com.example.staysense.ui.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.staysense.ui.home.HomeFragment
-import com.example.staysense.ui.home.RateFragment
+import com.example.staysense.ui.predict.InputManualFragment
+import com.example.staysense.ui.predict.UploadFileFragment
 
-class SectionsPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+class SectionPagerPredictAdapter (activity: FragmentActivity) : FragmentStateAdapter(activity) {
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> HomeFragment()
-            1 -> RateFragment()
-            else -> HomeFragment()
+            0 -> UploadFileFragment()
+            1 -> InputManualFragment()
+            else -> UploadFileFragment()
         }
     }
 

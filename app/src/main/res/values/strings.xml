@@ -42,11 +42,14 @@
     <string name="csv_file">csv file</string>
     <string name="upload_file">Upload File</string>
     <string name="supported_files">Supported files are .csv, .xls, .xlxs</string>
-    <string name="send">Send</string>
+    <string name="upload">Upload</string>
     <string name="or">OR</string>
     <string name="profile">Profile</string>
     <string name="username">$username</string>
     <string name="account_settings">Account Settings</string>
     <string name="enter_word">Enter word</string>
-
+    <string name="input_data_manual">Input Data Manual</string>
+    <string name="input_manual_instruction">ⓘ Fill out the following form to predict whether a customer will churn or not. Please complete all fields with the appropriate data. The data you enter will help the system to analyze accurately.</string>
+    <string name="input_churn_reason">Input Churn Reason</string>
+    <string name="submit">Submit</string>
 </resources>

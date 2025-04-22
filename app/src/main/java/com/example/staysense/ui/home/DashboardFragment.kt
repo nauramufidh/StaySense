@@ -8,7 +8,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.example.staysense.R
 import com.example.staysense.databinding.FragmentDashboardBinding
-import com.example.staysense.ui.adapter.SectionsPagerAdapter
+import com.example.staysense.ui.adapter.SectionsPagerDashboardAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DashboardFragment : Fragment() {
@@ -34,7 +34,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(requireActivity())
+        val sectionsPagerAdapter = SectionsPagerDashboardAdapter(requireActivity())
         binding.vpChart.adapter = sectionsPagerAdapter
         binding.vpChart.offscreenPageLimit = 2
 

@@ -40,4 +40,21 @@
         android:name="com.example.staysense.ui.home.RateFragment"
         android:label="fragment_rate"
         tools:layout="@layout/fragment_rate" />
+
+
+    <fragment
+        android:id="@+id/inputManualFragment"
+        android:name="com.example.staysense.ui.predict.InputManualFragment"
+        android:label="fragment_input_manual"
+        tools:layout="@layout/fragment_input_manual" />
+
+    <fragment
+        android:id="@+id/uploadFileFragment"
+        android:name="com.example.staysense.ui.predict.UploadFileFragment"
+        android:label="fragment_upload_file"
+        tools:layout="@layout/fragment_upload_file" />
+
+
+
+
 </navigation>
