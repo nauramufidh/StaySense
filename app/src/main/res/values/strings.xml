@@ -42,7 +42,7 @@
     <string name="input_data_costumer">Input Data Costumer</string>
     <string name="csv_file">csv file</string>
     <string name="upload_file">Upload File</string>
-    <string name="supported_files">Supported files are .csv, .xls, .xlxs</string>
+    <string name="supported_files">Supported files are .csv, .xls, .xlsx</string>
     <string name="upload">Upload</string>
     <string name="or">OR</string>
     <string name="profile">Profile</string>
@@ -58,6 +58,19 @@
     <string name="password_and_security">Password and Security</string>
     <string name="history">History</string>
     <string name="predict_history">Predict History</string>
+    <string name="result">Result</string>
+    <string name="churnrate_title">Churn Rate:</string>
+    <string name="churn_rate_result">0%</string>
+    <string name="is_churn">Is Churn</string>
+    <string name="total_customer">Total Customer</string>
+    <string name="totalcust">0</string>
+    <string name="tot_cust_churn">0</string>
+    <string name="title_tot_costumer_churn">Costumer Churn:</string>
+    <string name="costumers_not_churn_title">Costumers Not Churn:</string>
+    <string name="tot_cust_not_churn">0</string>
+    <string name="message_summary">Message Summary</string>
+    <string name="ok">OK</string>
+    <string name="detail">Detail</string>
 
 
 </resources>

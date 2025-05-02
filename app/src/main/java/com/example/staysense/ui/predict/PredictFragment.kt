@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.navigation.fragment.findNavController
 import com.example.staysense.R
 import com.example.staysense.databinding.FragmentPredictBinding
 import com.example.staysense.ui.adapter.SectionPagerPredictAdapter
 import com.example.staysense.ui.adapter.SectionsPagerDashboardAdapter
+import com.example.staysense.ui.main.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -42,7 +44,12 @@ class PredictFragment : Fragment() {
         TabLayoutMediator(binding.tlPredict, binding.vpPredict) { tab, position ->
             tab.text = resources.getString(TAB_TITLES_PREDICT[position])
         }.attach()
+
+        binding.btnExit.setOnClickListener{
+            findNavController().popBackStack(MainActivity::class.java, false)
+        }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
