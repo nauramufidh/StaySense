@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -9,6 +10,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
+//        buildConfigField("String", "BASE_URL", "\"https://my-api-staysense-production.up.railway.app/\"")
         applicationId = "com.example.staysense"
         minSdk = 26
         targetSdk = 35
@@ -37,6 +39,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -56,11 +59,14 @@ dependencies {
     implementation (libs.firebase.auth.ktx)
 //    implementation (libs.firebase.firestore)
 
-
     implementation (libs.anychart.android)
     implementation (libs.multidex)
-
+    implementation( libs.mpandroidchart)
 
     implementation(libs.androidx.viewpager2)
 
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 }
