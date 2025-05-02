@@ -54,7 +54,17 @@
         android:label="fragment_upload_file"
         tools:layout="@layout/fragment_upload_file" />
 
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.staysense.ui.result.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" />
 
+    <action
+        android:id="@+id/action_uploadFragment_to_resultFragment"
+        app:destination="@id/resultFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"/>
 
 
 </navigation>

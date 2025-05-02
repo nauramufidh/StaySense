@@ -92,7 +92,7 @@
                     android:id="@+id/tv_titile_input2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Input 1" />
+                    android:text="Input 2" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_input2"
@@ -105,7 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="4dp"
-                        android:hint="Input 3"
+                        android:hint="Input 2"
                         android:importantForAutofill="no" />
                 </com.google.android.material.textfield.TextInputLayout>
 

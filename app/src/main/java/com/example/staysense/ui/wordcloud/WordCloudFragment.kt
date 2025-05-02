@@ -1,19 +1,20 @@
 package com.example.staysense.ui.wordcloud
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.CategoryValueDataEntry
 import com.anychart.chart.common.dataentry.DataEntry
-import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.TagCloud
 import com.anychart.scales.OrdinalColor
+import com.example.staysense.R
 import com.example.staysense.databinding.FragmentWordCloudBinding
+import com.github.mikephil.charting.charts.HorizontalBarChart
 
 
 class WordCloudFragment : Fragment() {
@@ -21,6 +22,7 @@ class WordCloudFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var anyChartView: AnyChartView
+    private lateinit var clusteringchartView: HorizontalBarChart
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +35,23 @@ class WordCloudFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        anyChartView = binding.acWordCloudView
+        val wordCloudChart = binding.acWordCloudView
+//        val clusteringChart = binding.clusteringchartView
 
-        anyChartView.post {
-            setupTagCloud()
+        wordCloudChart.post {
+            setupTagCloud(wordCloudChart)
         }
+
+//        clusteringChart.post {
+//            setupClusteringChart(clusteringChart)
+//        }
     }
 
-    private fun setupTagCloud() {
+    private fun setupTagCloud(anyChartView: AnyChartView) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.clusterChartContainer, ClusteringChartFragment())
+            .commit()
+
         val tagCloud: TagCloud = AnyChart.tagCloud()
         tagCloud.title("World Cloud")
 
@@ -80,7 +91,13 @@ class WordCloudFragment : Fragment() {
 
         tagCloud.data(groupedData as List<DataEntry>)
         anyChartView.setChart(tagCloud)
+
+        Log.d("TagCloud", "Grouped data size: ${groupedData.size}")
     }
+
+//
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
