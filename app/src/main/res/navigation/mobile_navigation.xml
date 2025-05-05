@@ -21,7 +21,27 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.staysense.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profileFragment_to_personalInformationFragment"
+            app:destination="@id/personalInformationFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+
+        <action
+            android:id="@+id/action_profileFragment_to_securityFragment"
+            app:destination="@id/securityFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+
+        <action
+            android:id="@+id/action_profileFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_wordcloud"
@@ -65,6 +85,24 @@
         app:destination="@id/resultFragment"
         app:enterAnim="@anim/fade_in"
         app:exitAnim="@anim/fade_out"/>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.staysense.ui.profile.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/personalInformationFragment"
+        android:name="com.example.staysense.ui.profile.PersonalInformationFragment"
+        android:label="fragment_personal_information"
+        tools:layout="@layout/fragment_personal_information" />
+
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="com.example.staysense.ui.profile.SecurityFragment"
+        android:label="fragment_security"
+        tools:layout="@layout/fragment_security" />
 
 
 </navigation>

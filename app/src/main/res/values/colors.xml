@@ -11,6 +11,7 @@
     <color name="light_grayish_lime">#A9DBB5</color>
     <color name="light_grayish_yellow">#F6F8D5</color>
     <color name="light_grayish_green">#EEFBDD</color>
+    <color name="abu_gelap">#393E46</color>
     <color name="red">#FF0000</color>
 
 </resources>

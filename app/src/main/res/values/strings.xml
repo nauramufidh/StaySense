@@ -46,7 +46,7 @@
     <string name="upload">Upload</string>
     <string name="or">OR</string>
     <string name="profile">Profile</string>
-    <string name="username">$username</string>
+    <string name="username">username</string>
     <string name="user_email">User Email</string>
     <string name="account_settings">Account Settings</string>
     <string name="enter_word">Enter word</string>
@@ -71,6 +71,28 @@
     <string name="message_summary">Message Summary</string>
     <string name="ok">OK</string>
     <string name="detail">Detail</string>
+
+    <string name="personal_information_username">Username will appear here</string>
+    <string name="personal_information_full_name">Full Name</string>
+    <string name="personal_information_full_name2">Enter full name</string>
+    <string name="personal_information_role">Role</string>
+    <string name="personal_information_role2">Enter your role</string>
+    <string name="personal_information_email">Email</string>
+    <string name="personal_information_email2">User email will appear here</string>
+    <string name="save">Save</string>
+
+    <string name="about_staysense">About StaySense</string>
+    <string name="description_staysense">Staysense is a smart app designed to help companies identify customers at risk of churning.
+        It provides data-driven insights to support strategic decision-making,
+        allowing companies to improve customer retention and strengthen business relationships.</string>
+
+    <string name="description_security">Make sure the password you create is secure and hard to guess.
+        This will replace your old password, so make sure you remember your new password well before proceeding.</string>
+    <string name="change_password">Change password</string>
+    <string name="current_password">Current password</string>
+    <string name="New_password">New password</string>
+    <string name="Retype_new_password">Re-type new password</string>
+
 
 
 </resources>

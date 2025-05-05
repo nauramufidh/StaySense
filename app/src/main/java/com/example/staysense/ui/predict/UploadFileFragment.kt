@@ -21,7 +21,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.staysense.BuildConfig
 import com.example.staysense.R
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.api.ApiService

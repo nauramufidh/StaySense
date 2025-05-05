@@ -22,7 +22,7 @@ import kotlinx.coroutines.handleCoroutineException
 
 class WelcomeScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeScreenBinding
-    private lateinit var firebaseAuth: FirebaseAuth
+//    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class WelcomeScreenActivity : AppCompatActivity() {
         binding = ActivityWelcomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
+//        firebaseAuth = FirebaseAuth.getInstance()
 
 
         setupaction()
@@ -60,7 +60,6 @@ class WelcomeScreenActivity : AppCompatActivity() {
             finish()
         }
     }
-
 
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.ivWelcomeIcon, View.TRANSLATION_X, -30f, 30f).apply {

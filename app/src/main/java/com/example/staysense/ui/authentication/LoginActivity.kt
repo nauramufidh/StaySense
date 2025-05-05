@@ -2,60 +2,81 @@ package com.example.staysense.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.staysense.R
 import com.example.staysense.databinding.ActivityLoginBinding
 import com.example.staysense.ui.main.MainActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseDatabase = FirebaseDatabase.getInstance("https://staysense-624b4-default-rtdb.asia-southeast1.firebasedatabase.app")
+        databaseReference = firebaseDatabase.reference.child("users")
 
-        setupLogin()
-    }
-
-    private fun setupLogin(){
         binding.btnLogin2.setOnClickListener {
-            val email = binding.etEmailLogin.text.toString()
-            val password = binding.etPasswordLogin.text.toString()
+            val loginEmail = binding.etEmailLogin.text.toString()
+            val loginPassword = binding.etPasswordLogin.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()){
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                    if (task.isSuccessful){
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        val errorMessage = when (val exception = task.exception){
-                            is FirebaseAuthInvalidUserException -> "Email not registered."
-                            is FirebaseAuthInvalidCredentialsException -> "Incorrect Password or Email."
-                            else -> "Login Failed: ${exception?.localizedMessage}"
-                        }
-                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } else{
-                Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
+            if (loginEmail.isNotEmpty() && loginPassword.isNotEmpty()){
+                setupLogin(loginEmail, loginPassword)
+            }else{
+                Toast.makeText(this@LoginActivity, "All Fields are Mandatory", Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.tvRedirectToSignup.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+            finish()
         }
+    }
+
+    private fun setupLogin(email: String ,password: String){
+        databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (userSnapshot in dataSnapshot.children){
+                        val userData = userSnapshot.getValue(UserData::class.java)
+
+                        if (userData != null && userData.password == password){
+                            val sheredPreferences = getSharedPreferences("StaySensePrefs", MODE_PRIVATE)
+                            val editor = sheredPreferences.edit()
+                            editor.putBoolean("isLoggedIn", true)
+                            editor.putString("id", userData.id)
+                            editor.putString("email", userData.email)
+                            editor.putString("password", userData.password)
+                            editor.putString("username", userData.username)
+                            editor.apply()
+
+                            Toast.makeText(this@LoginActivity, "Login Successfull", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.putExtra("username", userData.username)
+                            intent.putExtra("email", userData.email)
+                            startActivity(intent)
+                            finish()
+                            return
+                        }
+                    }
+                }
+                Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(this@LoginActivity, "Database Error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 }

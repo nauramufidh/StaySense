@@ -2,74 +2,92 @@ package com.example.staysense.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.staysense.R
 import com.example.staysense.databinding.ActivitySignupBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseDatabase = FirebaseDatabase.getInstance("https://staysense-624b4-default-rtdb.asia-southeast1.firebasedatabase.app")
+        databaseReference = firebaseDatabase.reference.child("users")
 
-        binding.btnSignup.setOnClickListener { setupSignup() }
-        binding.tvRedirectToLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
+        binding.btnSignup.setOnClickListener {
+            Log.d("SignupDebug", "Signup button clicked")
+            val signupUsername = binding.etUsernameSignup.text.toString()
+            val signupEmail = binding.etEmailSignup.text.toString()
+            val signupPassword = binding.etPasswordSignup.text.toString()
+            val signupConfirmPassword = binding.etConfirmPasswordSignup.text.toString()
 
-    }
-
-    private fun setupSignup() {
-        val email = binding.etEmailSignup.text.toString()
-        val password = binding.etPasswordSignup.text.toString()
-        val confirmPassword = binding.etConfirmPasswordSignup.text.toString()
-
-        if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
-            if (password.length < 6) {
-                Toast.makeText(
-                    this,
-                    "Password must be at least 6 characters!",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else if (password != confirmPassword) {
-                Toast.makeText(this, "Password does not match!", Toast.LENGTH_SHORT).show()
-            } else {
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val intent = Intent(this, LoginActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                            val errorMessage = when (val exception = it.exception){
-                                is FirebaseAuthUserCollisionException -> "Email already registered."
-                                is FirebaseAuthInvalidCredentialsException -> "Invalid Email Format."
-                                else -> "Signup Failed: ${exception?.localizedMessage}"
-                            }
-                            Toast.makeText(
-                                this,
-                                errorMessage,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+            if (signupUsername.isNotEmpty() && signupEmail.isNotEmpty() && signupPassword.isNotEmpty() && signupConfirmPassword.isNotEmpty()) {
+                setupSignup(signupUsername, signupEmail, signupPassword, signupConfirmPassword)
+            }else{
+                Toast.makeText(this@SignupActivity, "All Fields are Mandatory", Toast.LENGTH_SHORT).show()
             }
-        } else {
-            Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
         }
+
+        binding.tvRedirectToLogin.setOnClickListener {
+            startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
+            finish()
+        }
+
     }
+
+    private fun setupSignup(username: String, email: String, password: String, confirmPassword: String) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this@SignupActivity, "Invalid email format", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (password != confirmPassword) {
+            Toast.makeText(this@SignupActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Toast.makeText(this@SignupActivity, "Email already registered!", Toast.LENGTH_SHORT).show()
+                } else {
+                    databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(usernameSnapshot: DataSnapshot) {
+                            if (!usernameSnapshot.exists()) {
+                                val id = databaseReference.push().key
+                                val userData = UserData(id, username, email, password, confirmPassword)
+                                databaseReference.child(id!!).setValue(userData)
+                                Toast.makeText(this@SignupActivity, "Signup Successful!", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
+                                finish()
+                            } else {
+                                Toast.makeText(this@SignupActivity, "Username already exists!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            Toast.makeText(this@SignupActivity, "Database Error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@SignupActivity, "Database Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
 }
