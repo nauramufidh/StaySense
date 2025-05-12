@@ -32,12 +32,12 @@
 
         <ImageView
             android:id="@+id/iv_personal_information"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
+            android:layout_width="98dp"
+            android:layout_height="99dp"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_gravity="center"
             android:src="@drawable/account_circle" />
 
         <TextView
@@ -51,15 +51,24 @@
             android:textStyle="bold"
             android:text="@string/username"/>
 
-        <EditText
-            android:id="@+id/et_username_personal_information"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_username_personal_information"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:minHeight="48dp"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:hint="@string/personal_information_username" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/et_username_personal_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:hint="@string/personal_information_username"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_full_name_personal_information"
@@ -72,15 +81,25 @@
             android:textStyle="bold"
             android:text="@string/personal_information_full_name"/>
 
-        <EditText
-            android:id="@+id/et_full_name_personal_information"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_full_name_personal_information"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:minHeight="48dp"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:hint="@string/personal_information_full_name2" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/et_full_name_personal_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:hint="@string/personal_information_full_name2"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/tv_role_personal_information"
@@ -93,15 +112,24 @@
             android:textStyle="bold"
             android:text="@string/personal_information_role"/>
 
-        <EditText
-            android:id="@+id/et_role_personal_information"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_role_personal_information"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:minHeight="48dp"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:hint="@string/personal_information_full_name2" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/et_role_personal_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:hint="@string/personal_information_role2"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_email_personal_information"
@@ -114,15 +142,24 @@
             android:textStyle="bold"
             android:text="@string/personal_information_email"/>
 
-        <EditText
-            android:id="@+id/et_email_personal_information"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_email_personal_information"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:minHeight="48dp"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:hint="@string/personal_information_email2" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/et_email_personal_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:inputType="textEmailAddress"
+                android:importantForAutofill="no"
+                android:hint="@string/personal_information_email2"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_save_personal_information"
