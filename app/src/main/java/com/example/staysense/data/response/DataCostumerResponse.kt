@@ -8,66 +8,68 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class DataCostumerResponse(
 
-	@field:SerializedName("online_backup")
-	val onlineBackup: String? = null,
+	@SerializedName("online_backup")
+	val onlineBackup: Int,
 
-	@field:SerializedName("unlimited_data")
-	val unlimitedData: String? = null,
+	@SerializedName("unlimited_data")
+	val unlimitedData: Int,
 
-	@field:SerializedName("satisfaction_score")
-	val satisfactionScore: String? = null,
+	@SerializedName("satisfaction_score")
+	val satisfactionScore: Int,
 
-	@field:SerializedName("city")
-	val city: String? = null,
+	@SerializedName("city")
+	val city: Int,
 
-	@field:SerializedName("online_security")
-	val onlineSecurity: String? = null,
+	@SerializedName("online_security")
+	val onlineSecurity: Int,
 
-	@field:SerializedName("cltv")
-	val cltv: String? = null,
+	@SerializedName("cltv")
+	val cltv: Int,
 
-	@field:SerializedName("premium_tech_support")
-	val premiumTechSupport: String? = null,
+	@SerializedName("premium_tech_support")
+	val premiumTechSupport: Int,
 
-	@field:SerializedName("number_of_dependents")
-	val numberOfDependents: String? = null,
+	@SerializedName("number_of_dependents")
+	val numberOfDependents: Int,
 
-	@field:SerializedName("contract")
-	val contract: String? = null,
+	@SerializedName("contract")
+	val contract: Int,
 
-	@field:SerializedName("internet_service")
-	val internetService: String? = null,
+	@SerializedName("internet_service")
+	val internetService: Int,
 
-	@field:SerializedName("device_protection_plan")
-	val deviceProtectionPlan: String? = null,
+	@SerializedName("device_protection_plan")
+	val deviceProtectionPlan: Int,
 
-	@field:SerializedName("total_charges")
-	val totalCharges: String? = null,
+	@SerializedName("total_charges")
+	val totalCharges: Int,
 
-	@field:SerializedName("total_revenue")
-	val totalRevenue: String? = null,
+	@SerializedName("total_revenue")
+	val totalRevenue: Int,
 
-	@field:SerializedName("monthly_charge")
-	val monthlyCharge: String? = null,
+	@SerializedName("monthly_charge")
+	val monthlyCharge: Int,
 
-	@field:SerializedName("streaming_tv")
-	val streamingTv: String? = null,
+	@SerializedName("streaming_tv")
+	val streamingTv: Int,
 
-	@field:SerializedName("tenure_in_months")
-	val tenureInMonths: String? = null,
+	@SerializedName("tenure_in_months")
+	val tenureInMonths: Int,
 
-	@field:SerializedName("streaming_movies")
-	val streamingMovies: String? = null,
+	@SerializedName("streaming_movies")
+	val streamingMovies: Int,
 
-	@field:SerializedName("streaming_music")
-	val streamingMusic: String? = null,
+	@SerializedName("streaming_music")
+	val streamingMusic: Int,
 
-	@field:SerializedName("age")
-	val age: String? = null,
+	@SerializedName("age")
+	val age: Int,
 
-	@field:SerializedName("payment_method")
-	val paymentMethod: String? = null,
+	@SerializedName("payment_method")
+	val paymentMethod: Int,
 
-	@field:SerializedName("churn_score")
-	val churnScore: String? = null
+	@SerializedName("churn_score")
+	val churnScore: Int
+
 ) : Parcelable
+

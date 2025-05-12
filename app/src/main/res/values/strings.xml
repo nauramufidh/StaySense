@@ -93,6 +93,47 @@
     <string name="New_password">New password</string>
     <string name="Retype_new_password">Re-type new password</string>
 
-
+    <string name="age">Age</string>
+    <string name="input_age">Input age</string>
+    <string name="number_of_dependents">Number of dependents</string>
+    <string name="input_number_of_dependents">Input number of dependents</string>
+    <string name="city">City</string>
+    <string name="input_city">Input city</string>
+    <string name="Tenure_in_months">Tenure in months</string>
+    <string name="input_tenure_in_months">Input tenure in months</string>
+    <string name="internet_service">Internet service</string>
+    <string name="input_internet_service">Input internet service</string>
+    <string name="online_security">Online security</string>
+    <string name="input_online_security">Input online security</string>
+    <string name="online_backup">Online backup</string>
+    <string name="input_online_backup">Input online backup</string>
+    <string name="device_protection_plan">Device protection plan</string>
+    <string name="input_device_protection_plan">Input device protection plan</string>
+    <string name="premium_tech_support">Premium tech support</string>
+    <string name="input_premium_tech_support">Input premium tech support</string>
+    <string name="streaming_tv">Streaming TV</string>
+    <string name="input_streaming_tv">Input streaming TV</string>
+    <string name="streaming_movies">Streaming movies</string>
+    <string name="input_streaming_movies">Input streaming movies</string>
+    <string name="streaming_music">Streaming music</string>
+    <string name="input_streaming_music">Input streaming music</string>
+    <string name="unlimited_data">Unlimited data</string>
+    <string name="input_unlimited_data">Input unlimited data</string>
+    <string name="contract">Contract</string>
+    <string name="input_contract">Input contract</string>
+    <string name="payment_method">Payment method</string>
+    <string name="input_payment_method">Input payment method</string>
+    <string name="monthly_charge">Monthly charge</string>
+    <string name="input_monthly_charge">Input monthly charge</string>
+    <string name="total_charges">Total charges</string>
+    <string name="input_total_charges">Input total charges</string>
+    <string name="total_revenue">Total revenue</string>
+    <string name="input_total_revenue">Input total revenue</string>
+    <string name="satisfaction_score">Satisfaction score</string>
+    <string name="input_satisfaction_score">Input satisfaction score</string>
+    <string name="churn_score">Churn score</string>
+    <string name="input_churn_score">Input churn score</string>
+    <string name="cltv">CLTV</string>
+    <string name="input_cltv">Input CLTV</string>
 
 </resources>

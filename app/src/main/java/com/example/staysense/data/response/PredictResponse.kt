@@ -8,18 +8,24 @@ import com.google.gson.annotations.SerializedName
 data class PredictResponse(
 
 	@field:SerializedName("prediction")
-	val prediction: Prediction? = null
+	val prediction: Prediction? = null,
+
+	@field:SerializedName("status")
+	val status: String? = null
 ) : Parcelable
 
 @Parcelize
 data class Prediction(
 
-	@field:SerializedName("churn_probability")
-	val churnProbability: String? = null,
+	@field:SerializedName("not_churn_rate")
+	val notChurnRate: String? = null,
+
+	@field:SerializedName("churn_rate")
+	val churnRate: String? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
 
 	@field:SerializedName("is_churn")
-	val isChurn: String? = null
+	val isChurn: Boolean? = null
 ) : Parcelable
