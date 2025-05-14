@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.CategoryValueDataEntry
@@ -36,21 +37,20 @@ class WordCloudFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val wordCloudChart = binding.acWordCloudView
-//        val clusteringChart = binding.clusteringchartView
+//        val clusteringFragment = ClusteringChartFragment()
+//        childFragmentManager.beginTransaction()
+//            .replace(R.id.clusterChartContainer, clusteringFragment)
+//            .commit()
 
         wordCloudChart.post {
             setupTagCloud(wordCloudChart)
         }
-
-//        clusteringChart.post {
-//            setupClusteringChart(clusteringChart)
-//        }
     }
 
     private fun setupTagCloud(anyChartView: AnyChartView) {
-        childFragmentManager.beginTransaction()
-            .replace(R.id.clusterChartContainer, ClusteringChartFragment())
-            .commit()
+//        childFragmentManager.beginTransaction()
+//            .replace(R.id.clusterChartContainer, ClusteringChartFragment())
+//            .commit()
 
         val tagCloud: TagCloud = AnyChart.tagCloud()
         tagCloud.title("World Cloud")

@@ -71,6 +71,7 @@
     <string name="message_summary">Message Summary</string>
     <string name="ok">OK</string>
     <string name="detail">Detail</string>
+    <string name="exit_to_main">exit to main</string>
 
     <string name="personal_information_username">Username will appear here</string>
     <string name="personal_information_full_name">Full Name</string>

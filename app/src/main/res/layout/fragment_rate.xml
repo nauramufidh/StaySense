@@ -81,7 +81,7 @@
                     android:textStyle="bold" />
 
                 <com.anychart.AnyChartView
-                    android:id="@+id/churn_piechart"
+                    android:id="@+id/churn_ratechart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center" />

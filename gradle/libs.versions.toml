@@ -3,7 +3,7 @@ agp = "8.9.1"
 anychartAndroid = "1.1.5"
 firebaseAuthKtx = "23.2.0"
 firebaseDatabase = "21.0.0"
-firebaseFirestore = "24.9.0"
+firebaseFirestoreKtx = "25.1.4"
 kotlin = "2.0.21"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -22,6 +22,7 @@ navigationFragmentKtx = "2.8.9"
 navigationUiKtx = "2.8.9"
 retrofit = "2.9.0"
 viewpager2 = "1.0.0"
+firebaseDatabaseKtx = "21.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,7 +31,7 @@ anychart-android = { module = "com.github.AnyChart:AnyChart-Android", version.re
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 firebase-database = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabase" }
-firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -45,6 +46,7 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 multidex = { module = "com.android.support:multidex", version.ref = "multidex" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

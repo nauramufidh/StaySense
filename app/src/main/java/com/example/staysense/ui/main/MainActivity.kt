@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home -> {
                     navView.visibility = View.VISIBLE
                 }
+                R.id.navigation_predict-> {
+                    navView.visibility = View.VISIBLE
+                }
                 R.id.navigation_profile-> {
                     navView.visibility = View.VISIBLE
                 }

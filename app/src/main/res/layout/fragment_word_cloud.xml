@@ -21,9 +21,10 @@
             android:visibility="visible"
             android:background="@drawable/rounded_background" />
 
-        <FrameLayout
+        <include
             android:id="@+id/clusterChartContainer"
             android:layout_width="match_parent"
+            layout="@layout/fragment_clustering_chart"
             android:layout_height="300dp"
             android:layout_marginTop="12dp"/>
 

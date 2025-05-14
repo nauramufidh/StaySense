@@ -1,25 +1,30 @@
 package com.example.staysense.ui.profile
 
 import android.content.Intent
+import android.os.Build.VERSION_CODES.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.staysense.databinding.FragmentProfileBinding
+import com.example.staysense.ui.authentication.LoginActivity
 import com.example.staysense.ui.welcomescreen.WelcomeScreenActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
-import com.example.staysense.R
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
 class ProfileFragment : Fragment() {
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
 
 //    private val currentUser = FirebaseAuth.getInstance().currentUser
 
@@ -29,35 +34,23 @@ class ProfileFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // save username email
-        val sharedPref = requireActivity().getSharedPreferences("StaySensePrefs", AppCompatActivity.MODE_PRIVATE)
-        val username = sharedPref.getString("username", "")
-        val email = sharedPref.getString("email", "")
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let {
+            val email = it.email
+            binding.tvEmail.text = email
+        }
 
-        val tvUsername = view.findViewById<TextView>(R.id.tv_username)
-        val tvEmail = view.findViewById<TextView>(R.id.tv_email)
+//        firebaseDatabase = FirebaseDatabase.getInstance("https://staysense-624b4-default-rtdb.asia-southeast1.firebasedatabase.app")
+//        databaseReference = firebaseDatabase.reference.child("users")
 
-        tvUsername.text = username
-        tvEmail.text = email
-
-        // logout
         binding.llLogout.setOnClickListener{setupLogout()}
 
-        // navigate to other fragments
-        binding.llPersonalInformationProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_personalInformationFragment)
-        }
-        binding.llPasswordSecurity.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_securityFragment)
-        }
-        binding.llAboutStaysense.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_aboutFragment)
-        }
     }
 
     private fun setupLogout() {
