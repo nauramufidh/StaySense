@@ -6,6 +6,7 @@ import com.example.staysense.data.response.PredictResponse
 import com.example.staysense.data.response.UploadResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -29,6 +30,6 @@ interface ApiService {
     ): Call<UploadResponse>
 
     @GET("chart")
-    fun getCharts(): Call<ChartResponse>
+    suspend fun getCharts(): Response<ChartResponse>
 
 }

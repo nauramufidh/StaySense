@@ -15,21 +15,21 @@ data class ChartResponse(
 ) : Parcelable
 
 @Parcelize
-data class PieChart(
-
-	@field:SerializedName("churn")
-	val churn: String? = null,
-
-	@field:SerializedName("not_churn")
-	val notChurn: String? = null
-) : Parcelable
-
-@Parcelize
 data class BarChartItem(
 
 	@field:SerializedName("month")
 	val month: String? = null,
 
 	@field:SerializedName("churn_rate")
-	val churnRate: String? = null
+	val churnRate: Double? = null
+) : Parcelable
+
+@Parcelize
+data class PieChart(
+
+	@field:SerializedName("churn")
+	val churn: Int? = null,
+
+	@field:SerializedName("not_churn")
+	val notChurn: Int? = null
 ) : Parcelable

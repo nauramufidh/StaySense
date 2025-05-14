@@ -10,11 +10,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.staysense.R
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.response.DataCostumerResponse
 import com.example.staysense.data.response.PredictResponse
+import com.example.staysense.ui.home.SharedViewModel
 import com.example.staysense.ui.main.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -50,6 +52,8 @@ class InputManualFragment : Fragment() {
     private lateinit var tvProbResult: TextView
     private lateinit var tvIsChurnResult: TextView
     private lateinit var btnOkmanual: Button
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,6 +150,8 @@ class InputManualFragment : Fragment() {
                         tvIsChurnResult.text = isChurn
 
                         flResult.visibility = View.VISIBLE
+
+                        sharedViewModel.setUploadSuccess(true)
 
                         btnOkmanual.setOnClickListener {
                             val intent = Intent(requireContext(), MainActivity::class.java)
