@@ -16,6 +16,8 @@ import com.example.staysense.R
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.response.DataCostumerResponse
 import com.example.staysense.data.response.PredictResponse
+import com.example.staysense.databinding.FragmentInputManualBinding
+import com.example.staysense.databinding.FragmentUploadFileBinding
 import com.example.staysense.ui.home.SharedViewModel
 import com.example.staysense.ui.main.MainActivity
 import retrofit2.Call
@@ -23,6 +25,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class InputManualFragment : Fragment() {
+
+    private var _binding: FragmentInputManualBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var etAge: EditText
     private lateinit var etNumberOfDependents: EditText
@@ -48,6 +53,7 @@ class InputManualFragment : Fragment() {
     private lateinit var btnInputManual: Button
 
     private lateinit var flResult: View
+    private lateinit var overlayDim: View
     private lateinit var tvMessage: TextView
     private lateinit var tvProbResult: TextView
     private lateinit var tvIsChurnResult: TextView
@@ -64,7 +70,8 @@ class InputManualFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_input_manual, container, false)
+        _binding = FragmentInputManualBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,6 +79,9 @@ class InputManualFragment : Fragment() {
 
         flResult = view.findViewById(R.id.fl_result_input_manual)
         flResult.visibility = View.GONE
+
+        overlayDim = view.findViewById(R.id.overlayDim)
+        overlayDim.visibility = View.GONE
 
         etAge = view.findViewById(R.id.et_input_age)
         etNumberOfDependents = view.findViewById(R.id.et_input_number_of_dependents)
@@ -101,8 +111,9 @@ class InputManualFragment : Fragment() {
         tvIsChurnResult = view.findViewById(R.id.tv_is_churn_result)
         btnOkmanual = view.findViewById(R.id.btn_ok_input_manual)
 
-
         btnInputManual.setOnClickListener {
+            showLoading(true)
+
             val data = DataCostumerResponse(
                 age = etAge.text.toString().toIntOrNull() ?: 0,
                 numberOfDependents = etNumberOfDependents.text.toString().toIntOrNull() ?: 0,
@@ -150,17 +161,22 @@ class InputManualFragment : Fragment() {
                         tvIsChurnResult.text = isChurn
 
                         flResult.visibility = View.VISIBLE
-
-                        sharedViewModel.setUploadSuccess(true)
+                        overlayDim.visibility = View.VISIBLE
 
                         btnOkmanual.setOnClickListener {
-                            val intent = Intent(requireContext(), MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+//                            val intent = Intent(requireContext(), MainActivity::class.java)
+//                            startActivity(intent)
+//                            activity?.finish()
+
+                            clearInputField()
+                            flResult.visibility = View.GONE
+                            overlayDim.visibility = View.GONE
+
+                            sharedViewModel.setUploadSuccess(true)
                         }
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Gagal response: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed get response: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -168,6 +184,38 @@ class InputManualFragment : Fragment() {
                 Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun clearInputField(){
+        binding.etInputAge.setText("")
+        binding.etInputCity.setText("")
+        binding.etInputCltv.setText("")
+        binding.etInputContract.setText("")
+        binding.etInputChurnScore.setText("")
+        binding.etInputDeviceProtectionPlan.setText("")
+        binding.etInputInternetService.setText("")
+        binding.etInputMonthlyCharge.setText("")
+        binding.etInputNumberOfDependents.setText("")
+        binding.etInputOnlineBackup.setText("")
+        binding.etInputOnlineSecurity.setText("")
+        binding.etInputPaymentMethod.setText("")
+        binding.etInputPremiumTechSupport.setText("")
+        binding.etInputStreamingTv.setText("")
+        binding.etInputSatisfactionScore.setText("")
+        binding.etInputStreamingMusic.setText("")
+        binding.etInputStreamingMovies.setText("")
+        binding.etInputTotalCharges.setText("")
+        binding.etInputTenureInMonths.setText("")
+        binding.etInputTotalRevenue.setText("")
+        binding.etInputUnlimitedData.setText("")
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
 }

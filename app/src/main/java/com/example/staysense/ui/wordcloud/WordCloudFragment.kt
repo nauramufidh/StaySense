@@ -95,8 +95,6 @@ class WordCloudFragment : Fragment() {
         Log.d("TagCloud", "Grouped data size: ${groupedData.size}")
     }
 
-//
-
 
 
     override fun onDestroyView() {

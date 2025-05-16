@@ -34,7 +34,6 @@ class RateFragment : Fragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-
     private lateinit var apiService : ApiService
 
     override fun onCreateView(
@@ -64,6 +63,7 @@ class RateFragment : Fragment() {
 
     private fun fetchChurnRateData() {
         viewLifecycleOwner.lifecycleScope.launch {
+            showLoadingChart(true)
             try {
                 Log.d("RateFragment", "Fetching chart data...")
                 val response = apiService.getCharts()
@@ -80,6 +80,8 @@ class RateFragment : Fragment() {
                 }
             } catch (e: Exception) {
                 Log.e("RateFragment", "Network error: ${e.message}")
+            } finally {
+                showLoadingChart(false)
             }
         }
     }
@@ -114,8 +116,19 @@ class RateFragment : Fragment() {
         Log.d("RateFragment", "Bar chart rendered")
     }
 
-    fun refreshChart() {
-        fetchChurnRateData()
+    private fun showLoadingChart(isLoading: Boolean){
+        binding.progressBarRateChart.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.cvChurnrate.alpha = if (isLoading) 0.3f else 1f
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("RateFragment", "Fragment visible, fetching chart data...")
+
+        if (sharedViewModel.uploadLiveData.value == true) {
+            fetchChurnRateData()
+            sharedViewModel.setUploadSuccess(false)
+        }
     }
 
     override fun onDestroyView() {

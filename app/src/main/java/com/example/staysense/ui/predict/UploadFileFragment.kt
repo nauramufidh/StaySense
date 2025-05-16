@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.databinding.FragmentUploadFileBinding
 import com.example.staysense.ui.home.RateFragment
 import com.example.staysense.ui.home.SharedViewModel
+import com.example.staysense.ui.main.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -143,8 +145,8 @@ class UploadFileFragment : Fragment() {
                     showLoading(false)
                     val result = response.body()
 
-                    result?.summary?.let {summary ->
-                        Toast.makeText(context, "Upload sukses!",Toast.LENGTH_LONG).show()
+                    result?.summary?.let { summary ->
+                        Toast.makeText(context, "Upload sukses!", Toast.LENGTH_LONG).show()
 
                         binding.overlayDim.visibility = View.VISIBLE
                         binding.flResultUpload.visibility = View.VISIBLE
@@ -154,15 +156,16 @@ class UploadFileFragment : Fragment() {
                         binding.tvTotCustNotChurnResult.text = "${summary.notChurnCount ?: 0}"
                         binding.tvChurnrateResult.text = "${summary.totalCustomers ?: 0}%"
 
-                        sharedViewModel.setUploadSuccess(true)
 
                         binding.btnOk.setOnClickListener {
                             binding.flResultUpload.visibility = View.GONE
                             binding.overlayDim.visibility = View.GONE
                             binding.tvSelectedFile.text = "Please choose a file."
                             selectedFileUri = null
-                        }
 
+                            Log.d("UploadFragment", "User confirmed upload result, notifying sharedViewModel")
+                            sharedViewModel.setUploadSuccess(true)
+                        }
                     }
                 } else {
                     Toast.makeText(context, "Upload gagal: ${response.code()} ${response.message()}",Toast.LENGTH_LONG).show()
