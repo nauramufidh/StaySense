@@ -29,7 +29,7 @@ interface ApiService {
         @Part file: MultipartBody.Part
     ): Call<UploadResponse>
 
-    @GET("chart")
+    @GET("dashboard/chart")
     suspend fun getCharts(): Response<ChartResponse>
 
 }
