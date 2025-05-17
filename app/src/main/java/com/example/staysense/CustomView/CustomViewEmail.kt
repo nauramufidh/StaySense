@@ -1,0 +1,42 @@
+package com.example.staysense.CustomView
+
+import android.content.Context
+import android.graphics.Canvas
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.AttributeSet
+import android.util.Patterns
+import androidx.appcompat.widget.AppCompatEditText
+
+class CustomViewEmail @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null
+) : AppCompatEditText(context, attrs) {
+
+    init {
+        addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int,count: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int,count: Int) {
+                val email = s.toString()
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    error = "Invalid email format"
+                } else {
+                    error = null
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Do nothing
+            }
+        })
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        if (text.isNullOrEmpty()){
+            hint = "Enter your email"
+        }
+    }
+}

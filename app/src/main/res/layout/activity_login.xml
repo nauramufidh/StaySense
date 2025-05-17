@@ -57,15 +57,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            app:startIconDrawable="@drawable/baseline_email_24">
 
             <EditText
                 android:id="@+id/et_email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
-                android:drawableStart="@drawable/baseline_email_24"
-                android:drawablePadding="4dp"
                 android:importantForAutofill="no"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -76,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            app:startIconDrawable="@drawable/baseline_lock_24"
             app:endIconMode="password_toggle">
 
             <EditText
@@ -84,9 +84,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:hint="@string/password"
-                android:drawableStart="@drawable/baseline_lock_24"
-                android:drawablePadding="4dp"/>
+                android:hint="@string/password"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

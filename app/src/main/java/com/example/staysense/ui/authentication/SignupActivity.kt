@@ -29,9 +29,9 @@ class SignupActivity : AppCompatActivity() {
         binding.btnSignup.setOnClickListener {
             Log.d("SignupDebug", "Signup button clicked")
             val signupUsername = binding.etUsernameSignup.text.toString()
-            val signupEmail = binding.etEmailSignup.text.toString()
-            val signupPassword = binding.etPasswordSignup.text.toString()
-            val signupConfirmPassword = binding.etConfirmPasswordSignup.text.toString()
+            val signupEmail = binding.cvEmailSignup.text.toString()
+            val signupPassword = binding.cvPasswordSignup.text.toString()
+            val signupConfirmPassword = binding.cvConfirmPasswordSignup.text.toString()
 
             if (signupUsername.isNotEmpty() && signupEmail.isNotEmpty() && signupPassword.isNotEmpty() && signupConfirmPassword.isNotEmpty()) {
                 setupSignup(signupUsername, signupEmail, signupPassword, signupConfirmPassword)
