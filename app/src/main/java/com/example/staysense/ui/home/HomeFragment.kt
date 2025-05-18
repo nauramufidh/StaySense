@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.ValueDataEntry
@@ -28,6 +29,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
     private var chartUpdateJob: Job? = null
     private var pieChart = PieChart()
 
@@ -43,6 +46,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedViewModel.uploadLiveData.observe(viewLifecycleOwner) { success ->
+            if (success == true) {
+                Log.d("RateFragment", "Upload success detected, re-fetching chart data...")
+                getChartData()
+                sharedViewModel.setUploadSuccess(false)
+            }
+        }
+
         getChartData()
 
     }
@@ -50,59 +61,30 @@ class HomeFragment : Fragment() {
     private fun getChartData(){
         val api = ApiConfig.getApiService()
 
-        lifecycleScope.launch{
+        viewLifecycleOwner.lifecycleScope.launch {
+            showLoadingChart(true)
             try {
-                val response = withContext(Dispatchers.IO){
-                    api.getCharts()
-                }
-
+                Log.d("HomeFragment", "Fetching chart data...")
+                val response = api.getCharts()
                 if (response.isSuccessful) {
-                    val chartData = response.body()
-
-                    chartData?.pieChart?.let { pieChart ->
-                        setupPieChart()
+                    Log.d("HomeFragment", "Response successful")
+                    response.body()?.pieChart?.let { pieChartData ->
+                        withContext(Dispatchers.Main) {
+                            setupPieChart(pieChartData)
+                        }
+                    } ?: run {
+                        Log.e("HomeFragment", "No pieChart data found in response")
                     }
                 } else {
-                    Log.e("ChartDebug", "Status: ${response.code()}, Message: ${response.errorBody()?.string()}")
-                    Toast.makeText(requireContext(), "Gagal mengambil data chart", Toast.LENGTH_SHORT).show()
+                    Log.e("HomeFragment", "Error fetching data: ${response.code()} - ${response.message()}")
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("HomeFragment", "Network error: ${e.message}")
+            } finally {
+                showLoadingChart(false)
             }
+
         }
-    }
-
-    private fun setupPieChart() {
-        Log.d("ChartData", "Churn: ${pieChart.churn}, Not Churn: ${pieChart.notChurn}")
-        val pie = AnyChart.pie()
-
-        val churnValue = pieChart.churn?.toDouble() ?: 0.0
-        val notChurnValue = pieChart.notChurn?.toDouble() ?: 0.0
-
-        if (churnValue == 0.0 && notChurnValue == 0.0) {
-            Log.d("ChartData", "Both values are zero, displaying chart with 0%")
-            val data = listOf(
-                ValueDataEntry("Churn", 90),
-                ValueDataEntry("Not Churn", 10)
-            )
-            pie.data(data)
-        } else {
-            val data = listOf(
-                ValueDataEntry("Churn", churnValue),
-                ValueDataEntry("Not Churn", notChurnValue)
-            )
-            pie.data(data)
-        }
-
-        val data = listOf(
-            ValueDataEntry("Churn", churnValue),
-            ValueDataEntry("Not Churn", notChurnValue)
-        )
-
-        pie.data(data)
-        pie.title("Customer Churn Pie Chart")
-        binding.churnPiechart.setChart(pie)
 
 //        val anyChartView = binding.churnPiechart
 //        anyChartView.setProgressBar(binding.progressbar)
@@ -142,12 +124,49 @@ class HomeFragment : Fragment() {
 //        Log.d("PieChart", "setupPieChart finished")
     }
 
+    private fun setupPieChart(pieChartData: PieChart) {
+
+        Log.d("ChartData", "Churn: ${pieChartData.churn}, Not Churn: ${pieChartData.notChurn}")
+        val pie = AnyChart.pie()
+
+        val churnValue = pieChartData.churn?.toDouble() ?: 0.0
+        val notChurnValue = pieChartData.notChurn?.toDouble() ?: 0.0
+
+        val data = listOf(
+            ValueDataEntry("Churn", churnValue),
+            ValueDataEntry("Not Churn", notChurnValue)
+        )
+
+        Log.d("ChartData", "Chart data: Churn: $churnValue, Not Churn: $notChurnValue")
+        pie.data(data)
+
+        pie.title("Customer Churn Pie Chart")
+
+        binding.churnPiechart.setChart(pie)
+
+//        view?.postDelayed({
+//            binding.churnPiechart.setChart(pie)
+//        }, 500)
 
 
+    }
 
-    override fun onPause() {
-        super.onPause()
-        chartUpdateJob?.cancel()
+    private fun showLoadingChart(isLoading: Boolean){
+        binding.progressBarPieChart.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.cvPiechart.alpha = if (isLoading) 0.3f else 1f
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("HomeFragment", "Fragment visible, fetching chart data...")
+
+        view?.post {
+            if (sharedViewModel.uploadLiveData.value == true) {
+                getChartData()
+                sharedViewModel.setUploadSuccess(false)
+            }
+        }
+
     }
 
     override fun onDestroyView() {

@@ -58,7 +58,10 @@ class RateFragment : Fragment() {
             }
         }
 
-        fetchChurnRateData()
+        view.postDelayed({
+            fetchChurnRateData()
+        }, 1000)
+
     }
 
     private fun fetchChurnRateData() {
@@ -85,7 +88,6 @@ class RateFragment : Fragment() {
             }
         }
     }
-
 
     private fun displayBarChart(barChartData: List<BarChartItem?>){
         Log.d("RateFragment", "Displaying bar chart with ${barChartData.size} data points")
