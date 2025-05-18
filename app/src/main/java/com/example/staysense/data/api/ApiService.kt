@@ -5,6 +5,7 @@ import com.example.staysense.data.response.ClusteringResponse
 import com.example.staysense.data.response.DataCostumerResponse
 import com.example.staysense.data.response.PredictResponse
 import com.example.staysense.data.response.UploadResponse
+import com.example.staysense.data.response.WordCloudRequest
 import com.example.staysense.data.response.WordCloudResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -36,9 +37,9 @@ interface ApiService {
 
     @Headers("Content-type: application/json")
     @POST("wordcloud")
-    fun getWordcloud(
-        @Body requestBody: WordCloudResponse
-    ) : Call<WordCloudResponse>
+    fun inputWordCloud(
+        @Body requestBody: WordCloudRequest
+    ): Call<WordCloudResponse>
 
     @GET("cluster/chart")
     fun getClustering(): Response<ClusteringResponse>

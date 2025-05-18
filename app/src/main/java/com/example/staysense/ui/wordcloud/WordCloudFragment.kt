@@ -14,8 +14,15 @@ import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.charts.TagCloud
 import com.anychart.scales.OrdinalColor
 import com.example.staysense.R
+import com.bumptech.glide.Glide
+import com.example.staysense.data.api.ApiConfig
+import com.example.staysense.data.response.WordCloudRequest
+import com.example.staysense.data.response.WordCloudResponse
 import com.example.staysense.databinding.FragmentWordCloudBinding
 import com.github.mikephil.charting.charts.HorizontalBarChart
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class WordCloudFragment : Fragment() {
@@ -36,69 +43,53 @@ class WordCloudFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val wordCloudChart = binding.acWordCloudView
-//        val clusteringFragment = ClusteringChartFragment()
-//        childFragmentManager.beginTransaction()
-//            .replace(R.id.clusterChartContainer, clusteringFragment)
-//            .commit()
+        binding.btnSubmitWord.setOnClickListener {
+            val inputText = binding.etWordInput.text.toString()
 
-        wordCloudChart.post {
-            setupTagCloud(wordCloudChart)
+            if (inputText.isNotBlank()){
+                sendWordCloudRequest(inputText)
+            }
         }
     }
 
-    private fun setupTagCloud(anyChartView: AnyChartView) {
-//        childFragmentManager.beginTransaction()
-//            .replace(R.id.clusterChartContainer, ClusteringChartFragment())
-//            .commit()
-
-        val tagCloud: TagCloud = AnyChart.tagCloud()
-        tagCloud.title("World Cloud")
-
-        val ordinalColor = OrdinalColor.instantiate()
-        ordinalColor.colors(
-            arrayOf("#26959f", "#f18126", "#3b8ad8", "#60727b", "#e24b26")
+    private fun sendWordCloudRequest(text: String) {
+        val requestBody = WordCloudRequest(
+            useModel = false,
+            text = text
         )
-        tagCloud.colorScale(ordinalColor)
-        tagCloud.angles(arrayOf(-90.0, 0.0, 90.0))
+        val client = ApiConfig.getApiService()
+        showLoadingChart(true)
 
-        tagCloud.colorRange().enabled(true)
-        tagCloud.colorRange().colorLineSize(15.0)
-        tagCloud.background().fill("#F6F8D5")
+        client.inputWordCloud(requestBody).enqueue(object : Callback<WordCloudResponse> {
+            override fun onResponse(
+                call: Call<WordCloudResponse>,
+                response: Response<WordCloudResponse>
+            ) {
+                showLoadingChart(false)
+                if (response.isSuccessful) {
+                    val imageUrl = response.body()?.imageUrl
+                    if (!imageUrl.isNullOrEmpty()) {
+                        val uniqueUrl = "$imageUrl?t=${System.currentTimeMillis()}"
 
-        val rawData = listOf(
-            CategoryValueDataEntry("China", "asia", 1),
-            CategoryValueDataEntry("India", "asia", 1),
-            CategoryValueDataEntry("India", "asia", 1),
-            CategoryValueDataEntry("India", "asia", 1),
-            CategoryValueDataEntry("India", "asia", 1),
-            CategoryValueDataEntry("United States", "america", 1),
-            CategoryValueDataEntry("Indonesia", "asia", 1),
-            CategoryValueDataEntry("Indonesia", "asia", 1),
-            CategoryValueDataEntry("Indonesia", "asia", 1),
-            CategoryValueDataEntry("Indonesia", "asia", 1),
-            CategoryValueDataEntry("Indonesia", "asia", 1),
-            CategoryValueDataEntry("Korea", "asia", 1),
-            CategoryValueDataEntry("New York", "america", 1)
-        )
-
-        val groupedData = rawData.groupBy { it.getValue("x") as String }
-            .map { (country, entries) ->
-                val region = entries.first().getValue("category") as String
-                val totalCount = entries.sumOf { it.getValue("value").toString().toInt() }
-                CategoryValueDataEntry(country, region, totalCount)
+                        Glide.with(requireContext())
+                            .load(uniqueUrl)
+                            .into(binding.ivWordcloud)
+                    }
+                } else {
+                    Log.e("WordCloud", "Response error: ${response.errorBody()?.string()}")
+                }
             }
 
-        tagCloud.data(groupedData as List<DataEntry>)
-        anyChartView.setChart(tagCloud)
+            override fun onFailure(call: Call<WordCloudResponse>, t: Throwable) {
 
-        Log.d("TagCloud", "Grouped data size: ${groupedData.size}")
+                Log.e("WordCloud", "Request failed: ${t.message}")
+            }
+        })
     }
 
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun showLoadingChart(isLoading: Boolean){
+        binding.progressBarWordcloud.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.cvWordcloud.alpha = if (isLoading) 0.3f else 1f
     }
+
 }

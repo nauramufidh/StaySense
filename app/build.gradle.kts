@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -71,5 +72,8 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation (libs.logging.interceptor)
+
+    implementation (libs.glide)
+    kapt (libs.glide.compiler)
 
 }
