@@ -47,20 +47,13 @@
                 android:layout_height="200dp"
                 android:src="@drawable/ic_launcher_foreground"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_wordcloud"
+            <EditText
+                android:id="@+id/et_word_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <EditText
-                    android:id="@+id/et_word_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:hint="@string/input_churn_reason"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:hint="@string/input_churn_reason"
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/btn_submit_word"
