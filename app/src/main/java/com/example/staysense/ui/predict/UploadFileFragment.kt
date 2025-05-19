@@ -154,7 +154,7 @@ class UploadFileFragment : Fragment() {
                         binding.tvTotalcustResult.text = "${summary.totalCustomers ?: 0}"
                         binding.tvTotCustChurnResult.text = "${summary.churnCount ?: 0}"
                         binding.tvTotCustNotChurnResult.text = "${summary.notChurnCount ?: 0}"
-                        binding.tvChurnrateResult.text = "${summary.totalCustomers ?: 0}%"
+                        binding.tvChurnrateResult.text = "${summary.churnRate ?: 0}"
 
 
                         binding.btnOk.setOnClickListener {
