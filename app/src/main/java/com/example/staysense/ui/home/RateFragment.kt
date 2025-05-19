@@ -6,26 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.charts.Cartesian
-import com.anychart.enums.Anchor
-import com.anychart.enums.Position
-import com.anychart.enums.TooltipPositionMode
-import com.example.staysense.R
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.api.ApiService
 import com.example.staysense.data.response.BarChartItem
-import com.example.staysense.data.response.ChartResponse
-import com.example.staysense.databinding.FragmentHomeBinding
 import com.example.staysense.databinding.FragmentRateBinding
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class RateFragment : Fragment() {
@@ -89,33 +82,44 @@ class RateFragment : Fragment() {
         }
     }
 
-    private fun displayBarChart(barChartData: List<BarChartItem?>){
-        Log.d("RateFragment", "Displaying bar chart with ${barChartData.size} data points")
-        val column = AnyChart.column()
+    private fun displayBarChart(barChartData: List<BarChartItem?>) {
+        val barChart = binding.churnRatechart
 
-        val data = barChartData.map {
-            Log.d("RateFragment", "Adding data point: month=${it?.month}, churnRate=${it?.churnRate}")
-            ValueDataEntry(it?.month ?: "", it?.churnRate ?: 0.0)
+        val entries = barChartData.mapIndexed { index, item ->
+            BarEntry(index.toFloat(), item?.churnRate?.toFloat() ?: 0f)
         }
 
-        column.data(data)
-        column.tooltip()
-            .titleFormat("{%X}")
-            .position(Position.CENTER_BOTTOM)
-            .anchor(Anchor.CENTER_BOTTOM)
-            .offsetX(0.0)
-            .offsetY(5.0)
-            .format("{%Value}%")
+        val labels = barChartData.map { it?.month ?: "" }
 
-        column.title("Monthly Churn Rate (%)")
-        column.yAxis(0).title("Churn Rate")
-        column.xAxis(0).title("Month")
+        val dataSet = BarDataSet(entries, "Churn Rate")
+        dataSet.color = "#E3EEB2".toColorInt()
+        dataSet.valueTextSize = 12f
 
-        column.animation(true)
-        column.yScale().minimum(0.0)
+        val data = BarData(dataSet)
+        data.barWidth = 0.4f
 
-        binding.churnRatechart.setChart(column)
-        Log.d("RateFragment", "Bar chart rendered")
+        val xAxis = barChart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.granularity = 1f
+        xAxis.setDrawGridLines(false)
+        xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+        xAxis.textSize = 12f
+
+        val leftAxis = barChart.axisLeft
+        leftAxis.axisMinimum = 0f
+        leftAxis.textSize = 12f
+        barChart.axisRight.isEnabled = false
+        leftAxis.setDrawGridLines(false)
+
+        barChart.data = data
+        barChart.setFitBars(true)
+        barChart.description.isEnabled = false
+        barChart.legend.isEnabled = false
+        barChart.setScaleEnabled(false)
+        barChart.animateY(1000)
+        barChart.setExtraOffsets(10f, 20f, 10f, 10f)
+
+        barChart.invalidate()
     }
 
     private fun showLoadingChart(isLoading: Boolean){
