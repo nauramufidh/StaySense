@@ -1,5 +1,6 @@
 package com.example.staysense.ui.home
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,6 +19,10 @@ import com.anychart.enums.LegendLayout
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.response.PieChart
 import com.example.staysense.databinding.FragmentHomeBinding
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -86,69 +91,39 @@ class HomeFragment : Fragment() {
 
         }
 
-//        val anyChartView = binding.churnPiechart
-//        anyChartView.setProgressBar(binding.progressbar)
-//
-//        Log.d("PieChart", "Binding progressbar: ${binding.progressbar}")
-//        Log.d("PieChart", "AnyChartView: ${binding.churnPiechart}")
-//
-//        val pie = AnyChart.pie()
-//
-//        pie.setOnClickListener(object : ListenersInterface.OnClickListener(arrayOf("x", "value")) {
-//            override fun onClick(event: Event?) {
-//                if (event != null) {
-//                    Toast.makeText(requireContext(), "${event.getData()["x"]}: ${event.getData()["value"]}", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        })
-//
-//        val data = listOf(
-//            ValueDataEntry("Churn", 6371664),
-//            ValueDataEntry("Not Churn", 789622),
-//        )
-//
-//        pie.data(data)
-////        pie.title("Churn Pie Chart")
-////        pie.labels().position("outside")
-//
-////        pie.legend().title().enabled(true)
-////        pie.legend().title().text("Churn").padding(0.0, 0.0, 10.0, 0.0)
-//
-//        pie.legend()
-//            .position("right")
-//            .itemsLayout(LegendLayout.VERTICAL)
-//            .align(Align.CENTER)
-//
-//        anyChartView.setChart(pie)
-//
-//        Log.d("PieChart", "setupPieChart finished")
     }
 
     private fun setupPieChart(pieChartData: PieChart) {
+        val chart = binding.churnPiechart
 
-        Log.d("ChartData", "Churn: ${pieChartData.churn}, Not Churn: ${pieChartData.notChurn}")
-        val pie = AnyChart.pie()
+        val churn = pieChartData.churn?.toFloat() ?: 0f
+        val notChurn = pieChartData.notChurn?.toFloat() ?: 0f
 
-        val churnValue = pieChartData.churn?.toDouble() ?: 0.0
-        val notChurnValue = pieChartData.notChurn?.toDouble() ?: 0.0
-
-        val data = listOf(
-            ValueDataEntry("Churn", churnValue),
-            ValueDataEntry("Not Churn", notChurnValue)
+        val entries = listOf(
+            PieEntry(churn, "Churn"),
+            PieEntry(notChurn, "Not Churn")
         )
 
-        Log.d("ChartData", "Chart data: Churn: $churnValue, Not Churn: $notChurnValue")
-        pie.data(data)
+        val dataSet = PieDataSet(entries, "")
+        dataSet.colors = listOf(
+            ColorTemplate.rgb("#E3EEB2"),
+            ColorTemplate.rgb("#71C0BB")
+        )
+        dataSet.sliceSpace = 3f
+        dataSet.selectionShift = 5f
+        dataSet.valueTextSize = 14f
+        dataSet.valueTextColor = Color.BLACK
+        val data = PieData(dataSet)
 
-        pie.title("Customer Churn Pie Chart")
+        chart.data = data
+        chart.description.isEnabled = false
+        chart.setUsePercentValues(true)
+        chart.centerText = "Churn Pie Chart"
+        chart.setEntryLabelColor(Color.BLACK)
+        chart.setEntryLabelTextSize(12f)
+        chart.animateY(1000)
 
-        binding.churnPiechart.setChart(pie)
-
-//        view?.postDelayed({
-//            binding.churnPiechart.setChart(pie)
-//        }, 500)
-
-
+        chart.invalidate()
     }
 
     private fun showLoadingChart(isLoading: Boolean){
