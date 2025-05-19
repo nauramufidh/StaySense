@@ -49,7 +49,6 @@ class WordCloudFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            delay(200)
             getClusteringData()
         }
     }
@@ -84,9 +83,11 @@ class WordCloudFragment : Fragment() {
         }
     }
 
-    private fun showLoadingChartWc(isLoading: Boolean){
-        binding.progressBarWordcloud.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.cvWordcloud.alpha = if (isLoading) 0.3f else 1f
+    private fun showLoadingChartWc(isLoading: Boolean) {
+        _binding?.let { binding ->
+            binding.progressBarWordcloud.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.cvWordcloud.alpha = if (isLoading) 0.3f else 1f
+        }
     }
 
     private fun getClusteringData() {
@@ -176,8 +177,11 @@ class WordCloudFragment : Fragment() {
     }
 
     private fun showLoadingChartCluster(isLoading: Boolean) {
-        binding.progressBarClustering.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.cvClustering.alpha = if (isLoading) 0.3f else 1f
+        _binding?.let { binding ->
+            binding.progressBarClustering.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.cvClustering.alpha = if (isLoading) 0.3f else 1f
+        }
     }
+
 
 }
