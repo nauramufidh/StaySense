@@ -1,7 +1,6 @@
 package com.example.staysense.data.api
 
 import com.example.staysense.data.response.ChartResponse
-import com.example.staysense.data.response.ClusteringResponse
 import com.example.staysense.data.response.ClusteringResponseItem
 import com.example.staysense.data.response.DataCostumerResponse
 import com.example.staysense.data.response.PredictResponse
@@ -38,11 +37,11 @@ interface ApiService {
 
     @Headers("Content-type: application/json")
     @POST("wordcloud")
-    fun inputWordCloud(
+    suspend fun inputWordCloud(
         @Body requestBody: WordCloudRequest
-    ): Call<WordCloudResponse>
+    ): WordCloudResponse
 
     @GET("cluster/chart")
-    fun getClustering(): Call<List<ClusteringResponseItem>>
+    suspend fun getClustering(): List<ClusteringResponseItem>
 
 }
