@@ -36,15 +36,15 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="120dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/ll_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="60dp">
 
                 <LinearLayout
                     android:id="@+id/ll_input_age"
@@ -70,7 +70,8 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_age"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="number"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -99,7 +100,8 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="Input number of dependents"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="number"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -128,7 +130,8 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_city"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -157,7 +160,8 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_tenure_in_months"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="number"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -676,7 +680,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:elevation="8dp"
         android:visibility="visible">
 
         <androidx.cardview.widget.CardView
@@ -684,7 +687,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:cardCornerRadius="12dp"
-            android:backgroundTint="@color/light_grayish_yellow">
+            android:backgroundTint="@color/light_grayish_yellow"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"

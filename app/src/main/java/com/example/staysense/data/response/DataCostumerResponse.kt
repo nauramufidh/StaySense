@@ -9,64 +9,64 @@ import kotlinx.android.parcel.Parcelize
 data class DataCostumerResponse(
 
 	@SerializedName("online_backup")
-	val onlineBackup: Int,
+	val onlineBackup: Boolean,
 
 	@SerializedName("unlimited_data")
-	val unlimitedData: Int,
+	val unlimitedData: Boolean,
 
 	@SerializedName("satisfaction_score")
-	val satisfactionScore: Int,
+	val satisfactionScore: Double,
 
 	@SerializedName("city")
-	val city: Int,
+	val city: String,
 
 	@SerializedName("online_security")
-	val onlineSecurity: Int,
+	val onlineSecurity: Boolean,
 
 	@SerializedName("cltv")
 	val cltv: Int,
 
 	@SerializedName("premium_tech_support")
-	val premiumTechSupport: Int,
+	val premiumTechSupport: Boolean,
 
 	@SerializedName("number_of_dependents")
 	val numberOfDependents: Int,
 
 	@SerializedName("contract")
-	val contract: Int,
+	val contract: String,
 
 	@SerializedName("internet_service")
-	val internetService: Int,
+	val internetService: Boolean,
 
 	@SerializedName("device_protection_plan")
-	val deviceProtectionPlan: Int,
+	val deviceProtectionPlan: Boolean,
 
 	@SerializedName("total_charges")
-	val totalCharges: Int,
+	val totalCharges: Double,
 
 	@SerializedName("total_revenue")
-	val totalRevenue: Int,
+	val totalRevenue: Double,
 
 	@SerializedName("monthly_charge")
-	val monthlyCharge: Int,
+	val monthlyCharge: Double,
 
 	@SerializedName("streaming_tv")
-	val streamingTv: Int,
+	val streamingTv: Boolean,
 
 	@SerializedName("tenure_in_months")
 	val tenureInMonths: Int,
 
 	@SerializedName("streaming_movies")
-	val streamingMovies: Int,
+	val streamingMovies: Boolean,
 
 	@SerializedName("streaming_music")
-	val streamingMusic: Int,
+	val streamingMusic: Boolean,
 
 	@SerializedName("age")
 	val age: Int,
 
 	@SerializedName("payment_method")
-	val paymentMethod: Int,
+	val paymentMethod: String,
 
 	@SerializedName("churn_score")
 	val churnScore: Int

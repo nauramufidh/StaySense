@@ -137,4 +137,21 @@
     <string name="cltv">CLTV</string>
     <string name="input_cltv">Input CLTV</string>
 
+    <string-array name="list_payment_method">
+        <item>Bank Withdrawal</item>
+        <item>Credit Card</item>
+        <item>Mailed Check</item>
+    </string-array>
+
+    <string-array name="list_contract">
+        <item>Month-to-Month</item>
+        <item>One Year</item>
+        <item>Two Year</item>
+    </string-array>
+
+    <string-array name="isBoolean">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
 </resources>
