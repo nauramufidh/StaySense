@@ -14,7 +14,12 @@ import com.example.staysense.data.response.ClusteringResponseItem
 import com.example.staysense.data.response.WordCloudRequest
 import com.example.staysense.databinding.FragmentWordCloudBinding
 import android.graphics.Color
+import android.view.Gravity
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -122,24 +127,38 @@ class WordCloudFragment : Fragment() {
             labels.add(item.cluster)
         }
 
-        val dataSet = BarDataSet(entries, "Reason")
         val colors = listOf(
             ContextCompat.getColor(requireContext(), R.color.teal),
-            ContextCompat.getColor(requireContext(), R.color.navy_pudar),
             ContextCompat.getColor(requireContext(), R.color.sage),
             ContextCompat.getColor(requireContext(), R.color.yellow_pudar),
             ContextCompat.getColor(requireContext(), R.color.lime_green),
             ContextCompat.getColor(requireContext(), R.color.grayish_lime),
         )
 
-        dataSet.colors = colors
+        val legendLabels = listOf(
+            "0 - Don't Know",
+            "1 - Competitor Made better offer, better devices",
+            "2 - Limited range, service dissatisfaction",
+            "3 - Attitude support person",
+            "4 - Offered data, higher speed, extra data changes"
+        )
 
+        val dataSet = BarDataSet(entries, "")
+        dataSet.colors = colors
         dataSet.valueTextSize = 12f
         dataSet.valueTextColor = Color.BLACK
         dataSet.setDrawValues(true)
 
         val data = BarData(dataSet)
         data.barWidth = 0.7f
+
+        val legendEntries = legendLabels.mapIndexed { index, label ->
+            LegendEntry().apply {
+                this.label = label
+                this.formColor = colors.getOrElse(index) { Color.GRAY }
+                this.form = Legend.LegendForm.SQUARE
+            }
+        }
 
         barChart.apply {
             this.data = data
@@ -165,8 +184,37 @@ class WordCloudFragment : Fragment() {
             axisLeft.setDrawGridLines(false)
             axisLeft.setDrawAxisLine(false)
 
+            barChart.setExtraBottomOffset(10f)
             legend.isEnabled = false
             invalidate()
+        }
+
+        val legendContainer = binding.legendLayout
+        legendContainer.removeAllViews()
+
+        legendLabels.forEachIndexed { index, label ->
+            val itemLayout = LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.HORIZONTAL
+                setPadding(12, 8, 12, 8)
+                gravity = Gravity.CENTER_VERTICAL
+            }
+
+            val colorBox = View(requireContext()).apply {
+                layoutParams = LinearLayout.LayoutParams(30, 30).apply {
+                    marginEnd = 12
+                }
+                setBackgroundColor(colors.getOrElse(index) { Color.GRAY })
+            }
+
+            val labelText = TextView(requireContext()).apply {
+                text = label
+                setTextColor(Color.BLACK)
+                textSize = 12f
+            }
+
+            itemLayout.addView(colorBox)
+            itemLayout.addView(labelText)
+            legendContainer.addView(itemLayout)
         }
     }
 

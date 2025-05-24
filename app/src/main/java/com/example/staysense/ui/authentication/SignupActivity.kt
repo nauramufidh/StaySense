@@ -2,6 +2,8 @@ package com.example.staysense.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +42,16 @@ class SignupActivity : AppCompatActivity() {
             }
         }
 
+        binding.cvPasswordSignup.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.cvConfirmPasswordSignup.setOriginalPassword(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         binding.tvRedirectToLogin.setOnClickListener {
             startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
             finish()
@@ -48,15 +60,6 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun setupSignup(username: String, email: String, password: String, confirmPassword: String) {
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this@SignupActivity, "Invalid email format", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (password != confirmPassword) {
-            Toast.makeText(this@SignupActivity, "Passwords do not match", Toast.LENGTH_SHORT).show()
-            return
-        }
 
         databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
