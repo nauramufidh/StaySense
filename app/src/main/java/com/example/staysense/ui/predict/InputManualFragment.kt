@@ -1,6 +1,5 @@
 package com.example.staysense.ui.predict
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,15 +10,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.example.staysense.R
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.response.DataCostumerResponse
 import com.example.staysense.data.response.PredictResponse
 import com.example.staysense.databinding.FragmentInputManualBinding
-import com.example.staysense.databinding.FragmentUploadFileBinding
 import com.example.staysense.ui.home.SharedViewModel
-import com.example.staysense.ui.main.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -117,23 +113,23 @@ class InputManualFragment : Fragment() {
             val data = DataCostumerResponse(
                 age = etAge.text.toString().toIntOrNull() ?: 0,
                 numberOfDependents = etNumberOfDependents.text.toString().toIntOrNull() ?: 0,
-                city = etCity.text.toString().toIntOrNull() ?: 0,
+                city = etCity.text.toString(),
                 tenureInMonths = etTenureInMonths.text.toString().toIntOrNull() ?: 0,
-                internetService = etInternetService.text.toString().toIntOrNull() ?: 0,
-                onlineSecurity = etOnlineSecurity.text.toString().toIntOrNull() ?: 0,
-                onlineBackup = etOnlineBackup.text.toString().toIntOrNull() ?: 0,
-                deviceProtectionPlan = etDeviceProtectionPlan.text.toString().toIntOrNull() ?: 0,
-                premiumTechSupport = etPremiumTechSupport.text.toString().toIntOrNull() ?: 0,
-                streamingTv = etStreamingTV.text.toString().toIntOrNull() ?: 0,
-                streamingMovies = etStreamingMovies.text.toString().toIntOrNull() ?: 0,
-                streamingMusic = etStreamingMusic.text.toString().toIntOrNull() ?: 0,
-                unlimitedData = etUnlimitedData.text.toString().toIntOrNull() ?: 0,
-                contract = etContract.text.toString().toIntOrNull() ?: 0,
-                paymentMethod = etPaymentMethod.text.toString().toIntOrNull() ?: 0,
-                monthlyCharge = etMonthlyCharge.text.toString().toIntOrNull() ?: 0,
-                totalCharges = etTotalCharges.text.toString().toIntOrNull() ?: 0,
-                totalRevenue = etTotalRevenue.text.toString().toIntOrNull() ?: 0,
-                satisfactionScore = etSatisfactionScore.text.toString().toIntOrNull() ?: 0,
+                internetService = etInternetService.text.toString().toBooleanStrictOrNull() ?: false,
+                onlineSecurity = etOnlineSecurity.text.toString().toBooleanStrictOrNull() ?: false,
+                onlineBackup = etOnlineBackup.text.toString().toBooleanStrictOrNull() ?: false,
+                deviceProtectionPlan = etDeviceProtectionPlan.text.toString().toBooleanStrictOrNull() ?: false,
+                premiumTechSupport = etPremiumTechSupport.text.toString().toBooleanStrictOrNull() ?: false,
+                streamingTv = etStreamingTV.text.toString().toBooleanStrictOrNull() ?: false,
+                streamingMovies = etStreamingMovies.text.toString().toBooleanStrictOrNull() ?: false,
+                streamingMusic = etStreamingMusic.text.toString().toBooleanStrictOrNull() ?: false,
+                unlimitedData = etUnlimitedData.text.toString().toBooleanStrictOrNull() ?: false,
+                contract = etContract.text.toString(),
+                paymentMethod = etPaymentMethod.text.toString(),
+                monthlyCharge = etMonthlyCharge.text.toString().toDoubleOrNull() ?: 0.0,
+                totalCharges = etTotalCharges.text.toString().toDoubleOrNull() ?: 0.0,
+                totalRevenue = etTotalRevenue.text.toString().toDoubleOrNull() ?: 0.0,
+                satisfactionScore = etSatisfactionScore.text.toString().toDoubleOrNull() ?: 0.0,
                 churnScore = etChurnScore.text.toString().toIntOrNull() ?: 0,
                 cltv = etCltv.text.toString().toIntOrNull() ?: 0,
             )
