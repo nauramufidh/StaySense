@@ -11,7 +11,7 @@ class CustomViewConfirmPass @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : AppCompatEditText(context, attrs) {
 
-    var originalPassword: String = ""
+    private var originalPassword: String = ""
 
     init {
         addTextChangedListener(object : TextWatcher{
@@ -32,6 +32,16 @@ class CustomViewConfirmPass @JvmOverloads constructor(
                 // Do nothing
             }
         })
+    }
+
+    fun setOriginalPassword(password: String) {
+        originalPassword = password
+        val confirmPassword = text.toString()
+        if (confirmPassword != originalPassword) {
+            setError("Passwords do not match", null)
+        } else {
+            error = null
+        }
     }
 
     override fun onDraw(canvas: Canvas) {

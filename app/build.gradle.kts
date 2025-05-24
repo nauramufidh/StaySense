@@ -65,6 +65,8 @@ dependencies {
     implementation (libs.anychart.android)
     implementation (libs.multidex)
     implementation (libs.mpandroidchart)
+    implementation (libs.flexbox)
+
 
     implementation(libs.androidx.viewpager2)
 
