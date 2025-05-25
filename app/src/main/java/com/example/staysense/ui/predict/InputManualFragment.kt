@@ -1,10 +1,13 @@
 package com.example.staysense.ui.predict
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -29,17 +32,17 @@ class InputManualFragment : Fragment() {
     private lateinit var etNumberOfDependents: EditText
     private lateinit var etCity: EditText
     private lateinit var etTenureInMonths: EditText
-    private lateinit var etInternetService: EditText
-    private lateinit var etOnlineSecurity: EditText
-    private lateinit var etOnlineBackup: EditText
-    private lateinit var etDeviceProtectionPlan: EditText
-    private lateinit var etPremiumTechSupport: EditText
-    private lateinit var etStreamingTV: EditText
-    private lateinit var etStreamingMovies: EditText
-    private lateinit var etStreamingMusic: EditText
-    private lateinit var etUnlimitedData: EditText
-    private lateinit var etContract: EditText
-    private lateinit var etPaymentMethod: EditText
+    private lateinit var etInternetService: AutoCompleteTextView
+    private lateinit var etOnlineSecurity: AutoCompleteTextView
+    private lateinit var etOnlineBackup: AutoCompleteTextView
+    private lateinit var etDeviceProtectionPlan: AutoCompleteTextView
+    private lateinit var etPremiumTechSupport: AutoCompleteTextView
+    private lateinit var etStreamingTV: AutoCompleteTextView
+    private lateinit var etStreamingMovies: AutoCompleteTextView
+    private lateinit var etStreamingMusic: AutoCompleteTextView
+    private lateinit var etUnlimitedData: AutoCompleteTextView
+    private lateinit var etContract: AutoCompleteTextView
+    private lateinit var etPaymentMethod: AutoCompleteTextView
     private lateinit var etMonthlyCharge: EditText
     private lateinit var etTotalCharges: EditText
     private lateinit var etTotalRevenue: EditText
@@ -48,8 +51,6 @@ class InputManualFragment : Fragment() {
     private lateinit var etCltv: EditText
     private lateinit var btnInputManual: Button
 
-    private lateinit var flResult: View
-    private lateinit var overlayDim: View
     private lateinit var tvMessage: TextView
     private lateinit var tvProbResult: TextView
     private lateinit var tvIsChurnResult: TextView
@@ -73,17 +74,20 @@ class InputManualFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        flResult = view.findViewById(R.id.fl_result_input_manual)
-        flResult.visibility = View.GONE
 
-        overlayDim = view.findViewById(R.id.overlayDim)
-        overlayDim.visibility = View.GONE
+        setupView(view)
+        setupDropdown()
+        setupButton()
+    }
+
+    private fun setupView(view: View){
+
 
         etAge = view.findViewById(R.id.et_input_age)
         etNumberOfDependents = view.findViewById(R.id.et_input_number_of_dependents)
         etCity = view.findViewById(R.id.et_input_city)
         etTenureInMonths = view.findViewById(R.id.et_input_tenure_in_months)
-        etInternetService = view.findViewById(R.id.et_input_internet_service)
+        etInternetService = view.findViewById(R.id.actv_input_internet_service)
         etOnlineSecurity = view.findViewById(R.id.et_input_online_security)
         etOnlineBackup = view.findViewById(R.id.et_input_online_backup)
         etDeviceProtectionPlan = view.findViewById(R.id.et_input_device_protection_plan)
@@ -107,6 +111,31 @@ class InputManualFragment : Fragment() {
         tvIsChurnResult = view.findViewById(R.id.tv_is_churn_result)
         btnOkmanual = view.findViewById(R.id.btn_ok_input_manual)
 
+    }
+
+    private fun setupDropdown(){
+        val listPaymentMethod = resources.getStringArray(R.array.list_payment_method)
+        val listContract = resources.getStringArray(R.array.list_contract)
+        val isBoolean = resources.getStringArray(R.array.isBoolean)
+
+        val paymentMehtodAdapter = ArrayAdapter(requireContext(), R.layout.item_input, listPaymentMethod)
+        etPaymentMethod.setAdapter(paymentMehtodAdapter)
+
+        val contractAdapter = ArrayAdapter(requireContext(), R.layout.item_input, listContract)
+        etContract.setAdapter(contractAdapter)
+
+        etInternetService.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etOnlineSecurity.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etOnlineBackup.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etDeviceProtectionPlan.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etPremiumTechSupport.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etStreamingTV.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etStreamingMovies.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etStreamingMusic.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+        etUnlimitedData.setAdapter(ArrayAdapter(requireContext(), R.layout.item_input, isBoolean))
+    }
+
+    private fun setupButton(){
         btnInputManual.setOnClickListener {
             showLoading(true)
 
@@ -115,15 +144,15 @@ class InputManualFragment : Fragment() {
                 numberOfDependents = etNumberOfDependents.text.toString().toIntOrNull() ?: 0,
                 city = etCity.text.toString(),
                 tenureInMonths = etTenureInMonths.text.toString().toIntOrNull() ?: 0,
-                internetService = etInternetService.text.toString().toBooleanStrictOrNull() ?: false,
-                onlineSecurity = etOnlineSecurity.text.toString().toBooleanStrictOrNull() ?: false,
-                onlineBackup = etOnlineBackup.text.toString().toBooleanStrictOrNull() ?: false,
-                deviceProtectionPlan = etDeviceProtectionPlan.text.toString().toBooleanStrictOrNull() ?: false,
-                premiumTechSupport = etPremiumTechSupport.text.toString().toBooleanStrictOrNull() ?: false,
-                streamingTv = etStreamingTV.text.toString().toBooleanStrictOrNull() ?: false,
-                streamingMovies = etStreamingMovies.text.toString().toBooleanStrictOrNull() ?: false,
-                streamingMusic = etStreamingMusic.text.toString().toBooleanStrictOrNull() ?: false,
-                unlimitedData = etUnlimitedData.text.toString().toBooleanStrictOrNull() ?: false,
+                internetService = toYesNo(etInternetService.text.toString()),
+                onlineSecurity = toYesNo(etOnlineSecurity.text.toString()),
+                onlineBackup = toYesNo(etOnlineBackup.text.toString()),
+                deviceProtectionPlan = toYesNo(etDeviceProtectionPlan.text.toString()),
+                premiumTechSupport = toYesNo(etPremiumTechSupport.text.toString()),
+                streamingTv = toYesNo(etStreamingTV.text.toString()),
+                streamingMovies = toYesNo(etStreamingMovies.text.toString()),
+                streamingMusic = toYesNo(etStreamingMusic.text.toString()),
+                unlimitedData = toYesNo(etUnlimitedData.text.toString()),
                 contract = etContract.text.toString(),
                 paymentMethod = etPaymentMethod.text.toString(),
                 monthlyCharge = etMonthlyCharge.text.toString().toDoubleOrNull() ?: 0.0,
@@ -142,6 +171,7 @@ class InputManualFragment : Fragment() {
         client.enqueue(object : Callback<PredictResponse> {
             override fun onResponse(call: Call<PredictResponse>, response: Response<PredictResponse>) {
                 if (response.isSuccessful) {
+                    showLoading(false)
                     val prediction = response.body()?.prediction
                     prediction?.let {
                         val message = it.message ?: "-"
@@ -156,8 +186,8 @@ class InputManualFragment : Fragment() {
                         tvProbResult.text = prob
                         tvIsChurnResult.text = isChurn
 
-                        flResult.visibility = View.VISIBLE
-                        overlayDim.visibility = View.VISIBLE
+                        binding.flResultInputManual.visibility = View.VISIBLE
+                        binding.overlayDim.visibility = View.VISIBLE
 
                         btnOkmanual.setOnClickListener {
 //                            val intent = Intent(requireContext(), MainActivity::class.java)
@@ -165,18 +195,22 @@ class InputManualFragment : Fragment() {
 //                            activity?.finish()
 
                             clearInputField()
-                            flResult.visibility = View.GONE
-                            overlayDim.visibility = View.GONE
+                            binding.flResultInputManual.visibility = View.GONE
+                            binding.overlayDim.visibility = View.GONE
 
                             sharedViewModel.setUploadSuccess(true)
                         }
                     }
                 } else {
+                    showLoading(false)
+                    Log.e("API_ERROR", response.errorBody()?.string() ?: "Unknown error")
                     Toast.makeText(requireContext(), "Failed get response: ${response.code()}", Toast.LENGTH_SHORT).show()
+
                 }
             }
 
             override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
+                showLoading(false)
                 Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
@@ -189,7 +223,7 @@ class InputManualFragment : Fragment() {
         binding.etInputContract.setText("")
         binding.etInputChurnScore.setText("")
         binding.etInputDeviceProtectionPlan.setText("")
-        binding.etInputInternetService.setText("")
+        binding.actvInputInternetService.setText("")
         binding.etInputMonthlyCharge.setText("")
         binding.etInputNumberOfDependents.setText("")
         binding.etInputOnlineBackup.setText("")
@@ -204,6 +238,10 @@ class InputManualFragment : Fragment() {
         binding.etInputTenureInMonths.setText("")
         binding.etInputTotalRevenue.setText("")
         binding.etInputUnlimitedData.setText("")
+    }
+
+    private fun toYesNo(value: String): String {
+        return if (value.equals("Yes", ignoreCase = true)) "Yes" else "No"
     }
 
     private fun showLoading(isLoading: Boolean){

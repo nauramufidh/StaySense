@@ -9,10 +9,10 @@ import kotlinx.android.parcel.Parcelize
 data class DataCostumerResponse(
 
 	@SerializedName("online_backup")
-	val onlineBackup: Boolean,
+	val onlineBackup: String,
 
 	@SerializedName("unlimited_data")
-	val unlimitedData: Boolean,
+	val unlimitedData: String,
 
 	@SerializedName("satisfaction_score")
 	val satisfactionScore: Double,
@@ -21,13 +21,13 @@ data class DataCostumerResponse(
 	val city: String,
 
 	@SerializedName("online_security")
-	val onlineSecurity: Boolean,
+	val onlineSecurity: String,
 
 	@SerializedName("cltv")
 	val cltv: Int,
 
 	@SerializedName("premium_tech_support")
-	val premiumTechSupport: Boolean,
+	val premiumTechSupport: String,
 
 	@SerializedName("number_of_dependents")
 	val numberOfDependents: Int,
@@ -36,10 +36,10 @@ data class DataCostumerResponse(
 	val contract: String,
 
 	@SerializedName("internet_service")
-	val internetService: Boolean,
+	val internetService: String,
 
 	@SerializedName("device_protection_plan")
-	val deviceProtectionPlan: Boolean,
+	val deviceProtectionPlan: String,
 
 	@SerializedName("total_charges")
 	val totalCharges: Double,
@@ -51,16 +51,16 @@ data class DataCostumerResponse(
 	val monthlyCharge: Double,
 
 	@SerializedName("streaming_tv")
-	val streamingTv: Boolean,
+	val streamingTv: String,
 
 	@SerializedName("tenure_in_months")
 	val tenureInMonths: Int,
 
 	@SerializedName("streaming_movies")
-	val streamingMovies: Boolean,
+	val streamingMovies: String,
 
 	@SerializedName("streaming_music")
-	val streamingMusic: Boolean,
+	val streamingMusic: String,
 
 	@SerializedName("age")
 	val age: Int,

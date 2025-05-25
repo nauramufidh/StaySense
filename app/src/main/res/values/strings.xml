@@ -136,6 +136,7 @@
     <string name="input_churn_score">Input churn score</string>
     <string name="cltv">CLTV</string>
     <string name="input_cltv">Input CLTV</string>
+    <string name="customer_churn_probability">Customer churn probability</string>
 
     <string-array name="list_payment_method">
         <item>Bank Withdrawal</item>

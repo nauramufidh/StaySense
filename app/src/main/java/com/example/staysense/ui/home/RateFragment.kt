@@ -32,7 +32,7 @@ class RateFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRateBinding.inflate(inflater, container, false)
         return binding.root
 

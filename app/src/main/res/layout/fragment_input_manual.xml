@@ -71,7 +71,9 @@
                             android:drawablePadding="4dp"
                             android:hint="@string/input_age"
                             android:importantForAutofill="no"
-                            android:inputType="number"/>
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            tools:ignore="TextContrastCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -99,9 +101,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
-                            android:hint="Input number of dependents"
+                            android:hint="@string/input_number_of_dependents"
                             android:importantForAutofill="no"
-                            android:inputType="number"/>
+                            android:inputType="number"
+                            tools:ignore="TextContrastCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -131,7 +134,9 @@
                             android:drawablePadding="4dp"
                             android:hint="@string/input_city"
                             android:importantForAutofill="no"
-                            android:inputType="textShortMessage"/>
+                            android:inputType="textShortMessage"
+                            tools:ignore="TextContrastCheck"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -161,7 +166,9 @@
                             android:drawablePadding="4dp"
                             android:hint="@string/input_tenure_in_months"
                             android:importantForAutofill="no"
-                            android:inputType="number"/>
+                            android:inputType="number"
+                            tools:ignore="TextContrastCheck"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -180,17 +187,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_internet_service"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/et_input_internet_service"
+                        <AutoCompleteTextView
+                            android:id="@+id/actv_input_internet_service"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_internet_service"
-                            android:importantForAutofill="no" />
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"
+                            tools:ignore="SpeakableTextPresentCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -209,17 +218,20 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_online_security"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_online_security"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_online_security"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            tools:ignore="SpeakableTextPresentCheck"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -238,17 +250,20 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_online_backup"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_online_backup"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_online_backup"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            tools:ignore="SpeakableTextPresentCheck"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -267,17 +282,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_device_protection_plan"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_device_protection_plan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_device_protection_plan"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -296,17 +313,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_premium_tech_support"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_premium_tech_support"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_premium_tech_support"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -325,17 +344,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_streaming_tv"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_streaming_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_streaming_tv"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -354,17 +375,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_streaming_movies"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_streaming_movies"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_streaming_movies"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -383,17 +406,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_streaming_music"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_streaming_music"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_streaming_music"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -412,17 +437,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_unlimited_data"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_unlimited_data"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_unlimited_data"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -441,17 +468,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_contract"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_contract"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_contract"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -470,17 +499,19 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_payment_method"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/et_input_payment_method"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_payment_method"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -509,7 +540,9 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_monthly_charge"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -538,7 +571,9 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_total_charges"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -567,7 +602,9 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_total_revenue"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -582,7 +619,8 @@
                         android:id="@+id/tv_input_satisfaction_score"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/satisfaction_score" />
+                        android:text="@string/satisfaction_score"
+                        tools:ignore="TooManyViews" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_satisfaction_score"
@@ -596,7 +634,9 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/satisfaction_score"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -625,7 +665,9 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_churn_score"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -654,7 +696,9 @@
                             android:layout_height="wrap_content"
                             android:drawablePadding="4dp"
                             android:hint="@string/input_cltv"
-                            android:importantForAutofill="no" />
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -663,7 +707,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="13dp"
-                    android:text="@string/submit"/>
+                    android:text="@string/submit"
+                    tools:ignore="VisualLintButtonSize" />
 
             </LinearLayout>
 
@@ -680,15 +725,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible">
+        android:visibility="gone"
+        android:elevation="4dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:cardCornerRadius="12dp"
-            android:backgroundTint="@color/light_grayish_yellow"
-            android:visibility="gone">
+            android:backgroundTint="@color/light_grayish_yellow">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -740,7 +785,7 @@
                             android:layout_weight="2"
                             android:gravity="center_horizontal"
                             android:layout_marginTop="8dp"
-                            android:text="customer churn probability"
+                            android:text="@string/customer_churn_probability"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -766,7 +811,7 @@
                             android:layout_weight="2"
                             android:gravity="center_horizontal"
                             android:layout_marginTop="8dp"
-                            android:text="is churn"
+                            android:text="@string/is_churn"
                             android:textStyle="bold"/>
 
                         <TextView
