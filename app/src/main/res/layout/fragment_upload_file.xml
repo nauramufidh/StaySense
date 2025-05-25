@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.predict.UploadFileFragment"
-    android:paddingBottom="120dp">
+    tools:context=".ui.predict.UploadFileFragment">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressIndicator"
@@ -17,7 +16,6 @@
         android:indeterminate="true"
         android:elevation="10dp"
         android:visibility="gone" />
-
 
     <LinearLayout
         android:id="@+id/ll_upload_file"
@@ -270,7 +268,7 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:text="@string/upload"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

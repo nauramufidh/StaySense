@@ -1,7 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.StaySense" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<!--        <item name="colorPrimary">@color/dark_cyan</item>-->
+<!--        <item name="colorPrimaryVariant">@color/light_grayish_lime</item>-->
+<!--        &lt;!&ndash;Text/icon yang ada diatas warna primary&ndash;&gt;-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+
+<!--        <item name="android:textColor">@color/white</item>-->
+
+<!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+
+<!--        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="27">shortEdges</item>-->
+<!--        <item name="android:fitsSystemWindows">true</item>-->
+<!--        <item name="android:windowTranslucentNavigation">false</item>-->
+<!--        <item name="android:windowTranslucentStatus">false</item>-->
     </style>
 </resources>

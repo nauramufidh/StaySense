@@ -182,14 +182,14 @@ class InputManualFragment : Fragment() {
                         }
                         val isChurn = if (it.isChurn == true) "Yes" else "No"
 
-                        tvMessage.text = message
-                        tvProbResult.text = prob
-                        tvIsChurnResult.text = isChurn
+                        binding.tvMessageResultInputManual.text = message
+//                        tvProbResult.text = prob
+//                        tvIsChurnResult.text = isChurn
 
                         binding.flResultInputManual.visibility = View.VISIBLE
                         binding.overlayDim.visibility = View.VISIBLE
 
-                        btnOkmanual.setOnClickListener {
+                        binding.btnOkInputManual.setOnClickListener {
 //                            val intent = Intent(requireContext(), MainActivity::class.java)
 //                            startActivity(intent)
 //                            activity?.finish()

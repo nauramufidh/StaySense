@@ -102,16 +102,30 @@ class UploadFileFragment : Fragment() {
         }
     }
 
-    private fun pickFile() {
-        val mimeTypes = arrayOf(
-            "text/csv",
-            "application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
+//    private fun pickFile() {
+//        val mimeTypes = arrayOf(
+//            "text/csv",
+//            "application/vnd.ms-excel",
+//            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+//        )
+//
+//        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+//            addCategory(Intent.CATEGORY_OPENABLE)
+//            type = "*/*"
+//            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("text/*", "application/*"))
+//        }
+//        filePickerLauncher.launch(intent)
+//    }
 
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "*/*"
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+    private fun pickFile() {
+        val mimeTypes = arrayOf("text/*", "application/*")
+
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        }
+
         filePickerLauncher.launch(intent)
     }
 
