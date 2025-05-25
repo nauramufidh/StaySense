@@ -8,6 +8,7 @@ import com.example.staysense.data.response.UploadResponse
 import com.example.staysense.data.response.WordCloudRequest
 import com.example.staysense.data.response.WordCloudResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -40,6 +41,13 @@ interface ApiService {
     suspend fun inputWordCloud(
         @Body requestBody: WordCloudRequest
     ): WordCloudResponse
+
+    @Multipart
+    @POST("/wordcloud")
+    fun generateWordCloudWithFile(
+        @Part file: MultipartBody.Part?,
+        @Part("text") text: RequestBody?
+    ): Call<WordCloudResponse>
 
     @GET("cluster/chart")
     suspend fun getClustering(): List<ClusteringResponseItem>

@@ -1,5 +1,11 @@
 package com.example.staysense.ui.wordcloud
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,10 +20,16 @@ import com.example.staysense.data.response.ClusteringResponseItem
 import com.example.staysense.data.response.WordCloudRequest
 import com.example.staysense.databinding.FragmentWordCloudBinding
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
+import android.provider.OpenableColumns
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.staysense.data.response.WordCloudResponse
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.XAxis
@@ -29,10 +41,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class WordCloudFragment : Fragment() {
     private var _binding: FragmentWordCloudBinding? = null
     private val binding get() = _binding!!
+
+    private var selectedFileUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +71,16 @@ class WordCloudFragment : Fragment() {
 
             if (inputText.isNotBlank()){
                 sendWordCloudRequest(inputText)
+            }
+        }
+
+        binding.cvWordcloud.setOnClickListener { checkPermissionAndPickFile() }
+        binding.btnUploadWc.setOnClickListener {
+            val uri = selectedFileUri
+            if (uri != null){
+                uploadWC()
+            }else{
+                Toast.makeText(requireContext(), "Please choose file first", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -86,6 +117,107 @@ class WordCloudFragment : Fragment() {
                 Log.e("WordCloud", "Request failed: ${e.message}")
             }
         }
+    }
+
+
+    @Suppress("DEPRECATION")
+    private fun checkPermissionAndPickFile() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            pickFile()
+        } else if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            pickFile()
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 100)
+        }
+    }
+
+    @SuppressLint("Range")
+    private fun getFileNameFromUri(context: Context, uri: Uri): String {
+        var name = "unknown"
+        val cursor = context.contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                name = it.getString(it.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME))
+            }
+        }
+        return name
+    }
+
+    private fun pickFile() {
+        val mimeTypes = arrayOf(
+            "text/csv",
+            "application/vnd.ms-excel",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        filePickerLauncher.launch(intent)
+    }
+
+    private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { uri ->
+                selectedFileUri = uri
+                val fileName = getFileNameFromUri(requireContext(), uri)
+                binding.tvSelectedFileWc.text = fileName
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun uploadWC() {
+        val uri = selectedFileUri ?: return
+
+        val contentResolver = requireContext().contentResolver
+        val fileName = getFileNameFromUri(requireContext(), uri)
+        val inputStream = contentResolver.openInputStream(uri) ?: return
+        val requestBody = inputStream.readBytes().toRequestBody(
+            contentResolver.getType(uri)?.toMediaTypeOrNull()
+        )
+
+        val filePart = MultipartBody.Part.createFormData(
+            "file",
+            fileName,
+            requestBody
+        )
+
+        val textRequestBody = "".toRequestBody("text/plain".toMediaTypeOrNull())
+
+        showLoadingChartWc(true)
+
+        val client = ApiConfig.getApiService().generateWordCloudWithFile(filePart, textRequestBody)
+        client.enqueue(object : Callback<WordCloudResponse> {
+            override fun onResponse(
+                call: Call<WordCloudResponse>,
+                response: Response<WordCloudResponse>
+            ) {
+                showLoadingChartWc(false)
+                if (response.isSuccessful) {
+                    val imageUrl = response.body()?.imageUrl
+                    if (!imageUrl.isNullOrEmpty()) {
+                        val uniqueUrl = "$imageUrl?t=${System.currentTimeMillis()}"
+                        Glide.with(requireContext())
+                            .load(uniqueUrl)
+                            .into(binding.ivWordcloud)
+                    } else {
+                        Toast.makeText(requireContext(), "Image URL kosong", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Upload gagal: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<WordCloudResponse>, t: Throwable) {
+                binding.progressBarWordcloud.visibility = View.GONE
+                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun showLoadingChartWc(isLoading: Boolean) {
@@ -218,7 +350,6 @@ class WordCloudFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -230,6 +361,5 @@ class WordCloudFragment : Fragment() {
             binding.cvClustering.alpha = if (isLoading) 0.3f else 1f
         }
     }
-
 
 }
