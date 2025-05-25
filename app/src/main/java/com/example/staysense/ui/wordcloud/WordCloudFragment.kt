@@ -118,8 +118,7 @@ class WordCloudFragment : Fragment() {
             }
         }
     }
-
-
+    
     @Suppress("DEPRECATION")
     private fun checkPermissionAndPickFile() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -283,14 +282,6 @@ class WordCloudFragment : Fragment() {
 
         val data = BarData(dataSet)
         data.barWidth = 0.7f
-
-        val legendEntries = legendLabels.mapIndexed { index, label ->
-            LegendEntry().apply {
-                this.label = label
-                this.formColor = colors.getOrElse(index) { Color.GRAY }
-                this.form = Legend.LegendForm.SQUARE
-            }
-        }
 
         barChart.apply {
             this.data = data
