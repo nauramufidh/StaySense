@@ -55,6 +55,7 @@ class HomeFragment : Fragment() {
             if (success == true) {
                 Log.d("RateFragment", "Upload success detected, re-fetching chart data...")
                 getChartData()
+                Toast.makeText(requireContext(), "Chart updated successfully", Toast.LENGTH_SHORT).show()
                 sharedViewModel.setUploadSuccess(false)
             }
         }
@@ -76,6 +77,7 @@ class HomeFragment : Fragment() {
                     response.body()?.pieChart?.let { pieChartData ->
                         withContext(Dispatchers.Main) {
                             setupPieChart(pieChartData)
+                            animateChartUpdate()
                         }
                     } ?: run {
                         Log.e("HomeFragment", "No pieChart data found in response")
@@ -142,6 +144,14 @@ class HomeFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun animateChartUpdate() {
+        binding.cvPiechart.apply {
+            animate().alpha(0.5f).setDuration(150).withEndAction {
+                animate().alpha(1f).setDuration(150).start()
+            }.start()
+        }
     }
 
     override fun onDestroyView() {

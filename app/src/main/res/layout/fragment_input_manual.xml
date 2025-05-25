@@ -757,81 +757,82 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/message_summary"
-                    android:maxLines="2" />
+                    android:textSize="18sp"
+                    android:maxLines="3" />
 
-                <TextView
-                    android:id="@+id/tv_detail_result_input_manual"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/detail"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_detail_result_input_manual"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="@string/detail"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <TableLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <TableRow
-                        android:id="@+id/tr_cust_churn_probability"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+<!--                    <TableRow-->
+<!--                        android:id="@+id/tr_cust_churn_probability"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                        <TextView
-                            android:id="@+id/tv_cust_churn_probability"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/customer_churn_probability"
-                            android:textStyle="bold"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_cust_churn_probability"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="2"-->
+<!--                            android:gravity="center_horizontal"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:text="@string/customer_churn_probability"-->
+<!--                            android:textStyle="bold"/>-->
 
-                        <TextView
-                            android:id="@+id/tv_cust_churn_probability_result"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/churn_rate_result" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_cust_churn_probability_result"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="2"-->
+<!--                            android:gravity="center_horizontal"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:text="@string/churn_rate_result" />-->
 
-                    </TableRow>
+<!--                    </TableRow>-->
 
-                    <TableRow
-                        android:id="@+id/tr_is_churn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+<!--                    <TableRow-->
+<!--                        android:id="@+id/tr_is_churn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                        <TextView
-                            android:id="@+id/tv_is_churn"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/is_churn"
-                            android:textStyle="bold"/>
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_is_churn"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="2"-->
+<!--                            android:gravity="center_horizontal"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:text="@string/is_churn"-->
+<!--                            android:textStyle="bold"/>-->
 
-                        <TextView
-                            android:id="@+id/tv_is_churn_result"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/tot_cust_not_churn" />
-                    </TableRow>
-                </TableLayout>
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_is_churn_result"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="2"-->
+<!--                            android:gravity="center_horizontal"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:text="@string/is_churn" />-->
+<!--                    </TableRow>-->
+<!--                </TableLayout>-->
 
                 <Button
                     android:id="@+id/btn_ok_input_manual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/ok"/>
 
             </LinearLayout>

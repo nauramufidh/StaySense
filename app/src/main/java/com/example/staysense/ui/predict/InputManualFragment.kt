@@ -107,8 +107,8 @@ class InputManualFragment : Fragment() {
         btnInputManual = view.findViewById(R.id.btn_input_manual)
 
         tvMessage = view.findViewById(R.id.tv_message_result_input_manual)
-        tvProbResult = view.findViewById(R.id.tv_cust_churn_probability_result)
-        tvIsChurnResult = view.findViewById(R.id.tv_is_churn_result)
+//        tvProbResult = view.findViewById(R.id.tv_cust_churn_probability_result)
+//        tvIsChurnResult = view.findViewById(R.id.tv_is_churn_result)
         btnOkmanual = view.findViewById(R.id.btn_ok_input_manual)
 
     }
