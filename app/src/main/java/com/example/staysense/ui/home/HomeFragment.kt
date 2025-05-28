@@ -90,16 +90,17 @@ class HomeFragment : Fragment() {
             } finally {
                 showLoadingChart(false)
             }
-
         }
-
     }
 
     private fun setupPieChart(pieChartData: PieChart) {
         val chart = binding.churnPiechart
 
-        val churn = pieChartData.churn?.toFloat() ?: 0f
-        val notChurn = pieChartData.notChurn?.toFloat() ?: 0f
+//        val churn = pieChartData.churn?.toFloat() ?: 0f
+//        val notChurn = pieChartData.notChurn?.toFloat() ?: 0f
+
+        val churn = pieChartData.churn?.replace("%", "")?.trim()?.toFloatOrNull() ?: 0f
+        val notChurn = pieChartData.notChurn?.replace("%", "")?.trim()?.toFloatOrNull() ?: 0f
 
         val entries = listOf(
             PieEntry(churn, "Churn"),

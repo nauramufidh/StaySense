@@ -47,8 +47,8 @@ data class BarChartItem(
 data class PieChart(
 
 	@field:SerializedName("churn")
-	val churn: Int? = null,
+	val churn: String? = null,
 
 	@field:SerializedName("not_churn")
-	val notChurn: Int? = null
+	val notChurn: String? = null
 ) : Parcelable
