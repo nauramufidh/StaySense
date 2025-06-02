@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.graphics.toColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.api.ApiService
 import com.example.staysense.data.response.BarChartItem
+import com.example.staysense.data.response.Information
 import com.example.staysense.databinding.FragmentRateBinding
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -43,16 +45,28 @@ class RateFragment : Fragment() {
 
         apiService = ApiConfig.getApiService()
 
+        binding.btnRefresh.setOnClickListener {
+            Log.d("RateFragment", "Refreshing chart data...")
+            fetchChurnRateData()
+            Toast.makeText(requireContext(), "Chart updated successfully", Toast.LENGTH_SHORT).show()
+        }
+
         sharedViewModel.uploadLiveData.observe(viewLifecycleOwner) { success ->
             if (success == true) {
                 Log.d("RateFragment", "Upload success detected, re-fetching chart data...")
                 fetchChurnRateData()
+                setupInformation()
                 sharedViewModel.setUploadSuccess(false)
             }
         }
 
+        binding.sflRate.setOnRefreshListener {
+            refreshData()
+        }
+
         view.postDelayed({
             fetchChurnRateData()
+            setupInformation()
         }, 1000)
 
     }
@@ -68,6 +82,7 @@ class RateFragment : Fragment() {
                     response.body()?.barChart?.let { barChartData ->
                         Log.d("RateFragment", "Bar chart data received with ${barChartData.size} items")
                         displayBarChart(barChartData)
+                        animateChartUpdate()
                     } ?: run {
                         Log.e("RateFragment", "No barChart data found in response")
                     }
@@ -78,6 +93,7 @@ class RateFragment : Fragment() {
                 Log.e("RateFragment", "Network error: ${e.message}")
             } finally {
                 showLoadingChart(false)
+                binding.sflRate.isRefreshing = false
             }
         }
     }
@@ -122,9 +138,58 @@ class RateFragment : Fragment() {
         barChart.invalidate()
     }
 
+    private fun setupInformation() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                showLoadingInformation(true)
+                val response = ApiConfig.getApiService().getInformations()
+
+                if (response.isSuccessful) {
+                    val chartResponse = response.body()
+                    Log.d("Informations", "Received ChartResponse: $chartResponse")
+
+                    chartResponse?.information?.let { information ->
+                        displayInformation(information)
+                    } ?: run {
+                        Log.e("Informations", "Information data is empty")
+                    }
+                } else {
+                    Log.e("Informations", "Error fetching information: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Log.e("Informations", "Error: ${e.message}")
+            } finally {
+                showLoadingInformation(false)
+                binding.sflRate.isRefreshing = false
+            }
+        }
+    }
+
+    private fun refreshData(){
+        fetchChurnRateData()
+        setupInformation()
+    }
+
+    private fun displayInformation(information: Information){
+        binding.tvTotalImpression.text = "${information.averageChurnRate ?: 0}"
+    }
+
     private fun showLoadingChart(isLoading: Boolean){
         binding.progressBarRateChart.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.cvChurnrate.alpha = if (isLoading) 0.3f else 1f
+    }
+
+    private fun showLoadingInformation(isLoading: Boolean) {
+        binding.progressBarInformations.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.cvTotalImpression.alpha = if (isLoading) 0.3f else 1f
+    }
+
+    private fun animateChartUpdate() {
+        binding.cvChurnrate.apply {
+            animate().alpha(0.5f).setDuration(150).withEndAction {
+                animate().alpha(1f).setDuration(150).start()
+            }.start()
+        }
     }
 
     override fun onResume() {
@@ -133,6 +198,7 @@ class RateFragment : Fragment() {
 
         if (sharedViewModel.uploadLiveData.value == true) {
             fetchChurnRateData()
+            setupInformation()
             sharedViewModel.setUploadSuccess(false)
         }
     }

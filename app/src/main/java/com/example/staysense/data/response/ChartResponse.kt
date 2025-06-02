@@ -18,22 +18,6 @@ data class ChartResponse(
 ) : Parcelable
 
 @Parcelize
-data class Information(
-
-	@field:SerializedName("average_churn_rate")
-	val averageChurnRate: String? = null,
-
-	@field:SerializedName("total_customers")
-	val totalCustomers: Int? = null,
-
-	@field:SerializedName("total_not_churn")
-	val totalNotChurn: Int? = null,
-
-	@field:SerializedName("total_churn")
-	val totalChurn: Int? = null
-) : Parcelable
-
-@Parcelize
 data class BarChartItem(
 
 	@field:SerializedName("month")
@@ -51,4 +35,20 @@ data class PieChart(
 
 	@field:SerializedName("not_churn")
 	val notChurn: String? = null
+) : Parcelable
+
+@Parcelize
+data class Information(
+
+	@field:SerializedName("average_churn_rate")
+	val averageChurnRate: String? = null,
+
+	@field:SerializedName("total_customers")
+	val totalCustomers: Int? = null,
+
+	@field:SerializedName("total_not_churn")
+	val totalNotChurn: Int? = null,
+
+	@field:SerializedName("total_churn")
+	val totalChurn: Int? = null
 ) : Parcelable

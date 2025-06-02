@@ -164,7 +164,7 @@ class UploadFileFragment : Fragment() {
                             )
                         }
 
-                        Toast.makeText(context, "Upload sukses!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Upload success!", Toast.LENGTH_LONG).show()
 
                         binding.overlayDim.visibility = View.VISIBLE
                         binding.flResultUpload.visibility = View.VISIBLE
@@ -184,7 +184,7 @@ class UploadFileFragment : Fragment() {
                         }
                     }
                 } else {
-                    Toast.makeText(context, "Upload gagal: ${response.code()} ${response.message()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Upload Failed: ${response.code()} ${response.message()}", Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

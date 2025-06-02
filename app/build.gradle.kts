@@ -66,6 +66,7 @@ dependencies {
     implementation (libs.multidex)
     implementation (libs.mpandroidchart)
     implementation (libs.flexbox)
+    implementation (libs.androidx.swiperefreshlayout)
 
 
     implementation(libs.androidx.viewpager2)

@@ -236,13 +236,10 @@ class InputManualFragment : Fragment() {
                         binding.overlayDim.visibility = View.VISIBLE
 
                         binding.btnOkInputManual.setOnClickListener {
-//                            val intent = Intent(requireContext(), MainActivity::class.java)
-//                            startActivity(intent)
-//                            activity?.finish()
-
                             clearInputField()
                             binding.flResultInputManual.visibility = View.GONE
                             binding.overlayDim.visibility = View.GONE
+
                             sharedViewModel.setUploadSuccess(true)
                         }
                     }

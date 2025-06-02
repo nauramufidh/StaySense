@@ -10,13 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.chart.common.listener.Event
-import com.anychart.chart.common.listener.ListenersInterface
-import com.anychart.enums.Align
-import com.anychart.enums.LegendLayout
 import com.example.staysense.data.api.ApiConfig
+import com.example.staysense.data.api.ApiService
+import com.example.staysense.data.response.Information
 import com.example.staysense.data.response.PieChart
 import com.example.staysense.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.data.PieData
@@ -25,8 +21,6 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -35,14 +29,15 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private lateinit var apiService: ApiService
 
-    private var chartUpdateJob: Job? = null
-    private var pieChart = PieChart()
+//    private var chartUpdateJob: Job? = null
+//    private var pieChart = PieChart()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,34 +46,43 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        apiService = ApiConfig.getApiService()
+
+        binding.btnRefresh.setOnClickListener{
+            Log.d("HomeFragment", "Refreshing Chart...")
+            getChartData()
+            Toast.makeText(requireContext(), "Chart updated successfully", Toast.LENGTH_SHORT).show()
+        }
+
         sharedViewModel.uploadLiveData.observe(viewLifecycleOwner) { success ->
             if (success == true) {
-                Log.d("RateFragment", "Upload success detected, re-fetching chart data...")
+                Log.d("HomeFragment", "Upload success detected, re-fetching chart data...")
                 getChartData()
-                Toast.makeText(requireContext(), "Chart updated successfully", Toast.LENGTH_SHORT).show()
+                setupInformation()
                 sharedViewModel.setUploadSuccess(false)
             }
         }
 
+        binding.homeFragment.setOnRefreshListener {
+            refreshData()
+        }
+
         getChartData()
+        setupInformation()
 
     }
 
     private fun getChartData(){
-        val api = ApiConfig.getApiService()
-
         viewLifecycleOwner.lifecycleScope.launch {
             showLoadingChart(true)
             try {
                 Log.d("HomeFragment", "Fetching chart data...")
-                val response = api.getCharts()
+                val response = apiService.getCharts()
                 if (response.isSuccessful) {
                     Log.d("HomeFragment", "Response successful")
                     response.body()?.pieChart?.let { pieChartData ->
-                        withContext(Dispatchers.Main) {
-                            setupPieChart(pieChartData)
-                            animateChartUpdate()
-                        }
+                        setupPieChart(pieChartData)
+                        animateChartUpdate()
                     } ?: run {
                         Log.e("HomeFragment", "No pieChart data found in response")
                     }
@@ -89,6 +93,7 @@ class HomeFragment : Fragment() {
                 Log.e("HomeFragment", "Network error: ${e.message}")
             } finally {
                 showLoadingChart(false)
+                binding.homeFragment.isRefreshing = false
             }
         }
     }
@@ -99,8 +104,8 @@ class HomeFragment : Fragment() {
 //        val churn = pieChartData.churn?.toFloat() ?: 0f
 //        val notChurn = pieChartData.notChurn?.toFloat() ?: 0f
 
-        val churn = pieChartData.churn?.replace("%", "")?.trim()?.toFloatOrNull() ?: 0f
-        val notChurn = pieChartData.notChurn?.replace("%", "")?.trim()?.toFloatOrNull() ?: 0f
+        val churn = pieChartData.churn?.replace("%", "")?.toFloatOrNull() ?: 0f
+        val notChurn = pieChartData.notChurn?.replace("%", "")?.toFloatOrNull() ?: 0f
 
         val entries = listOf(
             PieEntry(churn, "Churn"),
@@ -129,9 +134,54 @@ class HomeFragment : Fragment() {
         chart.invalidate()
     }
 
+    private fun setupInformation() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                showLoadingInformation(true)
+                val response = ApiConfig.getApiService().getInformations()
+
+                if (response.isSuccessful) {
+                    val chartResponse = response.body()
+                    Log.d("HomeFragment", "Received ChartResponse: $chartResponse")
+
+                    chartResponse?.information?.let { information ->
+                        displayInformation(information)
+                    } ?: run {
+                        Log.e("HomeFragment", "Information data is empty")
+                    }
+                } else {
+                    Log.e("HomeFragment", "Error fetching information: ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Log.e("HomeFragment", "Error: ${e.message}")
+            } finally {
+                showLoadingInformation(false)
+                binding.homeFragment.isRefreshing = false
+            }
+        }
+    }
+
+    private fun displayInformation(information: Information){
+        binding.tvTotalChurn.text = "${information.totalChurn ?: 0}"
+        binding.tvTotalCust.text = "${information.totalCustomers ?: 0}"
+    }
+
     private fun showLoadingChart(isLoading: Boolean){
         binding.progressBarPieChart.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.cvPiechart.alpha = if (isLoading) 0.3f else 1f
+    }
+
+    private fun showLoadingInformation(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressBarTotChurn.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.cvTotalCust.alpha = if (isLoading) 0.3f else 1f
+        binding.cvTotalChurn.alpha = if (isLoading) 0.3f else 1f
+    }
+
+    private fun refreshData(){
+        Log.d("HomeFragment", "Refreshing both chart and information...")
+        getChartData()
+        setupInformation()
     }
 
     override fun onResume() {
@@ -141,6 +191,7 @@ class HomeFragment : Fragment() {
         view?.post {
             if (sharedViewModel.uploadLiveData.value == true) {
                 getChartData()
+                setupInformation()
                 sharedViewModel.setUploadSuccess(false)
             }
         }
