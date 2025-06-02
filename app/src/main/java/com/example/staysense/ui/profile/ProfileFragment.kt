@@ -18,6 +18,7 @@ import com.example.staysense.ui.welcomescreen.WelcomeScreenActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
 import com.example.staysense.R
+import com.example.staysense.database.UserSession
 
 
 class ProfileFragment : Fragment() {
@@ -38,11 +39,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // save username email
-        val sharedPref =
-            requireActivity().getSharedPreferences("StaySensePrefs", AppCompatActivity.MODE_PRIVATE)
-        val username = sharedPref.getString("username", "")
-        val email = sharedPref.getString("email", "")
+        val username = UserSession.getUsername(requireContext())
+        val email = UserSession.getEmail(requireContext())
 
         val tvUsername = view.findViewById<TextView>(R.id.tv_username)
         val tvEmail = view.findViewById<TextView>(R.id.tv_email)
@@ -50,10 +48,8 @@ class ProfileFragment : Fragment() {
         tvUsername.text = username
         tvEmail.text = email
 
-        // logout
         binding.llLogout.setOnClickListener { setupLogout() }
 
-        // navigate to other fragments
         binding.llPersonalInformationProfile.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_personalInformationFragment)
         }
@@ -63,9 +59,17 @@ class ProfileFragment : Fragment() {
         binding.llAboutStaysense.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_aboutFragment)
         }
+        binding.llHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_predictHistoryFragment)
+        }
     }
 
     private fun setupLogout() {
+        val sharedPref = requireActivity().getSharedPreferences("StaySensePrefs", AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.clear()
+        editor.apply()
+
         Firebase.auth.signOut()
         val intent = Intent(requireContext(), WelcomeScreenActivity::class.java)
         startActivity(intent)

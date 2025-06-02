@@ -13,12 +13,18 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.staysense.R
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.response.DataCostumerResponse
 import com.example.staysense.data.response.PredictResponse
+import com.example.staysense.database.PredictionDatabase
+import com.example.staysense.database.HistoryEntity
+import com.example.staysense.database.UserSession
 import com.example.staysense.databinding.FragmentInputManualBinding
 import com.example.staysense.ui.home.SharedViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,6 +64,8 @@ class InputManualFragment : Fragment() {
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
+    private lateinit var database: PredictionDatabase
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +82,7 @@ class InputManualFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        database = PredictionDatabase.getInstance(requireContext())
 
         setupView(view)
         setupDropdown()
@@ -182,6 +191,43 @@ class InputManualFragment : Fragment() {
                         }
                         val isChurn = if (it.isChurn == true) "Yes" else "No"
 
+                        val userId = UserSession.getUserId(requireContext())
+
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            database.predictionHistoryDao().insert(
+                                HistoryEntity(
+                                    userId = userId ?: "",
+                                    source = "manual_input",
+                                    message = message,
+                                    churnProbability = prob,
+                                    isChurn = isChurn,
+                                    timestamp = System.currentTimeMillis(),
+
+                                    age = data.age,
+                                    numberOfDependents = data.numberOfDependents,
+                                    city = data.city,
+                                    tenureInMonths = data.tenureInMonths,
+                                    internetService = data.internetService,
+                                    onlineSecurity = data.onlineSecurity,
+                                    onlineBackup = data.onlineBackup,
+                                    deviceProtectionPlan = data.deviceProtectionPlan,
+                                    premiumTechSupport = data.premiumTechSupport,
+                                    streamingTv = data.streamingTv,
+                                    streamingMovies = data.streamingMovies,
+                                    streamingMusic = data.streamingMusic,
+                                    unlimitedData = data.unlimitedData,
+                                    contract = data.contract,
+                                    paymentMethod = data.paymentMethod,
+                                    monthlyCharge = data.monthlyCharge,
+                                    totalCharges = data.totalCharges,
+                                    totalRevenue = data.totalRevenue,
+                                    satisfactionScore = data.satisfactionScore,
+                                    churnScore = data.churnScore,
+                                    cltv = data.cltv
+                                )
+                            )
+                        }
+
                         binding.tvMessageResultInputManual.text = message
 //                        tvProbResult.text = prob
 //                        tvIsChurnResult.text = isChurn
@@ -197,7 +243,6 @@ class InputManualFragment : Fragment() {
                             clearInputField()
                             binding.flResultInputManual.visibility = View.GONE
                             binding.overlayDim.visibility = View.GONE
-
                             sharedViewModel.setUploadSuccess(true)
                         }
                     }

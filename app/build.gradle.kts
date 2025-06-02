@@ -78,4 +78,11 @@ dependencies {
     implementation (libs.glide)
     kapt (libs.glide.compiler)
 
+    // Room Database
+//    implementation (libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
+    kapt (libs.androidx.room.compiler.v261)
+
+    implementation (libs.androidx.room.runtime.v261)
+
 }

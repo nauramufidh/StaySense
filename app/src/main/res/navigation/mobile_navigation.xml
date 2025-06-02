@@ -41,6 +41,12 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"/>
 
+        <action
+            android:id="@+id/action_profileFragment_to_predictHistoryFragment"
+            app:destination="@id/predictHistory"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+
     </fragment>
 
     <fragment
@@ -104,5 +110,32 @@
         android:label="fragment_security"
         tools:layout="@layout/fragment_security" />
 
+    <fragment
+        android:id="@+id/predictHistory"
+        android:name="com.example.staysense.ui.profile.PredictHistoryFragment"
+        android:label="fragment_predict_history"
+        tools:layout="@layout/fragment_predict_history" >
+        <action
+            android:id="@+id/action_predictHistory_to_detailManualFragment"
+            app:destination="@id/detailManualFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_predictHistory_to_detailUploadFragment"
+            app:destination="@id/detailUploadFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailManualFragment"
+        android:name="com.example.staysense.ui.profile.history.DetailManualFragment"
+        android:label="fragment_detail_manual"
+        tools:layout="@layout/fragment_detail_manual" />
+    <fragment
+        android:id="@+id/detailUploadFragment"
+        android:name="com.example.staysense.ui.profile.history.DetailUploadFragment"
+        android:label="fragment_detail_upload"
+        tools:layout="@layout/fragment_detail_upload" />
 
 </navigation>

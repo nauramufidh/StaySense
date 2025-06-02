@@ -22,6 +22,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.staysense.data.api.ApiConfig
+import com.example.staysense.database.PredictionDatabase
+import com.example.staysense.database.UploadHistoryEntity
+import com.example.staysense.database.UserSession
 import com.example.staysense.databinding.FragmentUploadFileBinding
 import com.example.staysense.ui.home.RateFragment
 import com.example.staysense.ui.home.SharedViewModel
@@ -38,6 +41,7 @@ class UploadFileFragment : Fragment() {
     private var _binding: FragmentUploadFileBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var database: PredictionDatabase
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private var selectedFileUri: Uri? = null
@@ -67,6 +71,8 @@ class UploadFileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        database = PredictionDatabase.getInstance(requireContext())
 
         binding.llUploadFile.setOnClickListener { checkPermissionAndPickFile() }
         binding.btnUpload.setOnClickListener {
@@ -102,21 +108,6 @@ class UploadFileFragment : Fragment() {
         }
     }
 
-//    private fun pickFile() {
-//        val mimeTypes = arrayOf(
-//            "text/csv",
-//            "application/vnd.ms-excel",
-//            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-//        )
-//
-//        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-//            addCategory(Intent.CATEGORY_OPENABLE)
-//            type = "*/*"
-//            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("text/*", "application/*"))
-//        }
-//        filePickerLauncher.launch(intent)
-//    }
-
     private fun pickFile() {
         val mimeTypes = arrayOf("text/*", "application/*")
 
@@ -133,7 +124,6 @@ class UploadFileFragment : Fragment() {
     private fun setupUpload(uri: Uri) {
         val context = requireContext()
         val contentResolver = context.contentResolver
-
         val fileType = contentResolver.getType(uri) ?: "text/csv"
 
         val inputStream = contentResolver.openInputStream(uri)
@@ -156,20 +146,32 @@ class UploadFileFragment : Fragment() {
                 }
 
                 if (response.isSuccessful) {
-                    showLoading(false)
                     val result = response.body()
+                    val userId = UserSession.getUserId(requireContext())
 
                     result?.summary?.let { summary ->
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            database.uploadHistoryDao().insert(
+                                UploadHistoryEntity(
+                                    userId = userId ?: "",
+                                    source = "file_upload",
+                                    totalCustomers = summary.totalCustomers ?: 0,
+                                    churnCount = summary.churnCount ?: 0,
+                                    notChurnCount = summary.notChurnCount ?: 0,
+                                    churnRate = summary.churnRate ?: "0",
+                                    timestamp = System.currentTimeMillis()
+                                )
+                            )
+                        }
+
                         Toast.makeText(context, "Upload sukses!", Toast.LENGTH_LONG).show()
 
                         binding.overlayDim.visibility = View.VISIBLE
                         binding.flResultUpload.visibility = View.VISIBLE
-
                         binding.tvTotalcustResult.text = "${summary.totalCustomers ?: 0}"
                         binding.tvTotCustChurnResult.text = "${summary.churnCount ?: 0}"
                         binding.tvTotCustNotChurnResult.text = "${summary.notChurnCount ?: 0}"
                         binding.tvChurnrateResult.text = "${summary.churnRate ?: 0}"
-
 
                         binding.btnOk.setOnClickListener {
                             binding.flResultUpload.visibility = View.GONE
@@ -182,7 +184,7 @@ class UploadFileFragment : Fragment() {
                         }
                     }
                 } else {
-                    Toast.makeText(context, "Upload gagal: ${response.code()} ${response.message()}",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Upload gagal: ${response.code()} ${response.message()}", Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

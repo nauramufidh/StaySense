@@ -155,4 +155,8 @@
         <item>No</item>
     </string-array>
 
+    <string name="timestamp">Timestamp here</string>
+    <string name="source">Source will be displayed here</string>
+    <string name="appear_here">Will appear here</string>
+
 </resources>

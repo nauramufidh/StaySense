@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.staysense.database.UserSession
 import com.example.staysense.databinding.ActivityLoginBinding
 import com.example.staysense.ui.main.MainActivity
 import com.google.firebase.database.DataSnapshot
@@ -52,14 +53,23 @@ class LoginActivity : AppCompatActivity() {
                         val userData = userSnapshot.getValue(UserData::class.java)
 
                         if (userData != null && userData.password == password){
-                            val sheredPreferences = getSharedPreferences("StaySensePrefs", MODE_PRIVATE)
-                            val editor = sheredPreferences.edit()
-                            editor.putBoolean("isLoggedIn", true)
-                            editor.putString("id", userData.id)
+                            val sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+//                            editor.putBoolean("isLoggedIn", true)
+//                            editor.putString("user_id", userData.id)
                             editor.putString("email", userData.email)
                             editor.putString("password", userData.password)
                             editor.putString("username", userData.username)
                             editor.apply()
+                            UserSession.saveUser(this@LoginActivity, userData.id ?: "")
+//                            UserSession.saveUser(
+//                                context = this@LoginActivity,
+//                                id = userData.id ?: "",
+//                                username = userData.username ?: "",
+//                                email = userData.email,
+//                                password = userData.password,
+//                                confirmPassword = userData.confirmPassword
+//                            )
 
                             Toast.makeText(this@LoginActivity, "Login Successfull", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)

@@ -28,8 +28,8 @@
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
-                    android:layout_width="403dp"
-                    android:layout_height="94dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
@@ -48,10 +48,10 @@
                         android:id="@+id/tv_total_impression"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:layout_marginHorizontal="8dp"
                         android:layout_marginBottom="6dp"
                         android:gravity="center"
-                        android:layout_gravity="center"
                         android:letterSpacing="0.1"
                         android:text="@string/total_cust"
                         android:textSize="18sp"
@@ -90,6 +90,7 @@
                             android:id="@+id/tv_churnrate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="36dp"
                             android:contentDescription="TODO"
                             android:text="@string/churn_rate"
                             android:textSize="18sp"
