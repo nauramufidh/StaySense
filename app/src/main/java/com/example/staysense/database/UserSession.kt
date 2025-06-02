@@ -13,25 +13,16 @@ object UserSession {
     private const val KEY_CONFIRM_PASSWORD = "confirmPassword"
     private const val KEY_LOGGED_IN = "isLoggedIn"
 
-    fun saveUser(context: Context, id: String) {
-        val sharedPref = context.getSharedPreferences("StaySensePrefs", AppCompatActivity.MODE_PRIVATE)
-        sharedPref.edit().putString(KEY_USER_ID, id).putBoolean(KEY_LOGGED_IN, true).apply()
-
+    fun saveUser(context: Context, id: String, username: String, email: String) {
+        val sharedPref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putString(KEY_USER_ID, id)
+            putString(KEY_USERNAME, username)
+            putString(KEY_EMAIL, email)
+            putBoolean(KEY_LOGGED_IN, true)
+            apply()
+        }
     }
-
-//    fun saveUser(context: Context, id: String, username: String, email: String?, password: String, confirmPassword: String?) {
-//
-//        val sharedPref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
-//        with(sharedPref.edit()) {
-//            putString(KEY_USER_ID, id)
-//            putString(KEY_USERNAME, username)
-//            putString(KEY_EMAIL, email)
-//            putString(KEY_PASSWORD, password)
-//            putString(KEY_CONFIRM_PASSWORD, confirmPassword)
-//        }
-//    }
-
-
 
     fun getUsername(context: Context): String {
         val sharedPref: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

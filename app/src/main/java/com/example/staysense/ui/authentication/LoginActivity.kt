@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                             editor.putString("password", userData.password)
                             editor.putString("username", userData.username)
                             editor.apply()
-                            UserSession.saveUser(this@LoginActivity, userData.id ?: "")
+                            UserSession.saveUser(this@LoginActivity, userData.id ?: "", userData.username ?: "", userData.email ?: "")
 //                            UserSession.saveUser(
 //                                context = this@LoginActivity,
 //                                id = userData.id ?: "",
