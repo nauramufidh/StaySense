@@ -264,14 +264,18 @@ class WordCloudFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.yellow_pudar),
             ContextCompat.getColor(requireContext(), R.color.lime_green),
             ContextCompat.getColor(requireContext(), R.color.grayish_lime),
+            ContextCompat.getColor(requireContext(), R.color.navy_pudar),
+            ContextCompat.getColor(requireContext(), R.color.dark_cyan)
         )
 
         val legendLabels = listOf(
-            "0 - Don't Know",
-            "1 - Competitor Made better offer, better devices",
-            "2 - Limited range, service dissatisfaction",
-            "3 - Attitude support person",
-            "4 - Offered data, higher speed, extra data changes"
+            "0 - Limited Services & Device Issues",
+            "1 - Customer Support Dissatisfaction",
+            "2 - Data Offers & Extra Charges",
+            "3 - Faster Competitor Speeds",
+            "4 - Product/Service Dissatisfaction",
+            "5 - Unclear/Unknown Reason",
+            "6 - Better Offers from Competitors"
         )
 
         val dataSet = BarDataSet(entries, "")
