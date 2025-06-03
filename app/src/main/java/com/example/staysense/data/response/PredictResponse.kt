@@ -27,5 +27,8 @@ data class Prediction(
 	val message: String? = null,
 
 	@field:SerializedName("is_churn")
-	val isChurn: Boolean? = null
+	val isChurn: Boolean? = null,
+
+	@field:SerializedName("solution")
+	val solution: String? = null
 ) : Parcelable

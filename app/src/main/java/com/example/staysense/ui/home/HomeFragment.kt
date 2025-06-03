@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.api.ApiService
 import com.example.staysense.data.response.Information
+import com.example.staysense.data.response.InformationResponse
 import com.example.staysense.data.response.PieChart
 import com.example.staysense.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.data.PieData
@@ -141,10 +142,10 @@ class HomeFragment : Fragment() {
                 val response = ApiConfig.getApiService().getInformations()
 
                 if (response.isSuccessful) {
-                    val chartResponse = response.body()
-                    Log.d("HomeFragment", "Received ChartResponse: $chartResponse")
+                    val informationResponse = response.body()
+                    Log.d("HomeFragment", "Received InformationResponse: $informationResponse")
 
-                    chartResponse?.information?.let { information ->
+                    informationResponse?.let { information ->
                         displayInformation(information)
                     } ?: run {
                         Log.e("HomeFragment", "Information data is empty")
@@ -161,9 +162,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun displayInformation(information: Information){
-        binding.tvTotalChurn.text = "${information.totalChurn ?: 0}"
-        binding.tvTotalCust.text = "${information.totalCustomers ?: 0}"
+    private fun displayInformation(information: InformationResponse){
+        binding.tvTotalChurn.text = "${information.information?.totalChurn ?: 0}"
+        binding.tvTotalCust.text = "${information.information?.totalCustomers ?: 0}"
     }
 
     private fun showLoadingChart(isLoading: Boolean){

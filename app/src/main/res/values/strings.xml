@@ -136,7 +136,7 @@
     <string name="input_churn_score">Input churn score</string>
     <string name="cltv">CLTV</string>
     <string name="input_cltv">Input CLTV</string>
-    <string name="customer_churn_probability">Customer churn probability</string>
+    <string name="customer_churn_probability">Probability</string>
 
     <string-array name="list_payment_method">
         <item>Bank Withdrawal</item>
@@ -158,5 +158,9 @@
     <string name="timestamp">Timestamp here</string>
     <string name="source">Source will be displayed here</string>
     <string name="appear_here">Will appear here</string>
+    <string name="total_predicted">Total Predictions</string>
+    <string name="colon">:</string>
+    <string name="solution">Recomendation</string>
+    <string name="no_files">Choose a file</string>
 
 </resources>

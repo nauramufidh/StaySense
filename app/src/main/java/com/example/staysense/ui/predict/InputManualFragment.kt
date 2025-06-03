@@ -25,6 +25,7 @@ import com.example.staysense.databinding.FragmentInputManualBinding
 import com.example.staysense.ui.home.SharedViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,6 +61,7 @@ class InputManualFragment : Fragment() {
     private lateinit var tvMessage: TextView
     private lateinit var tvProbResult: TextView
     private lateinit var tvIsChurnResult: TextView
+    private lateinit var tvSolution: TextView
     private lateinit var btnOkmanual: Button
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -116,8 +118,9 @@ class InputManualFragment : Fragment() {
         btnInputManual = view.findViewById(R.id.btn_input_manual)
 
         tvMessage = view.findViewById(R.id.tv_message_result_input_manual)
-//        tvProbResult = view.findViewById(R.id.tv_cust_churn_probability_result)
-//        tvIsChurnResult = view.findViewById(R.id.tv_is_churn_result)
+        tvProbResult = view.findViewById(R.id.tv_cust_churn_probability_result)
+        tvIsChurnResult = view.findViewById(R.id.tv_is_churn_result)
+        tvSolution = view.findViewById(R.id.tv_solution)
         btnOkmanual = view.findViewById(R.id.btn_ok_input_manual)
 
     }
@@ -184,6 +187,7 @@ class InputManualFragment : Fragment() {
                     val prediction = response.body()?.prediction
                     prediction?.let {
                         val message = it.message ?: "-"
+                        val solution = it.solution ?: "-"
                         val prob = if (it.isChurn == true) {
                             it.churnRate ?: "-"
                         } else {
@@ -229,8 +233,9 @@ class InputManualFragment : Fragment() {
                         }
 
                         binding.tvMessageResultInputManual.text = message
-//                        tvProbResult.text = prob
-//                        tvIsChurnResult.text = isChurn
+                        tvProbResult.text = prob
+                        tvIsChurnResult.text = isChurn
+                        tvSolution.text = solution
 
                         binding.flResultInputManual.visibility = View.VISIBLE
                         binding.overlayDim.visibility = View.VISIBLE

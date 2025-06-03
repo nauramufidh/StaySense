@@ -4,6 +4,7 @@ import com.example.staysense.data.response.ChartResponse
 import com.example.staysense.data.response.ClusteringResponseItem
 import com.example.staysense.data.response.DataCostumerResponse
 import com.example.staysense.data.response.Information
+import com.example.staysense.data.response.InformationResponse
 import com.example.staysense.data.response.PredictResponse
 import com.example.staysense.data.response.UploadResponse
 import com.example.staysense.data.response.WordCloudRequest
@@ -37,8 +38,8 @@ interface ApiService {
     @GET("dashboard/chart")
     suspend fun getCharts(): Response<ChartResponse>
 
-    @GET("dashboard/chart")
-    suspend fun getInformations(): Response<ChartResponse>
+    @GET("dashboard/informations")
+    suspend fun getInformations(): Response<InformationResponse>
 
     @Headers("Content-type: application/json")
     @POST("wordcloud")

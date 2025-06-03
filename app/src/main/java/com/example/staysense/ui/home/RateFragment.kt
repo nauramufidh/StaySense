@@ -14,6 +14,8 @@ import com.example.staysense.data.api.ApiConfig
 import com.example.staysense.data.api.ApiService
 import com.example.staysense.data.response.BarChartItem
 import com.example.staysense.data.response.Information
+import com.example.staysense.data.response.InformationResponse
+import com.example.staysense.data.response.TotalPredictionsPerMonthItem
 import com.example.staysense.databinding.FragmentRateBinding
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -21,6 +23,9 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class RateFragment : Fragment() {
@@ -145,11 +150,20 @@ class RateFragment : Fragment() {
                 val response = ApiConfig.getApiService().getInformations()
 
                 if (response.isSuccessful) {
-                    val chartResponse = response.body()
-                    Log.d("Informations", "Received ChartResponse: $chartResponse")
+                    val informationResponse = response.body()
+                    Log.d("Informations", "Received Information: $informationResponse")
+                    val currentMonth = SimpleDateFormat("yyyy-MM", Locale.getDefault()).format(Date())
 
-                    chartResponse?.information?.let { information ->
-                        displayInformation(information)
+                    informationResponse?.information?.totalPredictionsPerMonth?.let { totalPredictionsList ->
+                        val predictionForCurrentMonth = totalPredictionsList.find { it?.month?.equals(currentMonth, ignoreCase = true) == true }
+
+                        predictionForCurrentMonth?.let {
+                            val totalPredictions = it.totalPredictions
+                            displayInformation(totalPredictions)
+                        } ?: run {
+                            Log.e("Informations", "No predictions for the current month")
+                            binding.tvTotalPredicted.text = "0"
+                        }
                     } ?: run {
                         Log.e("Informations", "Information data is empty")
                     }
@@ -170,8 +184,12 @@ class RateFragment : Fragment() {
         setupInformation()
     }
 
-    private fun displayInformation(information: Information){
-        binding.tvTotalImpression.text = "${information.averageChurnRate ?: 0}"
+    private fun displayInformation(totalPredictions: Int?) {
+        if (totalPredictions != null) {
+            binding.tvTotalPredicted.text = "$totalPredictions"
+        } else {
+            binding.tvTotalPredicted.text = "0"
+        }
     }
 
     private fun showLoadingChart(isLoading: Boolean){
@@ -180,8 +198,8 @@ class RateFragment : Fragment() {
     }
 
     private fun showLoadingInformation(isLoading: Boolean) {
-        binding.progressBarInformations.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.cvTotalImpression.alpha = if (isLoading) 0.3f else 1f
+        binding.progressBarTotPred.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.cvTotalPredictions.alpha = if (isLoading) 0.3f else 1f
     }
 
     private fun animateChartUpdate() {
