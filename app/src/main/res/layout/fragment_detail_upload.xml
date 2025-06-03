@@ -56,7 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textSize="18sp"
-            android:text="@string/appear_here"/>
+            android:text="@string/appear_here"
+            android:textColor="@color/dark_blue"/>
     </LinearLayout>
 
     <LinearLayout

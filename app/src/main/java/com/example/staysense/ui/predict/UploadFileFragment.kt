@@ -159,7 +159,8 @@ class UploadFileFragment : Fragment() {
                                     churnCount = summary.churnCount ?: 0,
                                     notChurnCount = summary.notChurnCount ?: 0,
                                     churnRate = summary.churnRate ?: "0",
-                                    timestamp = System.currentTimeMillis()
+                                    timestamp = System.currentTimeMillis(),
+                                    fileUrl = summary.fileUrl ?: ""
                                 )
                             )
                         }

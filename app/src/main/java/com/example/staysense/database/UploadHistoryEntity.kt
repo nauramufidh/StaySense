@@ -12,5 +12,6 @@ data class UploadHistoryEntity(
     val churnCount: Int ,
     val notChurnCount: Int,
     val churnRate: String,
-    val timestamp: Long
+    val timestamp: Long,
+    val fileUrl: String
 )
