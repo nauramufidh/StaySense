@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
 
 @Parcelize
 data class WordCloudRequest(
+	@field:SerializedName("id")
+	val userId: String?,
 
 	@field:SerializedName("use_model")
 	val useModel: Boolean? = null,

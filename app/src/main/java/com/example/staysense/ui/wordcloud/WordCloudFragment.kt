@@ -30,6 +30,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.staysense.data.response.WordCloudResponse
+import com.example.staysense.database.UserSession
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.XAxis
@@ -90,7 +91,9 @@ class WordCloudFragment : Fragment() {
     }
 
     private fun sendWordCloudRequest(text: String) {
+        val userId = UserSession.getUserId(requireContext()) ?: ""
         val requestBody = WordCloudRequest(
+            userId = userId ,
             useModel = false,
             text = text
         )
