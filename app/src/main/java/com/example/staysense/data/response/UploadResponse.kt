@@ -17,6 +17,9 @@ data class UploadResponse(
 @Parcelize
 data class Summary(
 
+	@SerializedName("id")
+	val userId: String?,
+
 	@field:SerializedName("file_url")
 	val fileUrl: String? = null,
 

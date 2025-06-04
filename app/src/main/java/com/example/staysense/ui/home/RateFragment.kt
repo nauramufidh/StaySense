@@ -16,6 +16,7 @@ import com.example.staysense.data.response.BarChartItem
 import com.example.staysense.data.response.Information
 import com.example.staysense.data.response.InformationResponse
 import com.example.staysense.data.response.TotalPredictionsPerMonthItem
+import com.example.staysense.database.UserSession
 import com.example.staysense.databinding.FragmentRateBinding
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -81,7 +82,8 @@ class RateFragment : Fragment() {
             showLoadingChart(true)
             try {
                 Log.d("RateFragment", "Fetching chart data...")
-                val response = apiService.getCharts()
+                val userId = UserSession.getUserId(requireContext()) ?: ""
+                val response = apiService.getCharts(userId)
                 if (response.isSuccessful) {
                     Log.d("RateFragment", "Response successful")
                     response.body()?.barChart?.let { barChartData ->
@@ -147,7 +149,8 @@ class RateFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 showLoadingInformation(true)
-                val response = ApiConfig.getApiService().getInformations()
+                val userId = UserSession.getUserId(requireContext()) ?: ""
+                val response = ApiConfig.getApiService().getInformations(userId)
 
                 if (response.isSuccessful) {
                     val informationResponse = response.body()

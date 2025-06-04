@@ -19,6 +19,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -32,14 +33,19 @@ interface ApiService {
     @Multipart
     @POST("upload")
     fun uploadFile(
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part,
+        @Part("id") userId: RequestBody
     ): Call<UploadResponse>
 
     @GET("dashboard/chart")
-    suspend fun getCharts(): Response<ChartResponse>
+    suspend fun getCharts(
+        @Query("id") userId: String
+    ): Response<ChartResponse>
 
     @GET("dashboard/informations")
-    suspend fun getInformations(): Response<InformationResponse>
+    suspend fun getInformations(
+        @Query("id") userId: String
+    ): Response<InformationResponse>
 
     @Headers("Content-type: application/json")
     @POST("wordcloud")

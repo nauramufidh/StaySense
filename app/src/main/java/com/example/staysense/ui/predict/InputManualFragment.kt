@@ -150,8 +150,10 @@ class InputManualFragment : Fragment() {
     private fun setupButton(){
         btnInputManual.setOnClickListener {
             showLoading(true)
+            val userId = UserSession.getUserId(requireContext())
 
             val data = DataCostumerResponse(
+                userId = userId,
                 age = etAge.text.toString().toIntOrNull() ?: 0,
                 numberOfDependents = etNumberOfDependents.text.toString().toIntOrNull() ?: 0,
                 city = etCity.text.toString(),

@@ -22,6 +22,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.staysense.data.api.ApiConfig
+import com.example.staysense.data.response.Summary
+import com.example.staysense.data.response.UploadResponse
 import com.example.staysense.database.PredictionDatabase
 import com.example.staysense.database.UploadHistoryEntity
 import com.example.staysense.database.UserSession
@@ -35,6 +37,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class UploadFileFragment : Fragment() {
@@ -137,33 +140,24 @@ class UploadFileFragment : Fragment() {
         val requestFile = tempFile.asRequestBody(fileType.toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("file", tempFile.name, requestFile)
 
+        val userId = UserSession.getUserId(requireContext()) ?: ""
+        val userIdRequest = userId.toRequestBody("text/plain".toMediaTypeOrNull())
+
         val api = ApiConfig.getApiService()
         lifecycleScope.launch {
             try {
                 showLoading(true)
                 val response = withContext(Dispatchers.IO) {
-                    api.uploadFile(body).execute()
+                    api.uploadFile(body, userIdRequest).execute()
                 }
 
                 if (response.isSuccessful) {
                     val result = response.body()
-                    val userId = UserSession.getUserId(requireContext())
+
 
                     result?.summary?.let { summary ->
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            database.uploadHistoryDao().insert(
-                                UploadHistoryEntity(
-                                    userId = userId ?: "",
-                                    source = "file_upload",
-                                    totalCustomers = summary.totalCustomers ?: 0,
-                                    churnCount = summary.churnCount ?: 0,
-                                    notChurnCount = summary.notChurnCount ?: 0,
-                                    churnRate = summary.churnRate ?: "0",
-                                    timestamp = System.currentTimeMillis(),
-                                    fileUrl = summary.fileUrl ?: ""
-                                )
-                            )
-                        }
+
+                        saveUploadHistory(userId, summary)
 
                         Toast.makeText(context, "Upload success!", Toast.LENGTH_LONG).show()
 
@@ -193,6 +187,23 @@ class UploadFileFragment : Fragment() {
             } finally {
                 showLoading(false)
             }
+        }
+    }
+
+    private suspend fun saveUploadHistory(userId: String, summary: Summary) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            database.uploadHistoryDao().insert(
+                UploadHistoryEntity(
+                    userId = userId,
+                    source = "file_upload",
+                    totalCustomers = summary.totalCustomers ?: 0,
+                    churnCount = summary.churnCount ?: 0,
+                    notChurnCount = summary.notChurnCount ?: 0,
+                    churnRate = summary.churnRate ?: "0",
+                    timestamp = System.currentTimeMillis(),
+                    fileUrl = summary.fileUrl ?: ""
+                )
+            )
         }
     }
 

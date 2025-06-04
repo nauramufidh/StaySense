@@ -8,6 +8,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class DataCostumerResponse(
 
+	@SerializedName("id")
+	val userId: String?,
+
 	@SerializedName("online_backup")
 	val onlineBackup: String,
 

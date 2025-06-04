@@ -15,6 +15,7 @@ import com.example.staysense.data.api.ApiService
 import com.example.staysense.data.response.Information
 import com.example.staysense.data.response.InformationResponse
 import com.example.staysense.data.response.PieChart
+import com.example.staysense.database.UserSession
 import com.example.staysense.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -47,6 +48,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         apiService = ApiConfig.getApiService()
 
         binding.btnRefresh.setOnClickListener{
@@ -77,8 +79,9 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             showLoadingChart(true)
             try {
+                val userId = UserSession.getUserId(requireContext()) ?: ""
                 Log.d("HomeFragment", "Fetching chart data...")
-                val response = apiService.getCharts()
+                val response = apiService.getCharts(userId)
                 if (response.isSuccessful) {
                     Log.d("HomeFragment", "Response successful")
                     response.body()?.pieChart?.let { pieChartData ->
@@ -139,7 +142,8 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 showLoadingInformation(true)
-                val response = ApiConfig.getApiService().getInformations()
+                val userId = UserSession.getUserId(requireContext()) ?: ""
+                val response = ApiConfig.getApiService().getInformations(userId)
 
                 if (response.isSuccessful) {
                     val informationResponse = response.body()
