@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="File Upload"
+            android:text="@string/file_upload"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -48,6 +48,27 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/date_time" />
+
+    <TextView
+        android:id="@+id/tv_timestamp_history_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/appear_here"
+        android:textColor="@color/dark_blue"
+        android:textSize="18sp" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -55,7 +76,7 @@
         android:layout_marginEnd="15dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="CSV file details :"/>
+        android:text="@string/csv_file_details"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,7 +104,7 @@
                     android:layout_weight="2"
                     android:gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="Attribute"
+                    android:text="@string/attribute"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="TextContrastCheck" />
@@ -100,7 +121,7 @@
                     android:fontFamily=""
                     android:gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="Result"
+                    android:text="@string/result"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="TextContrastCheck" />
@@ -116,55 +137,12 @@
                     android:background="@color/dark_cyan" />
 
                 <TextView
-                    android:id="@+id/tvTimestamp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="Date Time" />
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/dark_cyan" />
-
-                <TextView
-                    android:id="@+id/tv_timestamp_history_upload"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="@string/appear_here" />
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/dark_cyan" />
-            </TableRow>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:background="@color/dark_cyan" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/dark_cyan" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="Total Customers" />
+                    android:text="@string/total_customer" />
 
                 <View
                     android:layout_width="2dp"
@@ -206,7 +184,7 @@
                     android:layout_weight="2"
                     android:gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="Churn Count" />
+                    android:text="@string/churn_count" />
 
                 <View
                     android:layout_width="2dp"
@@ -248,7 +226,7 @@
                     android:layout_weight="2"
                     android:gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="Not Churn Count" />
+                    android:text="@string/not_churn_count" />
 
                 <View
                     android:layout_width="2dp"
@@ -281,7 +259,7 @@
                     android:layout_weight="2"
                     android:gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="Churn Rate" />
+                    android:text="@string/churn_rate" />
 
                 <View
                     android:layout_width="2dp"
@@ -310,7 +288,7 @@
         android:layout_marginEnd="15dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Download the CSV file via the link below:"/>
+        android:text="@string/downolad_csv"/>
 
     <TextView
         android:id="@+id/tv_file_url_history_upload"
@@ -321,6 +299,5 @@
         android:text="@string/appear_here"
         android:textColor="@color/dark_blue"
         android:textSize="18sp" />
-
 
 </LinearLayout>

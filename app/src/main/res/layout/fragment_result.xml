@@ -156,9 +156,7 @@
 
                 </TableRow>
 
-
             </TableLayout>
-
 
             <Button
                 android:id="@+id/btn_ok"
@@ -169,14 +167,8 @@
                 android:layout_marginBottom="4dp"
                 android:text="@string/ok"/>
 
-
         </LinearLayout>
 
-
-
     </androidx.cardview.widget.CardView>
-
-
-
 
 </FrameLayout>

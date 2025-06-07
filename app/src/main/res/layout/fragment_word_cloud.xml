@@ -109,7 +109,7 @@
                         android:id="@+id/tv_selected_File_wc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Belum ada file dipilih"
+                        android:text="@string/no_files"
                         android:layout_margin="8dp"/>
                 </FrameLayout>
 

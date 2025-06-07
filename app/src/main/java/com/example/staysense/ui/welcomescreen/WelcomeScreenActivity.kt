@@ -2,27 +2,18 @@ package com.example.staysense.ui.welcomescreen
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.staysense.R
 import com.example.staysense.databinding.ActivityWelcomeScreenBinding
 import com.example.staysense.ui.authentication.LoginActivity
 import com.example.staysense.ui.authentication.SignupActivity
-import com.example.staysense.ui.main.MainActivity
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.handleCoroutineException
+
 
 class WelcomeScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeScreenBinding
-//    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +21,8 @@ class WelcomeScreenActivity : AppCompatActivity() {
         binding = ActivityWelcomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        firebaseAuth = FirebaseAuth.getInstance()
-
-
         setupaction()
         playAnimation()
-
 
     }
 
@@ -51,12 +38,6 @@ class WelcomeScreenActivity : AppCompatActivity() {
             val intentToLogin = Intent(this, LoginActivity::class.java)
 //            intentToLogin.putExtra("fromWelcome", true)
             startActivity(intentToLogin)
-            finish()
-        }
-
-        binding.btnLgsgmasuk.setOnClickListener {
-            val intentMasuk = Intent(this, MainActivity::class.java)
-            startActivity(intentMasuk)
             finish()
         }
     }
@@ -77,6 +58,5 @@ class WelcomeScreenActivity : AppCompatActivity() {
             playSequentially(getstarted, welcometxt, btnsignup, haveacc)
             start()
         }
-
     }
 }

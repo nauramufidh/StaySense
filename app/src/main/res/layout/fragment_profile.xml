@@ -251,9 +251,8 @@
                     android:text="@string/logout"/>
             </LinearLayout>
 
-
         </LinearLayout>
 
-
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -78,19 +78,6 @@
             android:text="@string/login"
             android:textColor="@color/dark_cyan"/>
 
-
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_lgsgmasuk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/langsung_masuk"
-        app:layout_constraintTop_toBottomOf="@id/ll_have_acc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

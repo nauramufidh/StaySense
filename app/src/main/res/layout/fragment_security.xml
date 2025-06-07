@@ -134,5 +134,4 @@
             android:text="@string/change_password"/>
     </LinearLayout>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -186,8 +186,6 @@
                                 tools:ignore="TouchTargetSizeCheck"/>
                         </LinearLayout>
 
-
-
                         <com.github.mikephil.charting.charts.PieChart
                             android:id="@+id/churn_piechart"
                             android:layout_width="match_parent"
@@ -200,8 +198,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </ScrollView>
-
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
