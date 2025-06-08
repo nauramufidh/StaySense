@@ -31,20 +31,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.staysense.data.response.WordCloudResponse
 import com.example.staysense.database.UserSession
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -94,7 +90,6 @@ class WordCloudFragment : Fragment() {
         val userId = UserSession.getUserId(requireContext()) ?: ""
         val requestBody = WordCloudRequest(
             userId = userId ,
-            useModel = false,
             text = text
         )
         val client = ApiConfig.getApiService()
@@ -150,15 +145,25 @@ class WordCloudFragment : Fragment() {
     }
 
     private fun pickFile() {
-        val mimeTypes = arrayOf(
-            "text/csv",
-            "application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
+//        val mimeTypes = arrayOf(
+//            "text/csv",
+//            "application/vnd.ms-excel",
+//            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+//        )
+//
+//        val intent = Intent(Intent.ACTION_GET_CONTENT)
+//        intent.type = "*/*"
+//        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+//        filePickerLauncher.launch(intent)
 
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "*/*"
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        val mimeTypes = arrayOf("text/*", "application/*")
+
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        }
+
         filePickerLauncher.launch(intent)
     }
 
@@ -183,6 +188,9 @@ class WordCloudFragment : Fragment() {
             contentResolver.getType(uri)?.toMediaTypeOrNull()
         )
 
+        val userId = UserSession.getUserId(requireContext()) ?: ""
+        val idPart = MultipartBody.Part.createFormData("id", userId)
+
         val filePart = MultipartBody.Part.createFormData(
             "file",
             fileName,
@@ -193,7 +201,8 @@ class WordCloudFragment : Fragment() {
 
         showLoadingChartWc(true)
 
-        val client = ApiConfig.getApiService().generateWordCloudWithFile(filePart, textRequestBody)
+
+        val client = ApiConfig.getApiService().generateWordCloudWithFile(idPart, filePart, textRequestBody)
         client.enqueue(object : Callback<WordCloudResponse> {
             override fun onResponse(
                 call: Call<WordCloudResponse>,
@@ -221,6 +230,7 @@ class WordCloudFragment : Fragment() {
             }
         })
     }
+
 
     private fun showLoadingChartWc(isLoading: Boolean) {
         _binding?.let { binding ->
