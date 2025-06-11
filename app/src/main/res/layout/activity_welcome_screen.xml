@@ -10,65 +10,81 @@
 
     <ImageView
         android:id="@+id/iv_welcome_icon"
-        android:layout_width="380dp"
-        android:layout_height="450dp"
+        android:layout_width="331dp"
+        android:layout_height="440dp"
+        android:layout_marginTop="32dp"
         android:contentDescription="TODO"
-        android:src="@drawable/zwelcome_icon"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/zwelscreen"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome_text" />
 
     <TextView
-        android:id="@+id/tv_get_started"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_wl"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iv_welcome_icon"
+        android:layout_marginTop="72dp"
+        android:fontFamily="@font/wtf_horseland"
+        android:gravity="center"
+        android:text="Stay One Step Ahead \nwith Predictive Sense"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="20dp"
-        android:text="@string/get_started"
-        android:textSize="16sp"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/zarrowup"
+        app:layout_constraintEnd_toStartOf="@+id/tv_wl"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_welcome_text"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_get_started"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="20dp"
+        android:gravity="center"
         android:text="@string/welcome_text"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wl" />
 
     <Button
         android:id="@+id/btn_signup"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_welcome_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"
-        android:textStyle="bold"
         android:backgroundTint="@color/dark_cyan"
-        android:text="@string/sign_up"/>
+        android:text="@string/sign_up"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_welcome_icon" />
 
     <LinearLayout
         android:id="@+id/ll_have_acc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_signup">
 
         <TextView
             android:id="@+id/tv_have_acc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="20dp"
-            android:text="@string/already_have_an_account" />
+            android:text="@string/already_have_an_account"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/tv_login_to_login"
@@ -76,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="@string/login"
-            android:textColor="@color/dark_cyan"/>
+            android:textColor="@color/dark_cyan" />
 
     </LinearLayout>
 

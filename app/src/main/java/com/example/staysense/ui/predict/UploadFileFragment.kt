@@ -168,6 +168,14 @@ class UploadFileFragment : Fragment() {
                         binding.tvTotCustNotChurnResult.text = "${summary.notChurnCount ?: 0}"
                         binding.tvChurnrateResult.text = "${summary.churnRate ?: 0}"
 
+                        val message = when {
+                            "${summary.churnCount ?: 0}" > "${summary.notChurnCount ?: 0}" -> "Mostly customers will churn."
+                            "${summary.churnCount ?: 0}" < "${summary.notChurnCount ?: 0}" -> "Mostly customers will stay."
+                            else -> "Prediction of customers churn are balanced."
+                        }
+
+                        binding.tvMessageResult.text = message
+
                         binding.btnOk.setOnClickListener {
                             binding.flResultUpload.visibility = View.GONE
                             binding.overlayDim.visibility = View.GONE
@@ -190,7 +198,7 @@ class UploadFileFragment : Fragment() {
         }
     }
 
-    private suspend fun saveUploadHistory(userId: String, summary: Summary) {
+    private fun saveUploadHistory(userId: String, summary: Summary) {
         lifecycleScope.launch(Dispatchers.IO) {
             database.uploadHistoryDao().insert(
                 UploadHistoryEntity(

@@ -131,11 +131,20 @@
         android:id="@+id/detailManualFragment"
         android:name="com.example.staysense.ui.profile.history.DetailManualFragment"
         android:label="fragment_detail_manual"
-        tools:layout="@layout/fragment_detail_manual" />
+        tools:layout="@layout/fragment_detail_manual" >
+        <action
+            android:id="@+id/action_detailManualFragment_to_predictHistory"
+            app:destination="@id/predictHistory" />
+    </fragment>
+
     <fragment
         android:id="@+id/detailUploadFragment"
         android:name="com.example.staysense.ui.profile.history.DetailUploadFragment"
         android:label="fragment_detail_upload"
-        tools:layout="@layout/fragment_detail_upload" />
+        tools:layout="@layout/fragment_detail_upload" >
+        <action
+            android:id="@+id/action_detailUploadFragment_to_predictHistory"
+            app:destination="@id/predictHistory" />
+    </fragment>
 
 </navigation>

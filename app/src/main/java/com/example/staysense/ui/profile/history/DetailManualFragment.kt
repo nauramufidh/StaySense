@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.staysense.R
 import com.example.staysense.database.PredictionDatabase
 import com.example.staysense.database.PredictionHistoryDao
@@ -39,6 +41,11 @@ class DetailManualFragment : Fragment() {
 
         val id = arguments?.getInt("historyId") ?: return
 
+        val backButton = view.findViewById<ImageButton>(R.id.btn_back_manual_input)
+        backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_detailManualFragment_to_predictHistory)
+        }
+
         lifecycleScope.launch {
             val data = withContext(Dispatchers.IO) {
                 predictionHistoryDao.getHistoryById(id)
@@ -69,11 +76,7 @@ class DetailManualFragment : Fragment() {
                 view.findViewById<TextView>(R.id.tv_ss_history_manual).text = it.satisfactionScore.toString()
                 view.findViewById<TextView>(R.id.tv_cs_history_manual).text = it.churnScore.toString()
                 view.findViewById<TextView>(R.id.tv_cltv_history_manual).text = it.cltv.toString()
-
-
-
             }
         }
     }
-
 }

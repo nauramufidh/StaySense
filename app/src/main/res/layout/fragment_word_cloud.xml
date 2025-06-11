@@ -85,7 +85,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="or"
+                        android:text="@string/or"
                         android:textColor="#757575"
                         android:paddingHorizontal="8dp" />
 
@@ -132,7 +132,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="Clustering"
+            android:text="@string/clustering"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -167,7 +167,6 @@
                     android:id="@+id/legendLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
                     app:flexWrap="nowrap"
                     app:justifyContent="flex_start"
                     app:flexDirection="column" />

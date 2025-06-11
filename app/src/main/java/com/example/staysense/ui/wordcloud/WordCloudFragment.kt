@@ -69,9 +69,10 @@ class WordCloudFragment : Fragment() {
             if (inputText.isNotBlank()){
                 sendWordCloudRequest(inputText)
             }
+
         }
 
-        binding.cvWordcloud.setOnClickListener { checkPermissionAndPickFile() }
+        binding.ivWordcloud.setOnClickListener { checkPermissionAndPickFile() }
         binding.btnUploadWc.setOnClickListener {
             val uri = selectedFileUri
             if (uri != null){
@@ -116,6 +117,7 @@ class WordCloudFragment : Fragment() {
             }
         }
     }
+    
     
     @Suppress("DEPRECATION")
     private fun checkPermissionAndPickFile() {

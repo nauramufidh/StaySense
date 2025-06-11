@@ -162,6 +162,7 @@
     <string name="colon">:</string>
     <string name="solution">Recomendation</string>
     <string name="no_files">Choose a file</string>
+    <string name="clustering">Clustering</string>
 
     <string name="manual_input">Manual Input</string>
     <string name="file_upload">File Upload</string>

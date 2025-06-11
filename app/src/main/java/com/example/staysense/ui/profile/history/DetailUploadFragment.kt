@@ -1,13 +1,13 @@
 package com.example.staysense.ui.profile.history
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import androidx.core.net.toUri
-
+import androidx.navigation.fragment.findNavController
 
 class DetailUploadFragment : Fragment() {
 
@@ -45,6 +45,11 @@ class DetailUploadFragment : Fragment() {
         uploadHistoryDao = PredictionDatabase.getInstance(requireContext()).uploadHistoryDao()
 
         val id = arguments?.getInt("historyId") ?: return
+
+        val backButton = view.findViewById<ImageButton>(R.id.btn_back_upload_file)
+        backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_detailUploadFragment_to_predictHistory)
+        }
 
         lifecycleScope.launch {
             val data = withContext(Dispatchers.IO) {
@@ -78,6 +83,4 @@ class DetailUploadFragment : Fragment() {
             Toast.makeText(requireContext(), "Invalid URL", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }

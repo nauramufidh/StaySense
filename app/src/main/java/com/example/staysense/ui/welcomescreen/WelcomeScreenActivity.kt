@@ -49,13 +49,13 @@ class WelcomeScreenActivity : AppCompatActivity() {
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-        val getstarted = ObjectAnimator.ofFloat(binding.tvGetStarted, View.ALPHA, 1f).setDuration(500)
+//        val getstarted = ObjectAnimator.ofFloat(binding.tvGetStarted, View.ALPHA, 1f).setDuration(500)
         val welcometxt = ObjectAnimator.ofFloat(binding.tvWelcomeText, View.ALPHA, 1f).setDuration(500)
         val btnsignup = ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 1f).setDuration(500)
         val haveacc = ObjectAnimator.ofFloat(binding.llHaveAcc, View.ALPHA, 1f).setDuration(500)
 
         AnimatorSet().apply {
-            playSequentially(getstarted, welcometxt, btnsignup, haveacc)
+            playSequentially(welcometxt, btnsignup, haveacc)
             start()
         }
     }
