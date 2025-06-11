@@ -22,6 +22,11 @@ import com.example.staysense.databinding.FragmentWordCloudBinding
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
+import android.graphics.drawable.Drawable
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import android.provider.OpenableColumns
 import android.view.Gravity
 import android.widget.LinearLayout
@@ -72,6 +77,33 @@ class WordCloudFragment : Fragment() {
 
         }
 
+        val lastImageUrl = UserSession.getSavedWordCloudUrl(requireContext())
+        if (!lastImageUrl.isNullOrEmpty()) {
+
+            showLoadingImageWc(true)
+
+            val uniqueUrl = "$lastImageUrl?t=${System.currentTimeMillis()}"
+
+            Glide.with(requireContext())
+                .load(uniqueUrl)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
+                    ): Boolean {
+                        showLoadingImageWc(false)
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+                    ): Boolean {
+                        showLoadingImageWc(false)
+                        return false
+                    }
+                })
+                .into(binding.ivWordcloud)
+        }
+
         binding.ivWordcloud.setOnClickListener { checkPermissionAndPickFile() }
         binding.btnUploadWc.setOnClickListener {
             val uri = selectedFileUri
@@ -110,6 +142,8 @@ class WordCloudFragment : Fragment() {
                     Glide.with(requireContext())
                         .load(uniqueUrl)
                         .into(binding.ivWordcloud)
+
+                    UserSession.saveWordCloudUrl(requireContext(), imageUrl)
                 }
             } catch (e: Exception) {
                 showLoadingChartWc(false)
@@ -117,7 +151,6 @@ class WordCloudFragment : Fragment() {
             }
         }
     }
-    
 
     @Suppress("DEPRECATION")
     private fun checkPermissionAndPickFile() {
@@ -233,6 +266,12 @@ class WordCloudFragment : Fragment() {
         })
     }
 
+    private fun showLoadingImageWc(isLoading: Boolean) {
+        _binding?.let { binding ->
+            binding.progressBarIvWordcloud.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.flImageWordcloud.alpha = if (isLoading) 0.3f else 1f
+        }
+    }
 
     private fun showLoadingChartWc(isLoading: Boolean) {
         _binding?.let { binding ->

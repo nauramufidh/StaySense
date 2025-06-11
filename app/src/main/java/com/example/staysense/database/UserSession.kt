@@ -9,9 +9,8 @@ object UserSession {
     private const val KEY_USER_ID = "id"
     private const val KEY_USERNAME = "username"
     private const val KEY_EMAIL = "email"
-    private const val KEY_PASSWORD = "password"
-    private const val KEY_CONFIRM_PASSWORD = "confirmPassword"
     private const val KEY_LOGGED_IN = "isLoggedIn"
+    private const val KEY_WORDCLOUD_URL = "wordcloudUrl"
 
     fun saveUser(context: Context, id: String, username: String, email: String) {
         val sharedPref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
@@ -47,5 +46,15 @@ object UserSession {
     fun isLoggedIn(context: Context): Boolean {
         val sharedPref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
         return sharedPref.getBoolean(KEY_LOGGED_IN, false)
+    }
+
+    fun saveWordCloudUrl(context: Context, url: String) {
+        val sharedPref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
+        sharedPref.edit().putString(KEY_WORDCLOUD_URL, url).apply()
+    }
+
+    fun getSavedWordCloudUrl(context: Context): String? {
+        val sharedPref = context.getSharedPreferences(PREF_NAME, AppCompatActivity.MODE_PRIVATE)
+        return sharedPref.getString(KEY_WORDCLOUD_URL, null)
     }
 }

@@ -47,11 +47,26 @@
                 android:orientation="vertical"
                 android:layout_margin="8dp">
 
-                <ImageView
-                    android:id="@+id/iv_wordcloud"
+                <FrameLayout
+                    android:id="@+id/fl_image_wordcloud"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:src="@drawable/ic_launcher_foreground"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_wordcloud"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ic_launcher_foreground"/>
+
+                    <ProgressBar
+                        android:id="@+id/progressBar_iv_wordcloud"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:elevation="4dp"
+                        android:visibility="gone" />
+                </FrameLayout>
 
                 <EditText
                     android:id="@+id/et_word_input"
