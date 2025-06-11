@@ -118,7 +118,7 @@ class WordCloudFragment : Fragment() {
         }
     }
     
-    
+
     @Suppress("DEPRECATION")
     private fun checkPermissionAndPickFile() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
