@@ -3,6 +3,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+<!--dim -->
+    <color name="grey_blue">#8899ac</color>
+    <color name="navy">#003161</color>
+    <color name="dark_green">#006A67</color>
+    <color name="dark_grey">#15202b</color>
+    <color name="dark_grey2">#192734</color>
+    <color name="dark_grey3">#22303c</color>
+
+
     <color name="dark_blue">#205781</color>
     <color name="dark_cyan">#4F959D</color>
     <color name="blue_sky">#C9E6F0</color>

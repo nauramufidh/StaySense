@@ -7,44 +7,25 @@
     tools:context=".ui.predict.PredictFragment"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txt_title_predict_churn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-
-        <ImageButton
-            android:id="@+id/btnExit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:contentDescription="@string/exit_to_main"
-            app:tint="?attr/colorOnSurface"
-            android:padding="8dp"
-            android:src="@drawable/ic_close"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <TextView
-            android:id="@+id/txt_title_predict_churn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/predict_churn"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/predict_churn"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_predict"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabTextColor="@android:color/black"
+        app:tabIndicatorColor="?attr/colorPrimary"
         app:tabSelectedTextColor="?attr/colorPrimary"
-        app:tabIndicatorColor="?attr/colorPrimary"/>
+        app:tabTextColor="@android:color/black"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_predict"

@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.profile.ProfileFragment"
-    android:paddingBottom="64dp"
     android:background="@drawable/bg_tosca_gradient">
 
     <TextView
@@ -75,7 +74,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="520dp"
+        android:layout_height="600dp"
         app:cardCornerRadius="24dp"
         android:paddingBottom="8dp"
         android:background="@drawable/style_corner_top"

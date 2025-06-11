@@ -45,9 +45,6 @@ class PredictFragment : Fragment() {
             tab.text = resources.getString(TAB_TITLES_PREDICT[position])
         }.attach()
 
-        binding.btnExit.setOnClickListener{
-            findNavController().popBackStack(MainActivity::class.java, false)
-        }
     }
 
 
