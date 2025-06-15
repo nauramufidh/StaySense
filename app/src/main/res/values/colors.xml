@@ -27,5 +27,7 @@
     <color name="sage">#9EBC8A</color>
     <color name="yellow_pudar">#D2D0A0</color>
     <color name="red">#FF0000</color>
+    <color name="dark_red">#9D0000</color>
+    <color name="orange">#FF9800</color>
 
 </resources>

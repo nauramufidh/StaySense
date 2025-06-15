@@ -175,5 +175,12 @@
     <string name="churn_count">Churn Count</string>">
     <string name="not_churn_count">Not Churn Count</string>
     <string name="downolad_csv">Download the CSV file via the link below :</string>
+    <string name="delete_all_history">Delete All History</string>
+    <string name="ask_delete_all_history">Are you sure want to delete all history?</string>
+    <string name="delete_history">Delete History</string>
+    <string name="agree">Yes</string>
+    <string name="history_deleted">History deleted succesfully</string>
+    <string name="disagree">No</string>
+    <string name="confirm_logout">Are you sure want to Logout?</string>
 
 </resources>
