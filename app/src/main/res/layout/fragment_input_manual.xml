@@ -707,6 +707,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="13dp"
+                    android:layout_marginBottom="16dp"
                     android:text="@string/submit"
                     tools:ignore="VisualLintButtonSize" />
 
@@ -729,7 +730,7 @@
         android:elevation="4dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:cardCornerRadius="12dp"

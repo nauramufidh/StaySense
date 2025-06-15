@@ -149,8 +149,14 @@ class InputManualFragment : Fragment() {
 
     private fun setupButton(){
         btnInputManual.setOnClickListener {
+            val validationMessage = validateInput()
+            if(validationMessage != null){
+                Toast.makeText(requireContext(), validationMessage, Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             showLoading(true)
             val userId = UserSession.getUserId(requireContext())
+
 
             val data = DataCostumerResponse(
                 userId = userId,
@@ -287,6 +293,31 @@ class InputManualFragment : Fragment() {
         binding.etInputTenureInMonths.setText("")
         binding.etInputTotalRevenue.setText("")
         binding.etInputUnlimitedData.setText("")
+    }
+
+    private fun validateInput(): String? {
+        if (etAge.text.toString().isEmpty()) return "Age is required"
+        if (etCity.text.toString().isEmpty()) return "City is required"
+        if (etTenureInMonths.text.toString().isEmpty()) return "Tenure in months is required"
+        if (etContract.text.toString().isEmpty()) return "Contract is required"
+        if (etPaymentMethod.text.toString().isEmpty()) return "Payment Method is required"
+        if (etMonthlyCharge.text.toString().isEmpty()) return "Monthly Charge is required"
+        if (etTotalCharges.text.toString().isEmpty()) return "Total Charges is required"
+        if (etTotalRevenue.text.toString().isEmpty()) return "Total Revenue is required"
+        if (etSatisfactionScore.text.toString().isEmpty()) return "Satisfaction Score is required"
+        if (etChurnScore.text.toString().isEmpty()) return "Churn Score is required"
+        if (etCltv.text.toString().isEmpty()) return "CLTV is required"
+
+        if (etAge.text.toString().toIntOrNull() == null) return "Age must be a valid number"
+        if (etTenureInMonths.text.toString().toIntOrNull() == null) return "Tenure in months must be a valid number"
+        if (etMonthlyCharge.text.toString().toDoubleOrNull() == null) return "Monthly Charge must be a valid number"
+        if (etTotalCharges.text.toString().toDoubleOrNull() == null) return "Total Charges must be a valid number"
+        if (etTotalRevenue.text.toString().toDoubleOrNull() == null) return "Total Revenue must be a valid number"
+        if (etSatisfactionScore.text.toString().toDoubleOrNull() == null) return "Satisfaction Score must be a valid number"
+        if (etChurnScore.text.toString().toIntOrNull() == null) return "Churn Score must be a valid number"
+        if (etCltv.text.toString().toIntOrNull() == null) return "CLTV must be a valid number"
+
+        return null
     }
 
     private fun toYesNo(value: String): String {
