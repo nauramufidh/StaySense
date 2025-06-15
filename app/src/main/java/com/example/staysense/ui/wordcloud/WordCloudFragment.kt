@@ -104,7 +104,7 @@ class WordCloudFragment : Fragment() {
                 .into(binding.ivWordcloud)
         }
 
-        binding.ivWordcloud.setOnClickListener { checkPermissionAndPickFile() }
+        binding.flFilePickedWc.setOnClickListener { checkPermissionAndPickFile() }
         binding.btnUploadWc.setOnClickListener {
             val uri = selectedFileUri
             if (uri != null){
