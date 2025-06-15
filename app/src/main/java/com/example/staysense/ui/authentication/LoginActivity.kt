@@ -52,24 +52,14 @@ class LoginActivity : AppCompatActivity() {
                     for (userSnapshot in dataSnapshot.children){
                         val userData = userSnapshot.getValue(UserData::class.java)
 
-                        if (userData != null && userData.password == password){
-                            val sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE)
-                            val editor = sharedPreferences.edit()
-//                            editor.putBoolean("isLoggedIn", true)
-//                            editor.putString("user_id", userData.id)
-                            editor.putString("email", userData.email)
-                            editor.putString("password", userData.password)
-                            editor.putString("username", userData.username)
-                            editor.apply()
-                            UserSession.saveUser(this@LoginActivity, userData.id ?: "", userData.username ?: "", userData.email ?: "")
-//                            UserSession.saveUser(
-//                                context = this@LoginActivity,
-//                                id = userData.id ?: "",
-//                                username = userData.username ?: "",
-//                                email = userData.email,
-//                                password = userData.password,
-//                                confirmPassword = userData.confirmPassword
-//                            )
+                        if (userData != null && userData.password == password) {
+                            UserSession.saveUser(
+                                context = this@LoginActivity,
+                                id = userData.id ?: "",
+                                username = userData.username ?: "",
+                                email = userData.email ?: "",
+                                password = userData.password ?: ""
+                            )
 
                             Toast.makeText(this@LoginActivity, "Login Successfull", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)

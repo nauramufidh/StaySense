@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -38,14 +37,12 @@ class WelcomeScreenActivity : AppCompatActivity() {
     private fun setupaction() {
         binding.btnSignup.setOnClickListener {
             val intentToSignup = Intent(this, SignupActivity::class.java)
-//            intentToSignup.putExtra("fromWelcome", true)
             startActivity(intentToSignup)
             finish()
         }
 
         binding.tvLoginToLogin.setOnClickListener {
             val intentToLogin = Intent(this, LoginActivity::class.java)
-//            intentToLogin.putExtra("fromWelcome", true)
             startActivity(intentToLogin)
             finish()
         }
@@ -58,7 +55,6 @@ class WelcomeScreenActivity : AppCompatActivity() {
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-//        val getstarted = ObjectAnimator.ofFloat(binding.tvGetStarted, View.ALPHA, 1f).setDuration(500)
         val welcometxt = ObjectAnimator.ofFloat(binding.tvWelcomeText, View.ALPHA, 1f).setDuration(500)
         val btnsignup = ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 1f).setDuration(500)
         val haveacc = ObjectAnimator.ofFloat(binding.llHaveAcc, View.ALPHA, 1f).setDuration(500)

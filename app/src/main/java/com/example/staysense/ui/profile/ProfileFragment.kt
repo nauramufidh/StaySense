@@ -1,8 +1,6 @@
 package com.example.staysense.ui.profile
 
-import android.content.Context
 import android.content.Intent
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.staysense.databinding.FragmentProfileBinding
@@ -31,7 +28,6 @@ class ProfileFragment : Fragment() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-//    private val currentUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,31 +68,13 @@ class ProfileFragment : Fragment() {
         }
     }
 
-//    private fun setupLogout() {
-//
-//        UserSession.clearUser(requireContext())
-//
-//        Firebase.auth.signOut()
-//
-//        val intent = Intent(requireContext(), WelcomeScreenActivity::class.java)
-//        startActivity(intent)
-//
-//        Toast.makeText(requireContext(), "Logout Successfull", Toast.LENGTH_SHORT).show()
-//        requireActivity().finish()
-//    }
-
     private fun setupLogout(){
         AlertDialog.Builder(requireContext())
             .setTitle("Logout")
             .setMessage(getString(R.string.confirm_logout))
-            .setPositiveButton("Logout"){_, _, ->
-                val sharedPreferences =
-                    requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-                with(sharedPreferences.edit()) {
-                    remove("CURRENT_USERNAME")
-                    putBoolean("IS_LOGGED_IN", false)
-                    apply()
-                }
+            .setPositiveButton("Logout") { _, _ ->
+                Firebase.auth.signOut()
+                UserSession.clearUser(requireContext())
 
                 val intent = Intent(requireContext(), WelcomeScreenActivity::class.java)
                 startActivity(intent)
@@ -104,7 +82,7 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(requireContext(), "Logout Successfully", Toast.LENGTH_SHORT).show()
                 requireActivity().finish()
             }
-            .setNegativeButton(getString(R.string.disagree)){dialog, _, ->
+            .setNegativeButton(getString(R.string.disagree)) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
