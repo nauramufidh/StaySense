@@ -52,4 +52,9 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
 
         return (manualMapped + uploadMapped).sortedByDescending { it.timestamp }
     }
+
+    suspend fun deleteHistory(userId: String){
+        predictionHistoryDao.deleteAllByUser(userId)
+        uploadHistoryDao.deleteAllUploadByUser(userId)
+    }
 }
