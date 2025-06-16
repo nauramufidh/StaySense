@@ -108,11 +108,13 @@ class RateFragment : Fragment() {
     private fun displayBarChart(barChartData: List<BarChartItem?>) {
         val barChart = binding.churnRatechart
 
+        val sortedByDate = barChartData.sortedBy { it?.month }
+
         val entries = barChartData.mapIndexed { index, item ->
             BarEntry(index.toFloat(), item?.churnRate?.toFloat() ?: 0f)
         }
 
-        val labels = barChartData.map { it?.month ?: "" }
+        val labels = sortedByDate.map { it?.month ?: "" }
 
         val dataSet = BarDataSet(entries, "Churn Rate")
         dataSet.color = "#E3EEB2".toColorInt()

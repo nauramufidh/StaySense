@@ -109,6 +109,9 @@ class WordCloudFragment : Fragment() {
             val uri = selectedFileUri
             if (uri != null){
                 uploadWC()
+
+                binding.tvSelectedFileWc.text = "Choose a file"
+                selectedFileUri = null
             }else{
                 Toast.makeText(requireContext(), "Please choose file first", Toast.LENGTH_SHORT).show()
             }

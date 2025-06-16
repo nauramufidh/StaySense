@@ -179,7 +179,7 @@ class UploadFileFragment : Fragment() {
                         binding.btnOk.setOnClickListener {
                             binding.flResultUpload.visibility = View.GONE
                             binding.overlayDim.visibility = View.GONE
-                            binding.tvSelectedFile.text = "Please choose a file."
+                            binding.tvSelectedFile.text = "Choose a file."
                             selectedFileUri = null
 
                             Log.d("UploadFragment", "User confirmed upload result, notifying sharedViewModel")
