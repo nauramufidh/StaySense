@@ -43,7 +43,7 @@ class DetailManualFragment : Fragment() {
 
         val backButton = view.findViewById<ImageButton>(R.id.btn_back_manual_input)
         backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_detailManualFragment_to_predictHistory)
+            findNavController().popBackStack()
         }
 
         lifecycleScope.launch {

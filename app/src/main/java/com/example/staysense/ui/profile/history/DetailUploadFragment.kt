@@ -48,7 +48,7 @@ class DetailUploadFragment : Fragment() {
 
         val backButton = view.findViewById<ImageButton>(R.id.btn_back_upload_file)
         backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_detailUploadFragment_to_predictHistory)
+            findNavController().popBackStack()
         }
 
         lifecycleScope.launch {
