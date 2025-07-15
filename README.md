@@ -40,7 +40,7 @@ https://www.figma.com/design/W5XZL1rc1MILOc3QGK4q4M/StaySense?node-id=0-1&t=MYJ1
 
 ## Contributor
 
-- **Kasamira Anindita Qairia ** - **Mobile Developer and Backend Developer**   
+- **Kasamira Anindita Qairia** - **Mobile Developer and Backend Developer**   
   [LinkedIn](https://www.linkedin.com/in/kasamira-anindita-9aa88524b/) | [GitHub](https://github.com/kasanindit)
 - **Naura Mufidah** - **Mobile Developer**   
   [LinkedIn](https://www.linkedin.com/in/nauramufidah/) | [GitHub](https://github.com/nauramufidh)
