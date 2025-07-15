@@ -3,7 +3,7 @@
 StaySense is an Android-based application using machine learning-based predictive solution to predict potential customer churn in Telco companies. The app is designed to help telecommunication companies identify customers at risk of churn.
 
 <div align="center">
-  <img width="1206" height="1198" alt="Logo_Staysense" src="https://github.com/user-attachments/assets/104a6104-6f41-46b9-a75c-6fb83d67473b" />
+  <img width="32" height="32" alt="Logo_Staysense" src="https://github.com/user-attachments/assets/104a6104-6f41-46b9-a75c-6fb83d67473b" />
 </div>
 
 ---
